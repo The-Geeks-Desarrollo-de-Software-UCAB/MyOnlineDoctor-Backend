@@ -4,3 +4,4 @@ Proyecto semestral: myOnlineDoctor Desarrollo de Software Escuela de Ingeniería
 Integrantes:
 Diego Bastardo
 Tomás Sánchez
+Miguel Cuadrado
