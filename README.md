@@ -7,3 +7,4 @@ Miguel Cuadrado
 Anamaría Chacón
 Tomás Sánchez
 Vicente Mirabal
+Natalia Velásquez
