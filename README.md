@@ -5,3 +5,4 @@ Integrantes:
 Diego Bastardo
 Tomás Sánchez
 Miguel Cuadrado
+Vicente Mirabal
