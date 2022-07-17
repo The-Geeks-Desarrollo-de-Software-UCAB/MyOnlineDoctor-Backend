@@ -1,14 +1,19 @@
 
 export abstract class DomainEvent {
     private readonly _fechaOcurrencia: Date;
-    private idAggregado: string;
+    private readonly _idAggregado: string;
     
-    constructor(){
+    constructor(idAgg: string){
         this._fechaOcurrencia = new Date();
+        this._idAggregado = idAgg;
     }
 
     public get fechaOcurrencia(): Date {
         return this._fechaOcurrencia;
+    }
+
+    public get idAggregado(): string {
+        return this._idAggregado;
     }
 
     public static nombreEvento(): string {
