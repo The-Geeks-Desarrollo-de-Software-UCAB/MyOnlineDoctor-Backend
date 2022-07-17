@@ -1,4 +1,5 @@
 import { AggregateRoot } from 'src/modules/base/domain/entities/aggregate-root.base';
+import { IdDoctor } from 'src/modules/doctor/domain/value-objects/idDoctor.value-object';
 import { IdPaciente } from 'src/modules/paciente/domain/value-objects/idPaciente.value-object';
 import { Calificacion } from '../value-objects/calificacion.value-object';
 import { Duracion } from '../value-objects/duracion.value-object';
@@ -17,12 +18,13 @@ export class Cita extends AggregateRoot {
     private duracion: Duracion
     private calificacion? : Calificacion;
     private identificadorPaciente: IdPaciente;
+    private identificadorDoctor: IdDoctor;
 
     //se debe llamar a este constructor con la fecha deseada para la cita y 
     //un object value motivo inicializado
     // de esta manera new Cita(new fecha(new Date()), new motivo('contexto'))
 
-    constructor(fecha: Fecha, motivo: Motivo, tipo: TipoCita, duracion: Duracion, idPaciente: IdPaciente){
+    constructor(fecha: Fecha, motivo: Motivo, tipo: TipoCita, duracion: Duracion, idPaciente: IdPaciente, idDoctor: IdDoctor){
         super();
         this.identificador = new IdCita();
         this.fecha = fecha;
@@ -31,6 +33,7 @@ export class Cita extends AggregateRoot {
         this.motivo = motivo;
         this.duracion = duracion;
         this.identificadorPaciente = idPaciente;
+        this.identificadorDoctor = idDoctor;
     }
 
     public darId(): string {
@@ -63,6 +66,10 @@ export class Cita extends AggregateRoot {
 
     darIdentificadorPaciente(): string {
         return this.identificadorPaciente.id.value
+    }
+
+    darIdentificadorDoctor(): string {
+        return this.identificadorDoctor.id.value
     }
 
     public calificar(puntuacion: number): void {

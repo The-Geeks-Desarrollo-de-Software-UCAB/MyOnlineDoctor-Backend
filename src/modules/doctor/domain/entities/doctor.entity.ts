@@ -1,4 +1,4 @@
-import { AggregateRoot } from "../../../base/domain/entities/aggregate-root.base";
+import { AggregateRoot } from "src/modules/base/domain/entities/aggregate-root.base";
 import { Apellido } from "../value-objects/apellido.value-object";
 import { Especialidad } from "../value-objects/especialidad.value-object";
 import { IdDoctor } from "../value-objects/idDoctor.value-object";
