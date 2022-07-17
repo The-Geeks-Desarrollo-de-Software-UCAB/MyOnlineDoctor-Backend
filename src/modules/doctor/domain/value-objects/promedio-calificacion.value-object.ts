@@ -1,13 +1,13 @@
 export class PromedioCalificacion {
-    private constructor(private readonly promedioCalificacion: string) {
-        this.promedioCalificacion = promedioCalificacion;
+    private constructor(private readonly _promedioCalificacion: string) {
+        this._promedioCalificacion = _promedioCalificacion;
     }
 
-    get PromedioCalificacion(): string {
-        return this.promedioCalificacion;
+    get promedioCalificacion(): string {
+        return this._promedioCalificacion;
     }
 
     equals(otro: PromedioCalificacion) {
-        return this.promedioCalificacion == otro.promedioCalificacion;
+        return this._promedioCalificacion == otro.promedioCalificacion;
     }
 }

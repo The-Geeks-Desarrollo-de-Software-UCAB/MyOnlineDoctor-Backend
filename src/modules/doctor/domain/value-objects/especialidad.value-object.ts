@@ -1,13 +1,13 @@
 export class Especialidad {
-    private constructor(private readonly especialidad: string) {
-        this.especialidad = especialidad;
+    private constructor(private readonly _especialidad: string) {
+        this._especialidad = _especialidad;
     }
 
-    get Especialidad(): string {
-        return this.especialidad;
+    get especialidad(): string {
+        return this._especialidad;
     }
 
     equals(otro: Especialidad) {
-        return this.especialidad == otro.especialidad;
+        return this._especialidad == otro.especialidad;
     }
 }

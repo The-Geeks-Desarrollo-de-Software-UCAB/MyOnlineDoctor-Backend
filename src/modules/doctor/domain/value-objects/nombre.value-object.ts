@@ -1,18 +1,18 @@
 export class Nombre {
-    private constructor(private readonly primerNombre: string, private readonly segundoNombre: string) {
-        this.primerNombre = primerNombre;
-        this.segundoNombre = segundoNombre;
+    private constructor(private readonly _primerNombre: string, private readonly _segundoNombre: string) {
+        this._primerNombre = _primerNombre;
+        this._segundoNombre = _segundoNombre;
     }
 
-    get PrimerNombre(): string {
-        return this.primerNombre;
+    get primerNombre(): string {
+        return this._primerNombre;
     }
 
-    get SegundoNombre(): string {
-        return this.segundoNombre;
+    get segundoNombre(): string {
+        return this._segundoNombre;
     }
 
     equals(otro: Nombre) {
-        return this.primerNombre == otro.primerNombre && this.segundoNombre == otro.segundoNombre;
+        return this._primerNombre == otro.primerNombre && this._segundoNombre == otro.segundoNombre;
     }
 }

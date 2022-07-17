@@ -1,18 +1,18 @@
 export class Localizacion {
-    private constructor(private readonly latitud: string, private readonly longitud: string) { 
-        this.latitud = latitud;
-        this.longitud = longitud;
+    private constructor(private readonly _latitud: string, private readonly _longitud: string) { 
+        this._latitud = _latitud;
+        this._longitud = _longitud;
     }
 
-    get Latitud(): string {
-        return this.latitud;
+    get latitud(): string {
+        return this._latitud;
     }
 
-    get Longitud(): string {
-        return this.longitud;
+    get longitud(): string {
+        return this._longitud;
     }
 
     equals(otro: Localizacion) {
-        return this.latitud == otro.latitud && this.longitud == otro.longitud;
+        return this._latitud == otro.latitud && this._longitud == otro.longitud;
     }
 }

@@ -1,18 +1,18 @@
 export class Apellido {
-    private constructor(private readonly primerApellido: string, private readonly segundoApellido: string) {
-        this.primerApellido = primerApellido;
-        this.segundoApellido = segundoApellido;
+    private constructor(private readonly _primerApellido: string, private readonly _segundoApellido: string) {
+        this._primerApellido = _primerApellido;
+        this._segundoApellido = _segundoApellido;
     }
 
-    get PrimerApellido(): string {
+    get primerApellido(): string {
         return this.primerApellido;
     }
 
-    get SegundoApellido(): string {
+    get segundoApellido(): string {
         return this.segundoApellido;
     }
 
     equals(otro: Apellido) {
-        return this.primerApellido == otro.primerApellido && this.segundoApellido == otro.segundoApellido
+        return this._primerApellido == otro.primerApellido && this._segundoApellido == otro.segundoApellido
     }
 }

@@ -1,21 +1,26 @@
+import { AggregateRoot } from "../../../base/domain/entities/aggregate-root.base";
 import { Apellido } from "../value-objects/apellido.value-object";
 import { Especialidad } from "../value-objects/especialidad.value-object";
+import { IdDoctor } from "../value-objects/idDoctor.value-object";
 import { Localizacion } from "../value-objects/localizacion.value-object";
 import { Nombre } from "../value-objects/nombre.value-object";
 import { PromedioCalificacion } from "../value-objects/promedio-calificacion.value-object";
 
 
-export class DoctorEntity {
+export class DoctorEntity extends AggregateRoot{
     private constructor(
-        private readonly nombre: Nombre, 
-        private readonly apellido: Apellido, 
-        private readonly especialidad: Especialidad[], 
-        private readonly promedioCalificacion: PromedioCalificacion, 
-        private readonly localizacion: Localizacion) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.especialidad = especialidad;
-        this.promedioCalificacion = promedioCalificacion;
-        this.localizacion = localizacion;
+        private _id: IdDoctor,
+        private _nombre: Nombre, 
+        private _apellido: Apellido, 
+        private _especialidad: Especialidad[], 
+        private _promedioCalificacion: PromedioCalificacion, 
+        private _localizacion: Localizacion) {
+        super();
+        this._id = _id;
+        this._nombre = _nombre;
+        this._apellido = _apellido;
+        this._especialidad = _especialidad;
+        this._promedioCalificacion = _promedioCalificacion;
+        this._localizacion = _localizacion;
     }
 }
