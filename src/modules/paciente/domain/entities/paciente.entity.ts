@@ -14,7 +14,6 @@ import { Password } from '../value-objects/password.value-object';
 import { Peso } from '../value-objects/peso.value-object';
 import { IdPaciente } from '../value-objects/idPaciente.value-object';
 
-
 export class Paciente extends AggregateRoot {
  
   constructor(
@@ -33,7 +32,25 @@ export class Paciente extends AggregateRoot {
   private peso: Peso,
   private estadosuscripcion: EstadoSuscripcion) {
     super();
+
+    this.idPaciente = idPaciente;
+    this.correo = correo;
+    this.nombre = nombre;
+    this.apellido = apellido;
+    this.alergia = alergia;
+    this.altura = altura;
+    this.antecedente = antecedente;
+    this.fechanacimiento = fechanacimiento;
+    this.genero = genero;
+    this.numeromovil = numeromovil;
+    this.operacion = operacion;
+    this.password = password;
+    this.peso = peso;
+    this.estadosuscripcion = estadosuscripcion;
+
+    
   }
+
 
   getId(): IdPaciente {
     return this.idPaciente;
@@ -106,6 +123,6 @@ export class Paciente extends AggregateRoot {
   suspenderSuscripcion(): void {
     this.estadosuscripcion = EstadoSuscripcion.SUSPENDIDA;
   }
-  
+
 
 }
