@@ -1,3 +1,4 @@
+import { ArgumentNotProvidedException } from 'src/modules/base/domain/exceptions/argument-not-provided.exception';
 import {UUID} from 'src/modules/base/domain/value-objects/uuid'
 
 export class IdPaciente {
@@ -11,4 +12,9 @@ export class IdPaciente {
         return this._id;
     }
 
+    protected validate(): void{
+        if(this._id == null || this._id == undefined) {
+            throw new ArgumentNotProvidedException("id no fue provisto")
+        }
+    }
 }
