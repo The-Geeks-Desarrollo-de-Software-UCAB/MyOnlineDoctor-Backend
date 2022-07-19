@@ -5,7 +5,7 @@ export class CalcularValidezVideollamadaService {
   esValida(cita: Cita): boolean {
    const now = new Date();
 
-    if ((now.getTime() - cita.darFecha().getTime() >= 0) && (now.getTime() - cita.darFecha().getTime()  <= 3600000)) {
+    if ((now.getTime() - cita.fecha.getTime() >= 0) && (now.getTime() - cita.fecha.getTime()  <= 3600000)) {
     return true;
     }
 
