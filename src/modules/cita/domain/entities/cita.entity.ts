@@ -1,4 +1,5 @@
 import { AggregateRoot } from 'src/modules/base/domain/entities/aggregate-root.base';
+import { ArgumentInvalidException } from 'src/modules/base/domain/exceptions/argument-invalid.exception';
 import { IdDoctor } from 'src/modules/doctor/domain/value-objects/idDoctor.value-object';
 import { IdPaciente } from 'src/modules/paciente/domain/value-objects/idPaciente.value-object';
 import { Calificacion } from '../value-objects/calificacion.value-object';
@@ -11,7 +12,7 @@ import { TipoCita } from '../value-objects/tipoCita.object-value';
 
 export class Cita extends AggregateRoot {
     private _identificador: IdCita;
-    private _fecha: Fecha;
+    private _fecha?: Fecha;
     private _estado: EstadoCita;
     private _tipo: TipoCita;
     private _motivo: Motivo;
@@ -24,8 +25,7 @@ export class Cita extends AggregateRoot {
     //un object value motivo inicializado
     // de esta manera new Cita(new fecha(new Date()), new motivo('contexto'))
 
-    constructor(
-        fecha: Fecha, 
+    constructor( 
         motivo: Motivo, 
         tipo: TipoCita, 
         duracion: Duracion, 
@@ -34,7 +34,7 @@ export class Cita extends AggregateRoot {
 
         super();
         this._identificador = new IdCita();
-        this._fecha = fecha;
+        this._fecha = null;
         this._estado = EstadoCita.SOLICITADA;
         this._tipo = tipo;
         this._motivo = motivo;
@@ -81,5 +81,16 @@ export class Cita extends AggregateRoot {
 
     public calificar(puntuacion: number): void {
         this._calificacion = new Calificacion (puntuacion);
+    }
+
+    public agendar(fecha: Fecha) {
+        this.validate(fecha);
+        this._fecha = fecha;
+    }
+
+    protected validate(fecha: Fecha){
+        if(fecha.fecha < new Date()) {
+            throw new ArgumentInvalidException("fecha agendada no puede ser menor a fecha actual");
+        }
     }
 }
