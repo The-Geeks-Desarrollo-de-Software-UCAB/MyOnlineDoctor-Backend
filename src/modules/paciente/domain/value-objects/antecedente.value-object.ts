@@ -3,18 +3,21 @@ import { ArgumentOutOfRangeException } from "src/modules/base/domain/exceptions/
 
 export class Antecedente {
     
-  constructor(private readonly _antecedente: string){ }
+  constructor(private readonly _antecedente: string){ 
+    this.validate(_antecedente);
+    this._antecedente = _antecedente;
+  }
 
   public get antecedente(): string {
       return this._antecedente;
   }
 
-  protected validate(): void{
-    if(this._antecedente == null || this._antecedente == undefined) {
-        throw new ArgumentNotProvidedException("antecedente no fue provisto")
+  protected validate(antecedente: string): void{
+    if(antecedente == null || antecedente == undefined) {
+        throw new ArgumentNotProvidedException("antecedente no fue provisto");
     }
-    if(this._antecedente.length > 30) {
-        throw new ArgumentOutOfRangeException("antecedente esta fuera de rango")
+    if(antecedente.length > 30) {
+        throw new ArgumentOutOfRangeException("antecedente esta fuera de rango");
     }
   }
 }

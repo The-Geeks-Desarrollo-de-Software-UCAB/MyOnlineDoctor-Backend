@@ -3,18 +3,21 @@ import { ArgumentOutOfRangeException } from "src/modules/base/domain/exceptions/
 
 export class NumeroMovil {
     
-  constructor(private readonly _numeroMovil: string){ }
+  constructor(private readonly _numeroMovil: string){ 
+    this.validate(_numeroMovil);
+    this._numeroMovil = _numeroMovil;
+  }
 
   public get numeroMovil(): string {
       return this._numeroMovil;
   }
 
-  protected validate(): void{
-    if(this._numeroMovil == null || this._numeroMovil == undefined) {
-        throw new ArgumentNotProvidedException("numeroMovil no fue provisto")
+  protected validate(numeroMovil: string): void{
+    if(numeroMovil == null || numeroMovil == undefined) {
+        throw new ArgumentNotProvidedException("numeroMovil no fue provisto");
     }
-    if(this._numeroMovil.length > 15) {
-        throw new ArgumentOutOfRangeException("numeroMovil esta fuera de rango")
+    if(numeroMovil.length > 15) {
+        throw new ArgumentOutOfRangeException("numeroMovil esta fuera de rango");
     }
   }
 }

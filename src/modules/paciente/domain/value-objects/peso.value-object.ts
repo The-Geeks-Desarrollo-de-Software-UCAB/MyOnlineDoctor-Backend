@@ -3,18 +3,21 @@ import { ArgumentOutOfRangeException } from "src/modules/base/domain/exceptions/
 
 export class Peso {
     
-  constructor(private readonly _peso: number){ }
+  constructor(private readonly _peso: number){ 
+    this.validate(_peso);
+    this._peso = _peso;
+  }
 
   public get peso(): number {
       return this._peso;
   }
 
-  protected validate(): void{
-    if(this._peso == null || this._peso == undefined) {
-        throw new ArgumentNotProvidedException("peso no fue provisto")
+  protected validate(peso: number): void{
+    if(peso == null || peso == undefined) {
+        throw new ArgumentNotProvidedException("peso no fue provisto");
     }
-    if(this._peso > 1000) {
-        throw new ArgumentOutOfRangeException("peso esta fuera de rango")
+    if(peso > 1000) {
+        throw new ArgumentOutOfRangeException("peso esta fuera de rango");
     }
   }
 }

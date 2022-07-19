@@ -4,20 +4,23 @@ import { ArgumentOutOfRangeException } from "src/modules/base/domain/exceptions/
 
 export class Correo {
     
-  constructor(private readonly _correo: string){ }
+  constructor(private readonly _correo: string){ 
+    this.validate(_correo);
+    this._correo = _correo;
+  }
 
   public get correo(): string {
       return this._correo;
   }
 
-  protected validate(): void{
-    if(this._correo == null || this._correo == undefined) {
-        throw new ArgumentNotProvidedException("correo no fue provisto")
+  protected validate(correo: string): void{
+    if(correo == null || correo == undefined) {
+        throw new ArgumentNotProvidedException("correo no fue provisto");
     }
-    if(this._correo.length > 320 || this._correo.length < 3) {
-        throw new ArgumentOutOfRangeException("correo esta fuera de rango")
+    if(correo.length > 320 || correo.length < 3) {
+        throw new ArgumentOutOfRangeException("correo esta fuera de rango");
     }
-    if(!this._correo.includes("@")){
+    if(!correo.includes("@")){
         throw new ArgumentInvalidException("correo tiene formato incorrecto");
     }
   }

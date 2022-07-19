@@ -5,15 +5,17 @@ export class IdPaciente {
     private readonly _id: UUID;
 
     constructor(){
-        this._id = UUID.generate();
+        const id = UUID.generate();
+        this.validate(id);
+        this._id = id;
     }
 
     public get id(): UUID {
         return this._id;
     }
 
-    protected validate(): void{
-        if(this._id == null || this._id == undefined) {
+    protected validate(id: UUID): void{
+        if(id == null || id == undefined) {
             throw new ArgumentNotProvidedException("id no fue provisto")
         }
     }

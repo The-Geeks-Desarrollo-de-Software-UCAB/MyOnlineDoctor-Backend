@@ -3,18 +3,21 @@ import { ArgumentOutOfRangeException } from "src/modules/base/domain/exceptions/
 
 export class Genero {
     
-  constructor(private readonly _genero: string){ }
+  constructor(private readonly _genero: string){ 
+    this.validate(_genero);
+    this._genero = _genero;
+  }
 
   public get genero(): string {
       return this._genero;
   }
 
-  protected validate(): void{
-    if(this._genero == null || this._genero == undefined) {
-        throw new ArgumentNotProvidedException("genero no fue provisto")
+  protected validate(genero: string): void{
+    if(genero == null || genero == undefined) {
+        throw new ArgumentNotProvidedException("genero no fue provisto");
     }
-    if(this._genero.length > 1) {
-        throw new ArgumentOutOfRangeException("genero esta fuera de rango")
+    if(genero.length > 1) {
+        throw new ArgumentOutOfRangeException("genero esta fuera de rango");
     }
   }
 }

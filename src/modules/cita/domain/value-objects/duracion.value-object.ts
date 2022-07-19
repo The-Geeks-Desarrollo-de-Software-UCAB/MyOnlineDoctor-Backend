@@ -4,6 +4,7 @@ import { ArgumentNotProvidedException } from "src/modules/base/domain/exceptions
 export class Duracion {
     //tal vez es mejor hacer un enumerado
     constructor(private readonly _duracion: number){
+        this.validate(_duracion);
         this._duracion = _duracion        
      }
 
@@ -11,12 +12,12 @@ export class Duracion {
         return this._duracion;
     }
 
-    protected validate(): void{
-        if(this._duracion == null || this._duracion == undefined) {
-            throw new ArgumentNotProvidedException("duracion no fue provisto")
+    protected validate(duracion: number): void{
+        if(duracion == null || duracion == undefined) {
+            throw new ArgumentNotProvidedException("duracion no fue provisto");
         }
-        if(!Number.isInteger(this._duracion)) {
-            throw new ArgumentInvalidException("duracion debe ser entero")
+        if(!Number.isInteger(duracion)) {
+            throw new ArgumentInvalidException("duracion debe ser entero");
         }
     }
 }

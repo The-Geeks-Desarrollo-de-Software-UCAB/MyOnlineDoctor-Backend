@@ -8,7 +8,7 @@ import { PromedioCalificacion } from "../value-objects/promedio-calificacion.val
 
 
 export class DoctorEntity extends AggregateRoot{
-    private constructor(
+    constructor(
         private _id: IdDoctor,
         private _nombre: Nombre, 
         private _apellido: Apellido, 
@@ -22,5 +22,29 @@ export class DoctorEntity extends AggregateRoot{
         this._especialidad = _especialidad;
         this._promedioCalificacion = _promedioCalificacion;
         this._localizacion = _localizacion;
+    }
+
+    get id(){
+        return this._id;
+    }
+
+    get nombre(){
+        return this._nombre;
+    }
+
+    get apellido() {
+        return this._apellido;
+    }
+
+    get especialidad() {
+        return this._especialidad;
+    }
+
+    get promedioCalificacion() {
+        return this._promedioCalificacion;
+    }
+
+    get localizacion() {
+        return this._localizacion;
     }
 }

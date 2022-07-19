@@ -3,7 +3,11 @@ import { ArgumentOutOfRangeException } from "src/modules/base/domain/exceptions/
 
 export class Nombre {
     
-  constructor(private readonly _primerNombre: string, private readonly _segundoNombre: string){ }
+  constructor(private readonly _primerNombre: string, private readonly _segundoNombre: string){ 
+    this.validate(_primerNombre, _segundoNombre);
+    this._primerNombre = _primerNombre;
+    this._segundoNombre = _segundoNombre;
+  }
 
   public get primerNombre(): string {
       return this._primerNombre;
@@ -13,18 +17,18 @@ export class Nombre {
     return this._segundoNombre;
   }
 
-  protected validate(): void{
-    if(this._primerNombre == null || this._primerNombre == undefined) {
-        throw new ArgumentNotProvidedException("primerNombre no fue provisto")
+  protected validate(primerNombre: string, segundoNombre: string): void{
+    if(primerNombre == null || primerNombre == undefined) {
+        throw new ArgumentNotProvidedException("primerNombre no fue provisto");
     }
-    if(this._segundoNombre == null || this._segundoNombre == undefined) {
-        throw new ArgumentNotProvidedException("segundoNombre no fue provisto")
+    if(segundoNombre == null || segundoNombre == undefined) {
+        throw new ArgumentNotProvidedException("segundoNombre no fue provisto");
     }
-    if(this._primerNombre.length > 30) {
-        throw new ArgumentOutOfRangeException("primerNombre esta fuera de rango")
+    if(primerNombre.length > 30) {
+        throw new ArgumentOutOfRangeException("primerNombre esta fuera de rango");
     }
-    if(this._segundoNombre.length > 30) {
-        throw new ArgumentOutOfRangeException("segundoNombre esta fuera de rango")
+    if(segundoNombre.length > 30) {
+        throw new ArgumentOutOfRangeException("segundoNombre esta fuera de rango");
     }
   }
 

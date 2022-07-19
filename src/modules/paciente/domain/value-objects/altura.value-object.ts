@@ -9,12 +9,12 @@ export class Altura {
       return this._altura;
   }
 
-  protected validate(): void{
-    if(this._altura == null || this._altura == undefined) {
-        throw new ArgumentNotProvidedException("altura no fue provisto")
+  protected validate(altura: string): void{
+    if(altura == null || altura == undefined) {
+        throw new ArgumentNotProvidedException("altura no fue provisto");
     }
-    if(this._altura.length > 4) {
-        throw new ArgumentOutOfRangeException("altura esta fuera de rango")
+    if(altura.length > 4) {
+        throw new ArgumentOutOfRangeException("altura esta fuera de rango");
     }
   }
 }
