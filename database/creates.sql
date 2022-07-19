@@ -45,7 +45,7 @@ CREATE TABLE paciente (
     segundoApellido		    VARCHAR(30),
     genero			        VARCHAR(1) NOT NULL,
     altura                  INT(3) NOT NULL,
-    correo                  VARCHAR(60) NOT NULL,
+    correo                  VARCHAR(320) NOT NULL,
     numeroMovil             BIGINT(15) NOT NULL,
     fechaNacimiento         DATE NOT NULL,
     estadoSuscripcion       VARCHAR(10) NOT NULL

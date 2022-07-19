@@ -17,111 +17,108 @@ import { IdPaciente } from '../value-objects/idPaciente.value-object';
 export class Paciente extends AggregateRoot {
  
   constructor(
-  private idPaciente: IdPaciente,
-  private correo: Correo,
-  private nombre: Nombre,
-  private apellido: Apellido,
-  private alergia: Alergia,
-  private altura: Altura,
-  private antecedente: Antecedente,
-  private fechanacimiento: FechaNacimiento,
-  private genero: Genero,
-  private numeromovil: NumeroMovil,
-  private operacion: Operacion,
-  private password: Password,
-  private peso: Peso,
-  private estadosuscripcion: EstadoSuscripcion) {
+  private _idPaciente: IdPaciente,
+  private _correo: Correo,
+  private _nombre: Nombre,
+  private _apellido: Apellido,
+  private _alergia: Alergia,
+  private _altura: Altura,
+  private _antecedente: Antecedente,
+  private _fechaNacimiento: FechaNacimiento,
+  private _genero: Genero,
+  private _numeroMovil: NumeroMovil,
+  private _operacion: Operacion,
+  private _password: Password,
+  private _peso: Peso,
+  private _estadoSuscripcion: EstadoSuscripcion) {
     super();
-
-    this.idPaciente = idPaciente;
-    this.correo = correo;
-    this.nombre = nombre;
-    this.apellido = apellido;
-    this.alergia = alergia;
-    this.altura = altura;
-    this.antecedente = antecedente;
-    this.fechanacimiento = fechanacimiento;
-    this.genero = genero;
-    this.numeromovil = numeromovil;
-    this.operacion = operacion;
-    this.password = password;
-    this.peso = peso;
-    this.estadosuscripcion = estadosuscripcion;
-
-    
+    this._idPaciente = _idPaciente;
+    this._correo = _correo;
+    this._nombre = _nombre;
+    this._apellido = _apellido;
+    this._alergia = _alergia;
+    this._altura = _altura;
+    this._antecedente = _antecedente;
+    this._fechaNacimiento = _fechaNacimiento;
+    this._genero = _genero;
+    this._numeroMovil = _numeroMovil;
+    this._operacion = _operacion;
+    this._password = _password;
+    this._peso = _peso;
+    this._estadoSuscripcion = _estadoSuscripcion;
   }
 
 
-  getId(): IdPaciente {
-    return this.idPaciente;
+  get idPaciente(): IdPaciente {
+    return this._idPaciente;
   }
 
-  getCorreo(): Correo {
-    return this.correo;
+  get correo(): Correo {
+    return this._correo;
   }
 
-  getNombre(): Nombre {
-    return this.nombre;
+  get nombre(): Nombre {
+    return this._nombre;
   }
 
-  getApellido(): Apellido {
-    return this.apellido;
+  get apellido(): Apellido {
+    return this._apellido;
   }
 
-  getAlergia(): Alergia {
-    return this.alergia;
+  get alergia(): Alergia {
+    return this._alergia;
   }
 
-  getAltura(): Altura {
-    return this.altura;
+  get altura(): Altura {
+    return this._altura;
   }
 
-  getAntecedente(): Antecedente {
-    return this.antecedente;
+  get antecedente(): Antecedente {
+    return this._antecedente;
   }
 
-  getFechaNacimiento(): FechaNacimiento {
-    return this.fechanacimiento;
+  get fechaNacimiento(): FechaNacimiento {
+    return this._fechaNacimiento;
   }
 
-  getGenero(): Genero {
-    return this.genero;
+  get genero(): Genero {
+    return this._genero;
   }
 
-  getNumeroMovil(): NumeroMovil {
-    return this.numeromovil;
+  get numeroMovil(): NumeroMovil {
+    return this._numeroMovil;
   }
 
-  getOperacion(): Operacion {
-    return this.operacion;
+  get operacion(): Operacion {
+    return this._operacion;
   }
 
-  getPassword(): Password {
-    return this.password;
+  get password(): Password {
+    return this._password;
   }
 
-  getPeso(): Peso {
-    return this.peso;
+  get peso(): Peso {
+    return this._peso;
   }
 
-  getEstadoSuscripcion(): EstadoSuscripcion {
-    return this.estadosuscripcion;
+  get estadoSuscripcion(): EstadoSuscripcion {
+    return this._estadoSuscripcion;
   }
 
   cancelarSuscripcion(): void {
-    this.estadosuscripcion = EstadoSuscripcion.CANCELADA;
+    this._estadoSuscripcion = EstadoSuscripcion.CANCELADA;
   }
 
   bloquearSuscripcion(): void {
-    this.estadosuscripcion = EstadoSuscripcion.BLOQUEADA;
+    this._estadoSuscripcion = EstadoSuscripcion.BLOQUEADA;
   }
 
   activarSuscripcion(): void {
-    this.estadosuscripcion = EstadoSuscripcion.ACTIVA;
+    this._estadoSuscripcion = EstadoSuscripcion.ACTIVA;
   }
 
   suspenderSuscripcion(): void {
-    this.estadosuscripcion = EstadoSuscripcion.SUSPENDIDA;
+    this._estadoSuscripcion = EstadoSuscripcion.SUSPENDIDA;
   }
 
 
