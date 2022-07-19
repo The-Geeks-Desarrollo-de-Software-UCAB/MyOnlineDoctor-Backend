@@ -1,10 +1,10 @@
-CREATE DATABASE myonlinedoctor CHARACTER SET utf8 COLLATE utf8_unicode_ci;;
+CREATE DATABASE myonlinedoctor CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
-USE DATABASE myonlinedoctor;
+USE myonlinedoctor;
 
 CREATE TABLE doctor (
    
-    id				        VARCHAR(36) PRIMARY KEY,
+    id_doctor		        VARCHAR(36) PRIMARY KEY,
     usuario                 VARCHAR(30) NOT NULL,
     contrasena              VARCHAR(255) NOT NULL,
     primerNombre      	    VARCHAR(30) NOT NULL,
@@ -20,23 +20,22 @@ CREATE TABLE doctor (
 
 CREATE TABLE especialidad (
     
-    id				INT(11) PRIMARY KEY AUTO_INCREMENT,
+    id_especialidad	INT(11) PRIMARY KEY AUTO_INCREMENT,
     nombre      	VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE doctor_especialidad (
     
-    id				        INT(11) PRIMARY KEY AUTO_INCREMENT,
     id_doctor				VARCHAR(36),
     id_especialidad    	    INT(11),
-
-    FOREIGN KEY (id_doctor) REFERENCES doctor(id),
-    FOREIGN KEY (id_especialidad) REFERENCES especialidad(id)
+	PRIMARY KEY(id_doctor,id_especialidad),
+    FOREIGN KEY (id_doctor) REFERENCES doctor(id_doctor),
+    FOREIGN KEY (id_especialidad) REFERENCES especialidad(id_especialidad)
 );
 
 CREATE TABLE paciente (
    
-    id				        VARCHAR(36) PRIMARY KEY,
+    id_paciente		        VARCHAR(36) PRIMARY KEY,
     usuario                 VARCHAR(30) NOT NULL,
     contrasena              VARCHAR(255) NOT NULL,
     primerNombre      	    VARCHAR(30) NOT NULL,
@@ -45,7 +44,7 @@ CREATE TABLE paciente (
     segundoApellido		    VARCHAR(30),
     genero			        VARCHAR(1) NOT NULL,
     altura                  INT(3) NOT NULL,
-    correo                  VARCHAR(320) NOT NULL,
+    correo                  VARCHAR(60) NOT NULL,
     numeroMovil             BIGINT(15) NOT NULL,
     fechaNacimiento         DATE NOT NULL,
     estadoSuscripcion       VARCHAR(10) NOT NULL
@@ -53,48 +52,50 @@ CREATE TABLE paciente (
 
 CREATE TABLE antecedente (
     
-    id				INT(11) PRIMARY KEY AUTO_INCREMENT,
+    id_antecedente	INT(11) PRIMARY KEY AUTO_INCREMENT,
     id_paciente		VARCHAR(36),
     nombre    	    VARCHAR(30),
 
-    FOREIGN KEY (id_paciente) REFERENCES paciente(id)
+    FOREIGN KEY (id_paciente) REFERENCES paciente(id_paciente)
 );
 
 CREATE TABLE operacion (
     
-    id				INT(11) PRIMARY KEY AUTO_INCREMENT,
+    id_operacion	INT(11) PRIMARY KEY AUTO_INCREMENT,
     id_paciente		VARCHAR(36),
     nombre    	    VARCHAR(30),
 
-    FOREIGN KEY (id_paciente) REFERENCES paciente(id)
+    FOREIGN KEY (id_paciente) REFERENCES paciente(id_paciente)
 );
 
 CREATE TABLE alergia (
     
-    id				INT(11) PRIMARY KEY AUTO_INCREMENT,
+    id_alergia		INT(11) PRIMARY KEY AUTO_INCREMENT,
     id_paciente		VARCHAR(36),
     nombre    	    VARCHAR(30),
 
-    FOREIGN KEY (id_paciente) REFERENCES paciente(id)
+    FOREIGN KEY (id_paciente) REFERENCES paciente(id_paciente)
 );
 
 CREATE TABLE cita (
    
-    id				VARCHAR(36) PRIMARY KEY,
-    fecha           DATETIME NOT NULL,
+    id_cita			VARCHAR(36) PRIMARY KEY,
+    fecha           DATETIME,
     duracion        INT(3) NOT NULL,
     tipoCita        VARCHAR(10) NOT NULL,
     estadoCita      VARCHAR(10) NOT NULL,
-    id_doctor       VARCHAR(36) NOT NULL,
-    id_paciente     VARCHAR(36) NOT NULL,
+    motivo			VARCHAR(500) NOT NULL,
+    doctor       	VARCHAR(36) NOT NULL,
+    paciente     	VARCHAR(36) NOT NULL,
+    calificacion	INT,
 
-    FOREIGN KEY (id_doctor) REFERENCES doctor(id),
-    FOREIGN KEY (id_paciente) REFERENCES paciente(id)
+    FOREIGN KEY (doctor) REFERENCES doctor(id_doctor),
+    FOREIGN KEY (paciente) REFERENCES paciente(id_paciente)
 );
 
 CREATE TABLE registro (
    
-    id				VARCHAR(36) PRIMARY KEY,
+    id_registro		VARCHAR(36) PRIMARY KEY,
     fecha           DATE NOT NULL,
     id_cita         VARCHAR(36) NOT NULL,
     historia        VARCHAR(255) NOT NULL,
@@ -103,5 +104,5 @@ CREATE TABLE registro (
     examenes	    VARCHAR(255) NOT NULL,
     prescripcion    VARCHAR(255) NOT NULL,
 
-    FOREIGN KEY (id_cita) REFERENCES cita(id)
+    FOREIGN KEY (id_cita) REFERENCES cita(id_cita)
 );
