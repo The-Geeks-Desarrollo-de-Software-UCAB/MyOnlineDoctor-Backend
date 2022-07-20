@@ -15,41 +15,49 @@ export class CitaController {
     return await this.getService().findAll();
   }
 
-  @Get('byDoctor')
-  async findByDoctor(@Body() by): Promise<Cita[]> {
-    return await this.getService().findByDoctor(by.id_doctor);
+  @Get('byDoctor:id_doctor')
+  async findByDoctor(@Param('id_doctor') id_doctor: string): Promise<Cita[]> {
+    return await this.getService().findByDoctor(id_doctor);
   }
 
-  @Get('byPaciente')
-  async findByPaciente(@Body() by): Promise<Cita[]> {
-    return await this.getService().findByPaciente(by.id_paciente);
+  @Get('byPaciente:id_paciente')
+  async findByPaciente(
+    @Param('id_paciente') id_paciente: string,
+  ): Promise<Cita[]> {
+    return await this.getService().findByPaciente(id_paciente);
   }
 
-  @Get('byEstado')
-  async findByEstado(@Body() by): Promise<Cita[]> {
-    return await this.getService().findByEstado(by.estado);
+  @Get('byEstado:estado')
+  async findByEstado(@Param('estado') estado: string): Promise<Cita[]> {
+    return await this.getService().findByEstado(estado);
   }
 
-  @Get('SolicitadasDoctor')
-  async encontrarSolicitadasDoctor(@Body() para): Promise<Cita[]> {
-    return await this.getService().encontrarSolicitadasDoctor(para.id_doctor);
+  @Get('SolicitadasDoctor:id_doctor')
+  async encontrarSolicitadasDoctor(
+    @Param('id_doctor') id_doctor: string,
+  ): Promise<Cita[]> {
+    return await this.getService().encontrarSolicitadasDoctor(id_doctor);
   }
 
-  @Get('AceptadasDoctor')
-  async encontrarAceptadasDoctor(@Body() para): Promise<Cita[]> {
-    return await this.getService().encontrarAceptadasDoctor(para.id_doctor);
+  @Get('AceptadasDoctor:id_doctor')
+  async encontrarAceptadasDoctor(
+    @Param('id_doctor') id_doctor: string,
+  ): Promise<Cita[]> {
+    return await this.getService().encontrarAceptadasDoctor(id_doctor);
   }
 
-  @Get('SolicitadasPaciente')
-  async encontrarSolicitadasPaciente(@Body() para): Promise<Cita[]> {
-    return await this.getService().encontrarSolicitadasPaciente(
-      para.id_paciente,
-    );
+  @Get('SolicitadasPaciente:id_paciente')
+  async encontrarSolicitadasPaciente(
+    @Param('id_paciente') id_paciente: string,
+  ): Promise<Cita[]> {
+    return await this.getService().encontrarSolicitadasPaciente(id_paciente);
   }
 
-  @Get('AgendadasPaciente')
-  async encontrarAgendadasPaciente(@Body() para): Promise<Cita[]> {
-    return await this.getService().encontrarAgendadasPaciente(para.id_paciente);
+  @Get('AgendadasPaciente:id_paciente')
+  async encontrarAgendadasPaciente(
+    @Param('id_paciente') id_paciente: string,
+  ): Promise<Cita[]> {
+    return await this.getService().encontrarAgendadasPaciente(id_paciente);
   }
 
   @Post('Solicitar')
