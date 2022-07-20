@@ -14,6 +14,11 @@ import { Password } from '../value-objects/password.value-object';
 import { Peso } from '../value-objects/peso.value-object';
 import { IdPaciente } from '../value-objects/idPaciente.value-object';
 import { decoLog } from 'src/modules/decorators/logging-decorator';
+import { SuscripcionCanceladaDomainEvent } from '../events/suscripcion-cancelada.domain-event';
+import { PacienteBloqueadoDomainEvent } from '../events/paciente-bloqueado.domain-event';
+import { SuscripcionModificadaDomainEvent } from '../events/suscripcion-modificada.domain-event';
+import { SuscripcionSuspendidaDomainEvent } from '../events/suscripcion-suspendida.domain-event';
+import { PacienteCreadoDomainEvent } from '../events/paciente-creado.domain-event';
 
 export class PacienteEntity extends AggregateRoot {
  
@@ -47,6 +52,7 @@ export class PacienteEntity extends AggregateRoot {
     this._password = _password;
     this._peso = _peso;
     this._estadoSuscripcion = _estadoSuscripcion;
+    this.agregarEvento(new PacienteCreadoDomainEvent(this._idPaciente.id));
   }
 
   @decoLog()
@@ -122,21 +128,25 @@ export class PacienteEntity extends AggregateRoot {
   @decoLog()
   cancelarSuscripcion(): void {
     this._estadoSuscripcion = EstadoSuscripcion.CANCELADA;
+    this.agregarEvento(new SuscripcionCanceladaDomainEvent(this._idPaciente.id));
   }
 
   @decoLog()
-  bloquearSuscripcion(): void {
+  bloquearSuscripcion(razon: string): void {
     this._estadoSuscripcion = EstadoSuscripcion.BLOQUEADA;
+    this.agregarEvento(new PacienteBloqueadoDomainEvent(this._idPaciente.id, razon));
   }
 
   @decoLog()
   activarSuscripcion(): void {
     this._estadoSuscripcion = EstadoSuscripcion.ACTIVA;
+    this.agregarEvento(new SuscripcionModificadaDomainEvent(this._idPaciente.id));
   }
 
   @decoLog()
   suspenderSuscripcion(): void {
     this._estadoSuscripcion = EstadoSuscripcion.SUSPENDIDA;
+    this.agregarEvento(new SuscripcionSuspendidaDomainEvent(this._idPaciente.id));
   }
 
 
