@@ -11,7 +11,7 @@ import { Motivo } from '../value-objects/motivo.value-object';
 import { TipoCita } from '../value-objects/tipoCita.object-value';
 import { decoLog } from 'src/modules/decorators/logging-decorator';
 
-export class Cita extends AggregateRoot {
+export class CitaEntity extends AggregateRoot {
     private _identificador: IdCita;
     private _fecha?: Fecha;
     private _estado: EstadoCita;
@@ -27,26 +27,31 @@ export class Cita extends AggregateRoot {
     // de esta manera new Cita(new fecha(new Date()), new motivo('contexto'))
 
     constructor( 
-        motivo: Motivo, 
+        identificador: IdCita,
+        fecha: Fecha = null,
+        estado: EstadoCita = EstadoCita.SOLICITADA,
         tipo: TipoCita, 
+        motivo: Motivo, 
         duracion: Duracion, 
+        calificacion: Calificacion = null,
         idPaciente: IdPaciente, 
         idDoctor: IdDoctor){
 
         super();
-        this._identificador = new IdCita();
-        this._fecha = null;
-        this._estado = EstadoCita.SOLICITADA;
+        this._identificador = identificador;
+        this._fecha = fecha;
+        this._estado = estado;
         this._tipo = tipo;
         this._motivo = motivo;
         this._duracion = duracion;
+        this._calificacion = calificacion;
         this._identificadorPaciente = idPaciente;
         this._identificadorDoctor = idDoctor;
     }
 
     @decoLog()
     public get id(): string {
-        return this._identificador.id.value
+        return this._identificador.id
     }
 
     @decoLog()
@@ -81,12 +86,12 @@ export class Cita extends AggregateRoot {
 
     @decoLog()
     get identificadorPaciente(): string {
-        return this._identificadorPaciente.id.value
+        return this._identificadorPaciente.id
     }
 
     @decoLog()
     get identificadorDoctor(): string {
-        return this._identificadorDoctor.id.value
+        return this._identificadorDoctor.id
     }
 
     @decoLog()
