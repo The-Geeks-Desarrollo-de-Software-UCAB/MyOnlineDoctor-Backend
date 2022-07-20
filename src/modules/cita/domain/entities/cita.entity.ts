@@ -9,6 +9,7 @@ import { Fecha } from '../value-objects/fecha.value-object';
 import { IdCita } from '../value-objects/idCita.value-object'
 import { Motivo } from '../value-objects/motivo.value-object';
 import { TipoCita } from '../value-objects/tipoCita.object-value';
+import { decoLog } from 'src/modules/decorators/logging-decorator';
 
 export class Cita extends AggregateRoot {
     private _identificador: IdCita;
@@ -43,51 +44,63 @@ export class Cita extends AggregateRoot {
         this._identificadorDoctor = idDoctor;
     }
 
+    @decoLog()
     public get id(): string {
         return this._identificador.id.value
     }
 
+    @decoLog()
     public get fecha(): Date {
         return this._fecha.fecha
     }
 
+    @decoLog()
     public get estado(): EstadoCita {
         return this._estado
     }
 
+    @decoLog()
     public get tipo(): TipoCita {
         return this._tipo
     }
 
+    @decoLog()
     public get motivo(): string {
         return this._motivo.motivo
     }
 
+    @decoLog()
     public get duracion(): number {
         return this._duracion.duracion
     }
 
+    @decoLog()
     public get calificacion(): number {
         return this._calificacion.puntuacion;
     }
 
+    @decoLog()
     get identificadorPaciente(): string {
         return this._identificadorPaciente.id.value
     }
 
+    @decoLog()
     get identificadorDoctor(): string {
         return this._identificadorDoctor.id.value
     }
 
+    @decoLog()
     public calificar(puntuacion: number): void {
         this._calificacion = new Calificacion (puntuacion);
     }
 
+    @decoLog()
     public agendar(fecha: Fecha) {
         this.validate(fecha);
         this._fecha = fecha;
     }
 
+    @decoLog()
     protected validate(fecha: Fecha){
         if(fecha.fecha < new Date()) {
             throw new ArgumentInvalidException("fecha agendada no puede ser menor a fecha actual");

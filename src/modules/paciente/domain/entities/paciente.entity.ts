@@ -13,6 +13,7 @@ import { Operacion } from '../value-objects/operacion.value-object';
 import { Password } from '../value-objects/password.value-object';
 import { Peso } from '../value-objects/peso.value-object';
 import { IdPaciente } from '../value-objects/idPaciente.value-object';
+import { decoLog } from 'src/modules/decorators/logging-decorator';
 
 export class Paciente extends AggregateRoot {
  
@@ -48,75 +49,92 @@ export class Paciente extends AggregateRoot {
     this._estadoSuscripcion = _estadoSuscripcion;
   }
 
-
+  @decoLog()
   get idPaciente(): IdPaciente {
     return this._idPaciente;
   }
 
+  @decoLog()
   get correo(): Correo {
     return this._correo;
   }
 
+  @decoLog()
   get nombre(): Nombre {
     return this._nombre;
   }
 
+  @decoLog()
   get apellido(): Apellido {
     return this._apellido;
   }
 
+  @decoLog()
   get alergia(): Alergia {
     return this._alergia;
   }
 
+  @decoLog()
   get altura(): Altura {
     return this._altura;
   }
 
+  @decoLog()
   get antecedente(): Antecedente {
     return this._antecedente;
   }
 
+  @decoLog()
   get fechaNacimiento(): FechaNacimiento {
     return this._fechaNacimiento;
   }
 
+  @decoLog()
   get genero(): Genero {
     return this._genero;
   }
 
+  @decoLog()
   get numeroMovil(): NumeroMovil {
     return this._numeroMovil;
   }
 
+  @decoLog()
   get operacion(): Operacion {
     return this._operacion;
   }
 
+  @decoLog()
   get password(): Password {
     return this._password;
   }
 
+  @decoLog()
   get peso(): Peso {
     return this._peso;
   }
 
+  @decoLog()
   get estadoSuscripcion(): EstadoSuscripcion {
     return this._estadoSuscripcion;
   }
 
+  @decoLog()
   cancelarSuscripcion(): void {
     this._estadoSuscripcion = EstadoSuscripcion.CANCELADA;
   }
 
+  @decoLog()
   bloquearSuscripcion(): void {
     this._estadoSuscripcion = EstadoSuscripcion.BLOQUEADA;
   }
 
+  @decoLog()
   activarSuscripcion(): void {
     this._estadoSuscripcion = EstadoSuscripcion.ACTIVA;
   }
 
+  @decoLog()
   suspenderSuscripcion(): void {
     this._estadoSuscripcion = EstadoSuscripcion.SUSPENDIDA;
   }
