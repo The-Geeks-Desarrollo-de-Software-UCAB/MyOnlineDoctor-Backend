@@ -15,7 +15,7 @@ import { Peso } from '../value-objects/peso.value-object';
 import { IdPaciente } from '../value-objects/idPaciente.value-object';
 import { decoLog } from 'src/modules/decorators/logging-decorator';
 
-export class Paciente extends AggregateRoot {
+export class PacienteEntity extends AggregateRoot {
  
   constructor(
   private _idPaciente: IdPaciente,
