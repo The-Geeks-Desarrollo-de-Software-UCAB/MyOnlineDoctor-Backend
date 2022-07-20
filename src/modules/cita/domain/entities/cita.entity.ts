@@ -10,6 +10,13 @@ import { IdCita } from '../value-objects/idCita.value-object'
 import { Motivo } from '../value-objects/motivo.value-object';
 import { TipoCita } from '../value-objects/tipoCita.object-value';
 import { decoLog } from 'src/modules/decorators/logging-decorator';
+import { CitaAgendada } from '../events/cita-agendada.domain-event';
+import { CitaAceptada } from '../events/cita-aceptada.domain-event';
+import { CitaSolicitada } from '../events/cita-solicitada.domain-event';
+import { CitaCancelada } from '../events/cita-cancelada.domain-event';
+import { CitaRechazada } from '../events/cita-rechazada.domain-event';
+import { CitaFinalizada } from '../events/cita-finalizada.domain-event';
+import { CitaIniciada } from '../events/cita-iniciada.domain-event';
 
 export class CitaEntity extends AggregateRoot {
     private _identificador: IdCita;
@@ -47,6 +54,7 @@ export class CitaEntity extends AggregateRoot {
         this._calificacion = calificacion;
         this._identificadorPaciente = idPaciente;
         this._identificadorDoctor = idDoctor;
+        this.agregarEvento(new CitaSolicitada(this._identificador.id));
     }
 
     @decoLog()
@@ -103,6 +111,36 @@ export class CitaEntity extends AggregateRoot {
     public agendar(fecha: Fecha) {
         this.validate(fecha);
         this._fecha = fecha;
+        this.agregarEvento(new CitaAgendada(this._identificador.id));
+    }
+
+    @decoLog()
+    public aceptar() {
+        this._estado = EstadoCita.ACEPTADA;
+        this.agregarEvento(new CitaAceptada(this._identificador.id));
+    }
+
+    @decoLog()
+    public cancelar() {
+        this._estado = EstadoCita.CANCELADA;
+        this.agregarEvento(new CitaCancelada(this._identificador.id));
+    }
+
+    @decoLog()
+    public rechazar() {
+        this._estado = EstadoCita.RECHAZADA;
+        this.agregarEvento(new CitaRechazada(this._identificador.id));
+    }
+
+    @decoLog()
+    public iniciar() {
+        this.agregarEvento(new CitaIniciada(this._identificador.id));
+    }
+
+    @decoLog() 
+    public finalizar() {
+        this._estado = EstadoCita.FINALIZADA;
+        this.agregarEvento(new CitaFinalizada(this._identificador.id));
     }
 
     @decoLog()
