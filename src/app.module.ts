@@ -13,14 +13,14 @@ import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/entities/docto
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'ec2-54-87-179-4.compute-1.amazonaws.com',
-      port: 5432,
-      username: 'nffybrenogqxcl',
-      password: '4e5846bf15c8108830b6ef209c7bbbfc551f9673522226f97d6199acc180bae8',
-      database: 'd6o4rar9o3v525',
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: '', //ingresen aca su clave
+      database: 'myonlinedoctor',
+      entities: [Cita, Especialidad, Paciente, Doctor],
       autoLoadEntities: true,
-      synchronize: true
     }),
     DoctorModule,
     SpecialtyModule,
@@ -29,4 +29,4 @@ import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/entities/docto
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

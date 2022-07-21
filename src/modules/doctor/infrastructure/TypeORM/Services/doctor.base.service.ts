@@ -1,5 +1,5 @@
 import { Repository } from 'typeorm';
-import { Doctor } from '../entities/doctor.entity';
+import { Doctor } from '../Entities/doctor.entity';
 
 export interface DoctorBaseService {
   getRepository(): Repository<Doctor>;
