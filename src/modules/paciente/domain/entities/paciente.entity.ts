@@ -13,7 +13,6 @@ import { Operacion } from '../value-objects/operacion.value-object';
 import { Password } from '../value-objects/password.value-object';
 import { Peso } from '../value-objects/peso.value-object';
 import { IdPaciente } from '../value-objects/idPaciente.value-object';
-import { decoLog } from 'src/modules/decorators/logging-decorator';
 import { SuscripcionCanceladaDomainEvent } from '../events/suscripcion-cancelada.domain-event';
 import { PacienteBloqueadoDomainEvent } from '../events/paciente-bloqueado.domain-event';
 import { SuscripcionModificadaDomainEvent } from '../events/suscripcion-modificada.domain-event';
@@ -55,95 +54,95 @@ export class PacienteEntity extends AggregateRoot {
     this.agregarEvento(new PacienteCreadoDomainEvent(this._idPaciente.id));
   }
 
-  @decoLog()
+  
   get idPaciente(): IdPaciente {
     return this._idPaciente;
   }
 
-  @decoLog()
+  
   get correo(): Correo {
     return this._correo;
   }
 
-  @decoLog()
+
   get nombre(): Nombre {
     return this._nombre;
   }
 
-  @decoLog()
+  
   get apellido(): Apellido {
     return this._apellido;
   }
 
-  @decoLog()
+ 
   get alergia(): Alergia {
     return this._alergia;
   }
 
-  @decoLog()
+  
   get altura(): Altura {
     return this._altura;
   }
 
-  @decoLog()
+ 
   get antecedente(): Antecedente {
     return this._antecedente;
   }
 
-  @decoLog()
+ 
   get fechaNacimiento(): FechaNacimiento {
     return this._fechaNacimiento;
   }
 
-  @decoLog()
+  
   get genero(): Genero {
     return this._genero;
   }
 
-  @decoLog()
+  
   get numeroMovil(): NumeroMovil {
     return this._numeroMovil;
   }
 
-  @decoLog()
+  
   get operacion(): Operacion {
     return this._operacion;
   }
 
-  @decoLog()
+
   get password(): Password {
     return this._password;
   }
 
-  @decoLog()
+
   get peso(): Peso {
     return this._peso;
   }
 
-  @decoLog()
+  
   get estadoSuscripcion(): EstadoSuscripcion {
     return this._estadoSuscripcion;
   }
 
-  @decoLog()
+ 
   cancelarSuscripcion(): void {
     this._estadoSuscripcion = EstadoSuscripcion.CANCELADA;
     this.agregarEvento(new SuscripcionCanceladaDomainEvent(this._idPaciente.id));
   }
 
-  @decoLog()
+ 
   bloquearSuscripcion(razon: string): void {
     this._estadoSuscripcion = EstadoSuscripcion.BLOQUEADA;
     this.agregarEvento(new PacienteBloqueadoDomainEvent(this._idPaciente.id, razon));
   }
 
-  @decoLog()
+ 
   activarSuscripcion(): void {
     this._estadoSuscripcion = EstadoSuscripcion.ACTIVA;
     this.agregarEvento(new SuscripcionModificadaDomainEvent(this._idPaciente.id));
   }
 
-  @decoLog()
+ 
   suspenderSuscripcion(): void {
     this._estadoSuscripcion = EstadoSuscripcion.SUSPENDIDA;
     this.agregarEvento(new SuscripcionSuspendidaDomainEvent(this._idPaciente.id));
