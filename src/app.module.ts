@@ -17,7 +17,7 @@ import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/entities/docto
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'Tesa15600*', //ingresen aca su clave
+      password: '', //ingresen aca su clave
       database: 'myonlinedoctor',
       entities: [Cita, Especialidad, Paciente, Doctor],
       autoLoadEntities: true,
