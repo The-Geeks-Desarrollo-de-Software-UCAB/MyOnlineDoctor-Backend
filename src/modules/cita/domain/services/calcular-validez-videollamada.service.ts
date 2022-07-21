@@ -1,10 +1,9 @@
-import { Cita } from '../entities/cita.entity';
-import { decoLog } from 'src/modules/decorators/logging-decorator';
+import { CitaEntity } from '../entities/cita.entity';
 
 export class CalcularValidezVideollamadaService {
 
-  @decoLog()
-  esValida(cita: Cita): boolean {
+  
+  esValida(cita: CitaEntity): boolean {
    const now = new Date();
 
     if ((now.getTime() - cita.fecha.getTime() >= 0) && (now.getTime() - cita.fecha.getTime()  <= 3600000)) {
