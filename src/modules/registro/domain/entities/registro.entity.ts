@@ -1,27 +1,29 @@
-import { AggregateRoot } from "src/modules/base/domain/entities/aggregate-root.base";
-import { Historia } from "../value-objects/historia";
-import { Diagnostico } from "../value-objects/diagnostico";
-import { Plan } from "../value-objects/plan";
-import { preescripcion } from "../value-objects/preescripcion";
-import { examen } from "../value-objects/examen-realizar";
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Diagnostico } from '../value-objects/diagnostico';
+import { examen } from '../value-objects/examen-realizar';
+import { Historia } from '../value-objects/historia';
+import { Plan } from '../value-objects/plan';
+import { preescripcion } from '../value-objects/preescripcion';
 
+@Entity()
+export class Registro {
+    @PrimaryGeneratedColumn('uuid')
+    registroId: string;
 
-export class RegistroEntity extends AggregateRoot {
-    constructor(
-        private id: Historia,
-        private diagnostico: Diagnostico,
-        private plan: Plan,
-        private preescripcion: preescripcion,
-        private examen: examen
-    ) {
-        super();
-    }
+    @Column()
+    idHistoria: string;
 
+    @Column()
+    diagnostico: string;
 
-    getId = (): Historia => this.id;
-    getDiagnostico = (): Diagnostico => this.diagnostico;
-    getplan = (): Plan => this.plan;
-    getpreescripcion = (): preescripcion => this.preescripcion;
-    getexamen = (): examen => this.examen;
+    @Column()
+    plan: string;
+
+    @Column()
+    preescripcion: string;
+
+    @Column()
+    examen: string;
+
 
 }
