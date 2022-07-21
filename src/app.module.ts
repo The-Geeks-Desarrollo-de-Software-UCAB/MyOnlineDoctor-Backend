@@ -14,11 +14,11 @@ import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/entities/docto
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'ec2-54-87-179-4.compute-1.amazonaws.com',
+      host: 'ec2-23-23-182-238.compute-1.amazonaws.com',
       port: 5432,
-      username: 'nffybrenogqxcl',
-      password: '4e5846bf15c8108830b6ef209c7bbbfc551f9673522226f97d6199acc180bae8',
-      database: 'd6o4rar9o3v525',
+      username: 'xndqjgfouaonzs',
+      password: 'ee78b63f31fd3f278118a72809e600edd7cf037c465939f0b1a1d87def16810b',
+      database: 'dcloinfseo6j7n',
       autoLoadEntities: true,
       synchronize: true
     }),
