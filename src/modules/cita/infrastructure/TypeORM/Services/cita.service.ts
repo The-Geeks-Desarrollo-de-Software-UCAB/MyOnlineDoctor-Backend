@@ -113,6 +113,18 @@ export class CitaService {
   }
 
   @decoLog()
+  async encontrarAceptadasPaciente(paciente_id: string): Promise<Cita[]> {
+    const paciente = await this.pacienteRepo.findOneOrFail({
+      where: { id_paciente: paciente_id },
+    });
+    let resultado = await this.getRepository().find({
+      where: { paciente: paciente, estadoCita: 'ACEPTADA' },
+      relations: { doctor: true, paciente: true },
+    });
+    return resultado;
+  }
+
+  @decoLog()
   async solicitarCita(
     cita_id: string,
     duracion: number,

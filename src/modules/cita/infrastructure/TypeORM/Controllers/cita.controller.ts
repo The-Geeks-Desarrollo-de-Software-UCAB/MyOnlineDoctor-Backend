@@ -60,6 +60,13 @@ export class CitaController {
     return await this.getService().encontrarAgendadasPaciente(id_paciente);
   }
 
+  @Get('AceptadasPaciente:id_paciente')
+  async encontrarAceptadasPaciente(
+    @Param('id_paciente') id_paciente: string,
+  ): Promise<Cita[]> {
+    return await this.getService().encontrarAceptadasPaciente(id_paciente);
+  }
+
   @Post('Solicitar')
   async solicitarCita(@Body() para): Promise<Cita> {
     return await this.getService().solicitarCita(
