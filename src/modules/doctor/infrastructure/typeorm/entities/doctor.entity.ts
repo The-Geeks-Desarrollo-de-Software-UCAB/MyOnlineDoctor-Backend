@@ -46,7 +46,7 @@ export class Doctor {
   promedioCalificacion: number;
 
   @Column()
-  imagen: string;
+  imagen: number;
 
   @OneToMany(() => Cita, (cita) => cita.doctor)
   citas: Cita[];
