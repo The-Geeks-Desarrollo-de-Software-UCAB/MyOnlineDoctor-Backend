@@ -36,17 +36,17 @@ export class Doctor {
   @Column()
   genero: string;
 
-  @Column()
+  @Column({ nullable: true })
   longitud: number;
 
-  @Column()
+  @Column({ nullable: true })
   latitud: number;
 
-  @Column()
+  @Column({ nullable: true })
   promedioCalificacion: number;
 
-  @Column()
-  imagen: number;
+  @Column({ nullable: true })
+  imagen: string;
 
   @OneToMany(() => Cita, (cita) => cita.doctor)
   citas: Cita[];
