@@ -20,8 +20,7 @@ import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/entities/docto
       password: '4e5846bf15c8108830b6ef209c7bbbfc551f9673522226f97d6199acc180bae8',
       database: 'd6o4rar9o3v525',
       autoLoadEntities: true,
-      synchronize: true,
-      ssl: true,
+      synchronize: truessl: true,
       extra: {
         ssl: {
           rejectUnauthorized: false,
