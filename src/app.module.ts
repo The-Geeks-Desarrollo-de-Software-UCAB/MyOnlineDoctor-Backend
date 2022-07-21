@@ -9,6 +9,7 @@ import { Cita } from 'src/modules/cita/infrastructure/typeorm/Entities/cita.enti
 import { Especialidad } from 'src/modules/doctor/infrastructure/typeorm/entities/specialty.entity';
 import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/entities/paciente.entity';
 import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/entities/doctor.entity';
+import { RegistroModule } from './modules/registro/registro.module';
 
 @Module({
   imports: [
@@ -31,8 +32,10 @@ import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/entities/docto
     DoctorModule,
     SpecialtyModule,
     CitaModule,
+    RegistroModule
+
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,],
 })
 export class AppModule { }

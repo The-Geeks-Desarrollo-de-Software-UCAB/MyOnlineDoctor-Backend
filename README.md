@@ -8,3 +8,4 @@ Anamaría Chacón
 Tomás Sánchez
 Vicente Mirabal
 Natalia Velásquez
+Carlos Hernandez - Deploy Heroku, API REGISTRO HISTORIA MEDICA 
