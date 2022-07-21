@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Doctor } from '../Entities/doctor.entity';
-import { Especialidad } from '../Entities/specialty.entity';
+import { Doctor } from '../entities/doctor.entity';
+import { Especialidad } from '../entities/specialty.entity';
 import { DoctorBaseService } from './doctor.base.service';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class DoctorSpecialtyService implements DoctorBaseService {
     @InjectRepository(Doctor) private doctorRepo: Repository<Doctor>,
     @InjectRepository(Especialidad)
     private specialtyRepo: Repository<Especialidad>,
-  ) {}
+  ) { }
 
   getRepository(): Repository<Doctor> {
     return this.doctorRepo;

@@ -1,5 +1,5 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { Doctor } from '../Entities/doctor.entity';
+import { Doctor } from '../entities/doctor.entity';
 import { DoctorBaseService } from '../Services/doctor.base.service';
 import { DoctorSpecialtyService } from '../Services/doctor.specialty.service';
 import { DoctorBaseController } from './doctor.base.controller';

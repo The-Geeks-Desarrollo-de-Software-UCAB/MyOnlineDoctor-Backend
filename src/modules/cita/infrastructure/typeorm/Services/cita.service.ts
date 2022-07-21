@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Cita } from 'src/modules/cita/infrastructure/typeorm/Entities/cita.entity';
-import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/Entities/paciente.entity';
-import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/Entities/doctor.entity';
+import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/entities/paciente.entity';
+import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/entities/doctor.entity';
 
 @Injectable()
 export class CitaService {
@@ -11,7 +11,7 @@ export class CitaService {
     @InjectRepository(Cita) private citaRepo: Repository<Cita>,
     @InjectRepository(Doctor) private doctorRepo: Repository<Doctor>,
     @InjectRepository(Paciente) private pacienteRepo: Repository<Paciente>,
-  ) {}
+  ) { }
 
   getRepository(): Repository<Cita> {
     return this.citaRepo;

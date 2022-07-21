@@ -1,5 +1,5 @@
-import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/Entities/paciente.entity';
-import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/Entities/doctor.entity';
+import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/entities/paciente.entity';
+import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/entities/doctor.entity';
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 
 @Entity()
