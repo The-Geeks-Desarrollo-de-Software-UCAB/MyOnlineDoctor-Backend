@@ -206,11 +206,9 @@ export class CitaService {
 
   @decoLog()
   async aceptarFechaCita(paciente_id: string, cita_id: string): Promise<Cita> {
-    const paciente = await this.pacienteRepo.findOneOrFail({
-      where: { id_paciente: paciente_id },
-    });
+    
     let cita = await this.getRepository().findOneOrFail({
-      where: { id_cita: cita_id, paciente: paciente, estadoCita: 'AGENDADA' },
+      where: { id_cita: cita_id},
       relations: { doctor: true, paciente: true },
     });
     cita.estadoCita = 'ACEPTADA';
