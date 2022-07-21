@@ -42,10 +42,10 @@ export class Doctor {
   @Column()
   latitud: number;
 
-  @Column()
+  @Column({ nullable: true })
   promedioCalificacion: number;
 
-  @Column()
+  @Column({ nullable: true })
   imagen: string;
 
   @OneToMany(() => Cita, (cita) => cita.doctor)
