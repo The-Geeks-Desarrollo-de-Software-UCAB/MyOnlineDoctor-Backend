@@ -141,7 +141,7 @@ export class CitaService {
     });
     let cita = this.getRepository().create({
       id_cita: cita_id,
-      fecha: null,
+      fecha: new Date(),
       duracion: duracion,
       estadoCita: 'SOLICITADA',
       tipoCita: tipo,
