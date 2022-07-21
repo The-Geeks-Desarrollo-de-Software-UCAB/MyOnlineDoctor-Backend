@@ -57,57 +57,57 @@ export class CitaEntity extends AggregateRoot {
         this.agregarEvento(new CitaSolicitada(this._identificador.id));
     }
 
-    @decoLog()
+  
     public get id(): string {
         return this._identificador.id
     }
 
-    @decoLog()
+   
     public get fecha(): Date {
         return this._fecha.fecha
     }
 
-    @decoLog()
+  
     public get estado(): EstadoCita {
         return this._estado
     }
 
-    @decoLog()
+ 
     public get tipo(): TipoCita {
         return this._tipo
     }
 
-    @decoLog()
+
     public get motivo(): string {
         return this._motivo.motivo
     }
 
-    @decoLog()
+ 
     public get duracion(): number {
         return this._duracion.duracion
     }
 
-    @decoLog()
+ 
     public get calificacion(): number {
         return this._calificacion.puntuacion;
     }
 
-    @decoLog()
+
     get identificadorPaciente(): string {
         return this._identificadorPaciente.id
     }
 
-    @decoLog()
+   
     get identificadorDoctor(): string {
         return this._identificadorDoctor.id
     }
 
-    @decoLog()
+ 
     public calificar(puntuacion: number): void {
         this._calificacion = new Calificacion (puntuacion);
     }
 
-    @decoLog()
+   
     public agendar(fecha: Fecha) {
         this.validate(fecha);
         this._fecha = fecha;
@@ -143,7 +143,34 @@ export class CitaEntity extends AggregateRoot {
         this.agregarEvento(new CitaFinalizada(this._identificador.id));
     }
 
-    @decoLog()
+    public aceptar() {
+        this._estado = EstadoCita.ACEPTADA;
+        this.agregarEvento(new CitaAceptada(this._identificador.id));
+    }
+
+    public cancelar() {
+        this._estado = EstadoCita.CANCELADA;
+        this.agregarEvento(new CitaCancelada(this._identificador.id));
+    }
+
+  
+    public rechazar() {
+        this._estado = EstadoCita.RECHAZADA;
+        this.agregarEvento(new CitaRechazada(this._identificador.id));
+    }
+
+ 
+    public iniciar() {
+        this.agregarEvento(new CitaIniciada(this._identificador.id));
+    }
+
+
+    public finalizar() {
+        this._estado = EstadoCita.FINALIZADA;
+        this.agregarEvento(new CitaFinalizada(this._identificador.id));
+    }
+
+
     protected validate(fecha: Fecha){
         if(fecha.fecha < new Date()) {
             throw new ArgumentInvalidException("fecha agendada no puede ser menor a fecha actual");
