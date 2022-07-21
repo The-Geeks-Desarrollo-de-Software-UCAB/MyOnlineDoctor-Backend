@@ -1,9 +1,9 @@
 import { CitaEntity } from '../entities/cita.entity';
-
+import { decoLog } from 'src/modules/decorators/logging-decorator';
 
 export class CalcularValidezVideollamadaService {
 
-  
+  @decoLog()
   esValida(cita: CitaEntity): boolean {
    const now = new Date();
 

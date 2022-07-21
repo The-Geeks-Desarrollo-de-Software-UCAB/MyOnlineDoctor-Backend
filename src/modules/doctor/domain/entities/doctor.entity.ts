@@ -5,7 +5,7 @@ import { IdDoctor } from "../value-objects/idDoctor.value-object";
 import { Localizacion } from "../value-objects/localizacion.value-object";
 import { Nombre } from "../value-objects/nombre.value-object";
 import { PromedioCalificacion } from "../value-objects/promedio-calificacion.value-object";
-
+import { decoLog } from "src/modules/decorators/logging-decorator";
 
 export class DoctorEntity extends AggregateRoot{
     constructor(
@@ -24,32 +24,32 @@ export class DoctorEntity extends AggregateRoot{
         this._localizacion = _localizacion;
     }
 
- 
+    @decoLog()
     get id(){
         return this._id;
     }
 
-   
+    @decoLog()
     get nombre(){
         return this._nombre;
     }
 
-  
+    @decoLog()
     get apellido() {
         return this._apellido;
     }
 
-
+    @decoLog()
     get especialidad() {
         return this._especialidad;
     }
 
- 
+    @decoLog()
     get promedioCalificacion() {
         return this._promedioCalificacion;
     }
 
-
+    @decoLog()
     get localizacion() {
         return this._localizacion;
     }
