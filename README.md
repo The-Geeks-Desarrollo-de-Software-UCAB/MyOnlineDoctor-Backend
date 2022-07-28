@@ -47,7 +47,7 @@ Carlos Hernandez - Deploy Heroku, API REGISTRO HISTORIA MEDICA
 ### Carlos Hernandez
 | Descripción  |Links|
 | ------------- |:-------------:|
-| Creación del Agregado Doctor (Aggregate-root, Value Objects y Eventos, Repository, Servicios para crear y buscar eventos, implementacion de heroku)|[**Crear agregado Registro historia medica**](https://github.com/The-Geeks-Desarrollo-de-Software-UCAB/MyOnlineDoctor-Backend/commit/7a276bc5970c330183617de29a5470663d1d3d6c)|
+| Creación del Agregado Doctor (Aggregate-root, Value Objects y Eventos, Repository, Servicios para crear y buscar historias, implementacion de heroku)|[**Crear agregado Registro historia medica**](https://github.com/The-Geeks-Desarrollo-de-Software-UCAB/MyOnlineDoctor-Backend/commit/7a276bc5970c330183617de29a5470663d1d3d6c)|
 
 ## Instalación y Setup
 
