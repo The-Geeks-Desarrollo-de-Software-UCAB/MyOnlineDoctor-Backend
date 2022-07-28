@@ -44,6 +44,11 @@ Carlos Hernandez - Deploy Heroku, API REGISTRO HISTORIA MEDICA
 |Crear mapper de cita|[**Mapper de Cita y Ajustes**](https://github.com/The-Geeks-Desarrollo-de-Software-UCAB/MyOnlineDoctor-Backend/commit/bad65781a0451b8d12dee7b5fa9d0e67b200ce65)|
 |Generar eventos de dominio al crear y cambiar de estado|[**Generar eventos en agregados**](https://github.com/The-Geeks-Desarrollo-de-Software-UCAB/MyOnlineDoctor-Backend/commit/987935723772af4e72fa460ec71dfa376c3b7d7d)|
 
+### Carlos Hernandez
+| Descripción  |Links|
+| ------------- |:-------------:|
+| Creación del Agregado Doctor (Aggregate-root, Value Objects y Eventos, Repository, Servicios para crear y buscar eventos)|[**Crear agregado Registro historia medica**](https://github.com/The-Geeks-Desarrollo-de-Software-UCAB/MyOnlineDoctor-Backend/commit/7a276bc5970c330183617de29a5470663d1d3d6c)|
+
 ## Instalación y Setup
 
 Primero que nada, se debe descargar e instalar [Node.JS](https://nodejs.org/es/). 
