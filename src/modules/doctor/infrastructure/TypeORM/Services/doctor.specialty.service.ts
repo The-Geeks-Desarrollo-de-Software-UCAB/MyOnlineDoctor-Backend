@@ -18,17 +18,17 @@ export class DoctorSpecialtyService implements DoctorBaseService {
   }
 
   findAll(): Promise<Doctor[]> {
-    return this.getRepository().find({ relations: { especialidades: true } });
+    return this.getRepository().find({ relations: ['especialidades'] });
   }
 
   async findBy(by: number): Promise<Doctor[]> {
     //const especialidad = await this.specialtyRepo.findBy({ id_specialty: by }); en el caso de que no queramos mandar error se usa esta
-    const especialidad = await this.specialtyRepo.findOneByOrFail({
-      id_especialidad: by,
+    const especialidad = await this.specialtyRepo.findOneOrFail({
+      where: { id_especialidad: by },
     });
     let resultado = await this.getRepository().find({
       where: { especialidades: especialidad },
-      relations: { especialidades: true },
+      relations: ['especialidades'],
     });
     return resultado;
   }

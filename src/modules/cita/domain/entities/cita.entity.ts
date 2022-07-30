@@ -16,6 +16,7 @@ import { CitaCancelada } from '../events/cita-cancelada.domain-event';
 import { CitaRechazada } from '../events/cita-rechazada.domain-event';
 import { CitaFinalizada } from '../events/cita-finalizada.domain-event';
 import { CitaIniciada } from '../events/cita-iniciada.domain-event';
+import { Cita } from '../../infrastructure/typeorm/Entities/cita.entity';
 
 export class CitaEntity extends AggregateRoot {
   private _identificador: IdCita;
@@ -54,6 +55,36 @@ export class CitaEntity extends AggregateRoot {
     this._identificadorPaciente = idPaciente;
     this._identificadorDoctor = idDoctor;
     this.agregarEvento(new CitaSolicitada(this._identificador.id));
+  }
+
+  static create(
+    cita_id: string,
+    duracion: number,
+    tipo: string,
+    motivo: string,
+    paciente_id: string,
+    doctor_id: string,
+  ): CitaEntity {
+    let identificador = new IdCita(cita_id);
+    let fecha = new Fecha(null);
+    let estado = EstadoCita[EstadoCita.SOLICITADA];
+    let tipoCita = TipoCita[tipo];
+    let motivoCita = new Motivo(motivo);
+    let duracionCita = new Duracion(duracion);
+    let calificacionCita = new Calificacion(null);
+    let idPaciente = new IdPaciente(paciente_id);
+    let idDoctor = new IdDoctor(doctor_id);
+    return new CitaEntity(
+      identificador,
+      fecha,
+      estado,
+      tipoCita,
+      motivoCita,
+      duracionCita,
+      calificacionCita,
+      idPaciente,
+      idDoctor,
+    );
   }
 
   public get id(): string {

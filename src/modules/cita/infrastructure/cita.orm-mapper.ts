@@ -12,15 +12,18 @@ import { TipoCita } from '../domain/value-objects/tipoCita.object-value';
 import { Cita } from './typeorm/Entities/cita.entity';
 import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/Entities/paciente.entity';
 import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/Entities/doctor.entity';
-import { Repository } from 'typeorm';
+import { getCustomRepository, getRepository, Repository } from 'typeorm';
 
 export class CitaOrmMapper {
-  constructor(
-    @InjectRepository(Doctor) private doctorRepo: Repository<Doctor>,
-    @InjectRepository(Paciente) private pacienteRepo: Repository<Paciente>,
-  ) {}
-  public toDomain(cita: Cita): CitaEntity {
-    const citaEntity = new CitaEntity(
+  private readonly ormDoctorRepo: Repository<Doctor>; //cambiar por equivalente a OrmRepoCita
+  private readonly ormPacienteRepo: Repository<Paciente>; //cambiar por equivalente a OrmRepoCita
+  constructor() {
+    this.ormDoctorRepo = getRepository(Doctor);
+    this.ormPacienteRepo = getRepository(Paciente);
+  }
+
+  public async toDomain(cita: Cita): Promise<CitaEntity> {
+    const citaEntity = await new CitaEntity(
       new IdCita(cita.id_cita),
       new Fecha(cita.fecha),
       EstadoCita[cita.estadoCita],
@@ -31,15 +34,24 @@ export class CitaOrmMapper {
       new IdPaciente(cita.paciente.id_paciente),
       new IdDoctor(cita.doctor.id_doctor),
     );
+    citaEntity.limpiarEventos();
     return citaEntity;
   }
 
+  public async toDomainMulti(citas: Cita[]): Promise<CitaEntity[]> {
+    const resultado: CitaEntity[] = [];
+    for await (let cita of citas) {
+      resultado.push(await this.toDomain(cita));
+    }
+    return resultado;
+  }
+
   public async toInfrastructure(cita: CitaEntity): Promise<Cita> {
-    const paciente = await this.pacienteRepo.findOneByOrFail({
-      id_paciente: cita.identificadorPaciente,
+    const paciente = await this.ormPacienteRepo.findOneOrFail({
+      where: { id_paciente: cita.identificadorPaciente },
     });
-    const doctor = await this.doctorRepo.findOneByOrFail({
-      id_doctor: cita.identificadorDoctor,
+    const doctor = await this.ormDoctorRepo.findOneOrFail({
+      where: { id_doctor: cita.identificadorDoctor },
     });
     let fecha: Date;
     if (cita.estado == 'SOLICITADA') {

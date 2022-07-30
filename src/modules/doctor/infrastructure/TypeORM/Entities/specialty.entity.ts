@@ -8,7 +8,4 @@ export class Especialidad {
 
   @Column()
   nombre: string;
-
-  @ManyToMany(() => Doctor, (doctor) => doctor.especialidades)
-  doctores: Doctor[];
 }

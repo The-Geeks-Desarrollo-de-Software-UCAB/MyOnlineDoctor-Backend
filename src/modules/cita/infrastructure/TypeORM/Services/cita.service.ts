@@ -6,11 +6,19 @@ import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/Entities/p
 import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/Entities/doctor.entity';
 import { CitaOrmMapper } from '../../cita.orm-mapper';
 import { decoLog } from 'src/modules/decorators/logging-decorator';
+import { OrmRepoCita } from '../Repositories/ORMRepoCita.repository';
+import { IRepoCita } from 'src/modules/cita/application/IRepoCita.repository';
+import { CitaEntity } from 'src/modules/cita/domain/entities/cita.entity';
+import { DoctorEntity } from 'src/modules/doctor/domain/entities/doctor.entity';
+import { DoctorOrmMapper } from 'src/modules/doctor/infrastructure/doctor.orm-mapper';
+import { OrmRepoDoctor } from 'src/modules/doctor/infrastructure/TypeORM/Repositories/ormRepoDoctor.repository';
 
 @Injectable()
 export class CitaService {
+  //SolicitarCitaService
+
   constructor(
-    @InjectRepository(Cita) private citaRepo: Repository<Cita>,
+    @InjectRepository(Cita) private citaRepo: Repository<Cita>, //IRepoCita     RepoCitaORM
     @InjectRepository(Doctor) private doctorRepo: Repository<Doctor>,
     @InjectRepository(Paciente) private pacienteRepo: Repository<Paciente>,
   ) {}
@@ -21,11 +29,67 @@ export class CitaService {
 
   findAll(): Promise<Cita[]> {
     return this.getRepository().find({
-      relations: { doctor: true, paciente: true },
+      relations: ['doctor', 'paciente'],
     });
   }
 
-  @decoLog()
+  async encontrarTodos(repoDoctor: OrmRepoDoctor): Promise<DoctorEntity[]> {
+    return await repoDoctor.encontrarTodos();
+  }
+
+  async encontrarPorEspecialidad(
+    repoDoctor: OrmRepoDoctor,
+    id_especialidad: number,
+  ): Promise<DoctorEntity[]> {
+    return await repoDoctor.encontrarPorEspecialidad(id_especialidad);
+  }
+
+  async encontrarTodas(repoCita: OrmRepoCita): Promise<CitaEntity[]> {
+    return await repoCita.encontrarTodas();
+  }
+
+  async encontrarPorDoctor(
+    repoCita: OrmRepoCita,
+    repoDoctor: OrmRepoDoctor,
+    doctor_id: string,
+  ): Promise<CitaEntity[]> {
+    const doctor = await repoDoctor.encontrarPorId(doctor_id);
+    return await repoCita.encontrarPorDoctor(doctor.id);
+  }
+
+  async encontrarPorDoctorYEstado(
+    repoCita: OrmRepoCita,
+    repoDoctor: OrmRepoDoctor,
+    doctor_id: string,
+    estado: string,
+  ): Promise<CitaEntity[]> {
+    const doctor = await repoDoctor.encontrarPorId(doctor_id);
+    estado.toUpperCase;
+    return await repoCita.encontrarPorDoctorYEstado(doctor.id, estado);
+  }
+
+  async solicitarCita(
+    repoCita: OrmRepoCita,
+    cita_id: string,
+    duracion: number,
+    tipo: string,
+    motivo: string,
+    paciente_id: string,
+    doctor_id: string,
+  ): Promise<CitaEntity> {
+    //falta validar que el doctor y el paciente existan
+    let cita = CitaEntity.create(
+      cita_id,
+      duracion,
+      tipo,
+      motivo,
+      paciente_id,
+      doctor_id,
+    );
+    return await repoCita.guardarCita(cita);
+  }
+
+  /*@decoLog()
   async findByDoctor(by: string): Promise<Cita[]> {
     //const especialidad = await this.specialtyRepo.findBy({ id_specialty: by }); en el caso de que no queramos mandar error se usa esta
     const doctor = await this.doctorRepo.findOneByOrFail({
@@ -56,7 +120,7 @@ export class CitaService {
     //const especialidad = await this.specialtyRepo.findBy({ id_specialty: by }); en el caso de que no queramos mandar error se usa esta
     /*const paciente = await this.pacienteRepo.findOneByOrFail({
       id_paciente: by,
-    });*/
+    });
     let resultado = await this.getRepository().find({
       where: { estadoCita: by },
       relations: { doctor: true, paciente: true },
@@ -133,8 +197,8 @@ export class CitaService {
     paciente_id: string,
     doctor_id: string,
   ): Promise<Cita> {
-    const paciente = await this.pacienteRepo.findOneOrFail({
-      where: { id_paciente: paciente_id },
+    const paciente = await this.pacienteRepo.findOneByOrFail({
+      id_paciente: paciente_id,
     });
     const doctor = await this.doctorRepo.findOneByOrFail({
       id_doctor: doctor_id,
@@ -206,9 +270,11 @@ export class CitaService {
 
   @decoLog()
   async aceptarFechaCita(paciente_id: string, cita_id: string): Promise<Cita> {
-    
+    const paciente = await this.pacienteRepo.findOneOrFail({
+      where: { id_paciente: paciente_id },
+    });
     let cita = await this.getRepository().findOneOrFail({
-      where: { id_cita: cita_id},
+      where: { id_cita: cita_id, paciente: paciente, estadoCita: 'AGENDADA' },
       relations: { doctor: true, paciente: true },
     });
     cita.estadoCita = 'ACEPTADA';
@@ -288,5 +354,5 @@ export class CitaService {
       relations: { doctor: true, paciente: true },
     });
     return resultado;
-  }
+  }*/
 }

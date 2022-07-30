@@ -1,6 +1,6 @@
 import { AggregateRoot } from 'src/modules/base/domain/entities/aggregate-root.base';
 import { Apellido } from '../value-objects/apellido.value-object';
-import { Especialidad } from '../value-objects/especialidad.value-object';
+import { EspecialidadDomain } from '../value-objects/especialidad.value-object';
 import { IdDoctor } from '../value-objects/idDoctor.value-object';
 import { Localizacion } from '../value-objects/localizacion.value-object';
 import { Nombre } from '../value-objects/nombre.value-object';
@@ -11,7 +11,7 @@ export class DoctorEntity extends AggregateRoot {
     private _id: IdDoctor,
     private _nombre: Nombre,
     private _apellido: Apellido,
-    private _especialidad: Especialidad[],
+    private _especialidad: EspecialidadDomain[],
     private _promedioCalificacion: PromedioCalificacion,
     private _localizacion: Localizacion,
   ) {
