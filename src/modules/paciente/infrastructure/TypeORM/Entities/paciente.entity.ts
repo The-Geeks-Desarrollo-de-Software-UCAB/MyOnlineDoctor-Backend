@@ -28,7 +28,7 @@ export class Paciente {
   genero: string;
 
   @Column()
-  altura: string;
+  altura: number;
 
   @Column()
   correo: string;

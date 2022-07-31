@@ -21,7 +21,7 @@ export class OrmRepoDoctor extends Repository<Doctor> implements IRepoDoctor {
   }
 
   async encontrarPorId(id_doctor: string): Promise<DoctorEntity> {
-    let doctor = await super.findOneOrFail({
+    let doctor = await super.findOne({
       where: { id_doctor: id_doctor },
       relations: ['especialidades'],
     });

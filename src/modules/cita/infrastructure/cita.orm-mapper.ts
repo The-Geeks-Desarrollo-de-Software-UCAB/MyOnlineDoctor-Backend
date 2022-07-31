@@ -53,15 +53,9 @@ export class CitaOrmMapper {
     const doctor = await this.ormDoctorRepo.findOneOrFail({
       where: { id_doctor: cita.identificadorDoctor },
     });
-    let fecha: Date;
-    if (cita.estado == 'SOLICITADA') {
-      fecha = null;
-    } else {
-      fecha = cita.fecha;
-    }
     return {
       id_cita: cita.id,
-      fecha: fecha,
+      fecha: cita.fecha,
       duracion: cita.duracion,
       tipoCita: cita.tipo,
       estadoCita: cita.estado,

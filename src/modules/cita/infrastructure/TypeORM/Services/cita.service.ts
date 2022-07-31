@@ -23,7 +23,7 @@ export class CitaService {
     @InjectRepository(Paciente) private pacienteRepo: Repository<Paciente>,
   ) {}
 
-  getRepository(): Repository<Cita> {
+  /*getRepository(): Repository<Cita> {
     return this.citaRepo;
   }
 
@@ -42,7 +42,7 @@ export class CitaService {
     id_especialidad: number,
   ): Promise<DoctorEntity[]> {
     return await repoDoctor.encontrarPorEspecialidad(id_especialidad);
-  }
+  }*/
 
   async encontrarTodas(repoCita: OrmRepoCita): Promise<CitaEntity[]> {
     return await repoCita.encontrarTodas();
@@ -54,7 +54,7 @@ export class CitaService {
     doctor_id: string,
   ): Promise<CitaEntity[]> {
     const doctor = await repoDoctor.encontrarPorId(doctor_id);
-    return await repoCita.encontrarPorDoctor(doctor.id);
+    return await repoCita.encontrarPorDoctor(doctor_id);
   }
 
   async encontrarPorDoctorYEstado(
@@ -65,7 +65,7 @@ export class CitaService {
   ): Promise<CitaEntity[]> {
     const doctor = await repoDoctor.encontrarPorId(doctor_id);
     estado.toUpperCase;
-    return await repoCita.encontrarPorDoctorYEstado(doctor.id, estado);
+    return await repoCita.encontrarPorDoctorYEstado(doctor_id, estado);
   }
 
   async solicitarCita(

@@ -16,7 +16,6 @@ import { CitaCancelada } from '../events/cita-cancelada.domain-event';
 import { CitaRechazada } from '../events/cita-rechazada.domain-event';
 import { CitaFinalizada } from '../events/cita-finalizada.domain-event';
 import { CitaIniciada } from '../events/cita-iniciada.domain-event';
-import { Cita } from '../../infrastructure/typeorm/Entities/cita.entity';
 
 export class CitaEntity extends AggregateRoot {
   private _identificador: IdCita;
@@ -133,6 +132,7 @@ export class CitaEntity extends AggregateRoot {
   public agendar(fecha: Fecha) {
     this.validate(fecha);
     this._fecha = fecha;
+    this._estado = EstadoCita.AGENDADA;
     this.agregarEvento(new CitaAgendada(this._identificador.id));
   }
 
@@ -161,7 +161,7 @@ export class CitaEntity extends AggregateRoot {
   }
 
   protected validate(fecha: Fecha) {
-    if (fecha.fecha < new Date()) {
+    if (fecha.fecha < new Date(Date.now())) {
       throw new ArgumentInvalidException(
         'fecha agendada no puede ser menor a fecha actual',
       );

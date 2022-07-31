@@ -5,17 +5,19 @@ import { CitaEntity } from '../domain/entities/cita.entity';
 export interface IRepoCita {
   encontrarTodas(): Promise<CitaEntity[]>;
 
-  encontrarPorDoctor(id_doctor: IdDoctor): Promise<CitaEntity[]>;
+  encontrarPorId(id_cita: string): Promise<CitaEntity>;
 
-  encontrarPorPaciente(id_paciente: IdPaciente): Promise<CitaEntity[]>;
+  encontrarPorDoctor(id_doctor: string): Promise<CitaEntity[]>;
+
+  encontrarPorPaciente(id_paciente: string): Promise<CitaEntity[]>;
 
   encontrarPorDoctorYEstado(
-    id_doctor: IdDoctor,
+    id_doctor: string,
     estado: string,
   ): Promise<CitaEntity[]>;
 
   encontrarPorPacienteYEstado(
-    id_paciente: IdPaciente,
+    id_paciente: string,
     estado: string,
   ): Promise<CitaEntity[]>;
 

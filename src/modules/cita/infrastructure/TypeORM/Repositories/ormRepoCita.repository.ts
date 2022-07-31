@@ -6,8 +6,6 @@ import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/Entities/docto
 import { CitaOrmMapper } from '../../cita.orm-mapper';
 import { decoLog } from 'src/modules/decorators/logging-decorator';
 import { CitaEntity } from 'src/modules/cita/domain/entities/cita.entity';
-import { IdDoctor } from 'src/modules/doctor/domain/value-objects/idDoctor.value-object';
-import { IdPaciente } from 'src/modules/paciente/domain/value-objects/idPaciente.value-object';
 
 @EntityRepository(Cita)
 export class OrmRepoCita extends Repository<Cita> implements IRepoCita {
@@ -22,9 +20,17 @@ export class OrmRepoCita extends Repository<Cita> implements IRepoCita {
     return await this.mapper.toDomainMulti(citas);
   }
 
-  async encontrarPorDoctor(id_doctor: IdDoctor): Promise<CitaEntity[]> {
+  async encontrarPorId(id_cita: string): Promise<CitaEntity> {
+    let cita = await super.findOne({
+      where: { id_cita: id_cita },
+      relations: ['doctor', 'paciente'],
+    });
+    return await this.mapper.toDomain(cita);
+  }
+
+  async encontrarPorDoctor(id_doctor: string): Promise<CitaEntity[]> {
     const doctorOrm = await this.doctorRepo.findOneOrFail({
-      where: { id_doctor: id_doctor.id },
+      where: { id_doctor: id_doctor },
     });
     let citas = await super.find({
       where: { doctor: doctorOrm },
@@ -33,9 +39,9 @@ export class OrmRepoCita extends Repository<Cita> implements IRepoCita {
     return await this.mapper.toDomainMulti(citas);
   }
 
-  async encontrarPorPaciente(id_paciente: IdPaciente): Promise<CitaEntity[]> {
+  async encontrarPorPaciente(id_paciente: string): Promise<CitaEntity[]> {
     const pacienteOrm = await this.pacienteRepo.findOneOrFail({
-      where: { id_doctor: id_paciente.id },
+      where: { id_paciente: id_paciente },
     });
     let citas = await super.find({
       where: { paciente: pacienteOrm },
@@ -45,11 +51,11 @@ export class OrmRepoCita extends Repository<Cita> implements IRepoCita {
   }
 
   async encontrarPorDoctorYEstado(
-    id_doctor: IdDoctor,
+    id_doctor: string,
     estado: string,
   ): Promise<CitaEntity[]> {
     const doctorOrm = await this.doctorRepo.findOneOrFail({
-      where: { id_doctor: id_doctor.id },
+      where: { id_doctor: id_doctor },
     });
     let citas = await super.find({
       where: { doctor: doctorOrm, estadoCita: estado },
@@ -59,11 +65,11 @@ export class OrmRepoCita extends Repository<Cita> implements IRepoCita {
   }
 
   async encontrarPorPacienteYEstado(
-    id_paciente: IdPaciente,
+    id_paciente: string,
     estado: string,
   ): Promise<CitaEntity[]> {
     const pacienteOrm = await this.pacienteRepo.findOneOrFail({
-      where: { id_doctor: id_paciente.id },
+      where: { id_paciente: id_paciente },
     });
     let citas = await super.find({
       where: { paciente: pacienteOrm, estadoCita: estado },
