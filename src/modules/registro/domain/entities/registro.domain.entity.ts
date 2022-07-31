@@ -1,16 +1,13 @@
-import { IsString, IsEmail } from 'class-validator';
+//import { IsString, IsEmail } from 'class-validator';
 
 export class RegistroDomain {
-    @IsString()
-    readonly idHistoria: string;
+  readonly idHistoria: string;
 
-    @IsString()
-    readonly diagnostico: string;
+  readonly diagnostico: string;
 
-    @IsString()
-    readonly plan: string;
-    @IsString()
-    readonly preescripcion: string;
-    @IsString()
-    readonly examen: string;
+  readonly plan: string;
+
+  readonly preescripcion: string;
+
+  readonly examen: string;
 }
