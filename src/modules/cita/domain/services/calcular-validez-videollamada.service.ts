@@ -1,4 +1,4 @@
-import { CitaEntity } from '../entities/cita.entity';
+import { CitaEntity } from '../entities/cita';
 
 export class CalcularValidezVideollamadaService {
   esValida(cita: CitaEntity): boolean {
