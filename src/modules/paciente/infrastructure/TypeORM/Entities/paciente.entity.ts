@@ -31,6 +31,9 @@ export class Paciente {
   altura: number;
 
   @Column()
+  peso: number;
+
+  @Column()
   correo: string;
 
   @Column()
@@ -41,6 +44,15 @@ export class Paciente {
 
   @Column()
   estadoSuscripcion: string;
+
+  @Column()
+  alergia: string;
+
+  @Column()
+  antecedente: string;
+
+  @Column()
+  operacion: string;
 
   @OneToMany(() => Cita, (cita) => cita.paciente)
   citas: Cita[];
