@@ -45,10 +45,14 @@ CREATE TABLE paciente (
     genero			        VARCHAR(1) NOT NULL,
     altura                  INT(3) NOT NULL,
     correo                  VARCHAR(60) NOT NULL,
-    numeroMovil             BIGINT(15) NOT NULL,
+    numeroMovil             VARCHAR(15) NOT NULL,
     fechaNacimiento         DATE NOT NULL,
-    estadoSuscripcion       VARCHAR(10) NOT NULL
-);
+    estadoSuscripcion       VARCHAR(10) NOT NULL,
+    alergia	              	VARCHAR(500) NOT NULL,
+    operacion               VARCHAR(500) NOT NULL,
+    peso                  	INT(5) NOT NULL,
+    antecedente             VARCHAR(500) NOT NULL
+    );
 
 CREATE TABLE antecedente (
     
@@ -87,7 +91,7 @@ CREATE TABLE cita (
     motivo			VARCHAR(500) NOT NULL,
     doctor       	VARCHAR(36) NOT NULL,
     paciente     	VARCHAR(36) NOT NULL,
-    calificacion	INT,
+    calificacion	INT DEFAULT NULL,
 
     FOREIGN KEY (doctor) REFERENCES doctor(id_doctor),
     FOREIGN KEY (paciente) REFERENCES paciente(id_paciente)

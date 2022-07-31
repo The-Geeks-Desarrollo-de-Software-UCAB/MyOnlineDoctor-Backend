@@ -18,10 +18,9 @@ import config from 'ormconfig';
     DoctorModule,
     SpecialtyModule,
     CitaModule,
-    RegistroModule
-
+    RegistroModule,
   ],
   controllers: [AppController],
-  providers: [AppService,],
+  providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

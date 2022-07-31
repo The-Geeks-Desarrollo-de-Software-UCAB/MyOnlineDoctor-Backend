@@ -9,7 +9,7 @@ import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/entities/docto
 
 @Module({
   imports: [TypeOrmModule.forFeature([Cita, Paciente, Doctor, Especialidad])],
-  providers: [CitaService],
+  providers: [], //tal vez va cita service aca
   controllers: [CitaController],
 })
-export class CitaModule { }
+export class CitaModule {}

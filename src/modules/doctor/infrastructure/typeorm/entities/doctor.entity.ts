@@ -51,7 +51,6 @@ export class Doctor {
   @OneToMany(() => Cita, (cita) => cita.doctor)
   citas: Cita[];
 
-  @ManyToMany(() => Especialidad, (especialidad) => especialidad.doctores)
   @JoinTable({
     name: 'doctor_especialidad',
     joinColumn: {
@@ -61,5 +60,6 @@ export class Doctor {
       name: 'id_especialidad',
     },
   })
+  @ManyToMany(() => Especialidad, (especialidad) => especialidad.nombre)
   especialidades: Especialidad[];
 }

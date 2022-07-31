@@ -1,4 +1,4 @@
-import { AggregateRoot } from 'src/modules/base/domain/entities/aggregate-root.base'
+import { AggregateRoot } from 'src/modules/base/domain/entities/aggregate-root.base';
 import { Nombre } from '../value-objects/nombre.value-object';
 import { Correo } from '../value-objects/correo.value-object';
 import { Apellido } from '../value-objects/apellido.value-object';
@@ -20,22 +20,22 @@ import { SuscripcionSuspendidaDomainEvent } from '../events/suscripcion-suspendi
 import { PacienteCreadoDomainEvent } from '../events/paciente-creado.domain-event';
 
 export class PacienteEntity extends AggregateRoot {
- 
   constructor(
-  private _idPaciente: IdPaciente,
-  private _correo: Correo,
-  private _nombre: Nombre,
-  private _apellido: Apellido,
-  private _alergia: Alergia,
-  private _altura: Altura,
-  private _antecedente: Antecedente,
-  private _fechaNacimiento: FechaNacimiento,
-  private _genero: Genero,
-  private _numeroMovil: NumeroMovil,
-  private _operacion: Operacion,
-  private _password: Password,
-  private _peso: Peso,
-  private _estadoSuscripcion: EstadoSuscripcion) {
+    private _idPaciente: IdPaciente,
+    private _correo: Correo,
+    private _nombre: Nombre,
+    private _apellido: Apellido,
+    private _alergia: Alergia,
+    private _altura: Altura,
+    private _antecedente: Antecedente,
+    private _fechaNacimiento: FechaNacimiento,
+    private _genero: Genero,
+    private _numeroMovil: NumeroMovil,
+    private _operacion: Operacion,
+    private _password: Password,
+    private _peso: Peso,
+    private _estadoSuscripcion: EstadoSuscripcion,
+  ) {
     super();
     this._idPaciente = _idPaciente;
     this._correo = _correo;
@@ -54,99 +54,87 @@ export class PacienteEntity extends AggregateRoot {
     this.agregarEvento(new PacienteCreadoDomainEvent(this._idPaciente.id));
   }
 
-  
   get idPaciente(): IdPaciente {
     return this._idPaciente;
   }
 
-  
   get correo(): Correo {
     return this._correo;
   }
-
 
   get nombre(): Nombre {
     return this._nombre;
   }
 
-  
   get apellido(): Apellido {
     return this._apellido;
   }
 
- 
   get alergia(): Alergia {
     return this._alergia;
   }
 
-  
   get altura(): Altura {
     return this._altura;
   }
 
- 
   get antecedente(): Antecedente {
     return this._antecedente;
   }
 
- 
   get fechaNacimiento(): FechaNacimiento {
     return this._fechaNacimiento;
   }
 
-  
   get genero(): Genero {
     return this._genero;
   }
 
-  
   get numeroMovil(): NumeroMovil {
     return this._numeroMovil;
   }
 
-  
   get operacion(): Operacion {
     return this._operacion;
   }
-
 
   get password(): Password {
     return this._password;
   }
 
-
   get peso(): Peso {
     return this._peso;
   }
 
-  
   get estadoSuscripcion(): EstadoSuscripcion {
     return this._estadoSuscripcion;
   }
 
- 
   cancelarSuscripcion(): void {
     this._estadoSuscripcion = EstadoSuscripcion.CANCELADA;
-    this.agregarEvento(new SuscripcionCanceladaDomainEvent(this._idPaciente.id));
+    this.agregarEvento(
+      new SuscripcionCanceladaDomainEvent(this._idPaciente.id),
+    );
   }
 
- 
   bloquearSuscripcion(razon: string): void {
     this._estadoSuscripcion = EstadoSuscripcion.BLOQUEADA;
-    this.agregarEvento(new PacienteBloqueadoDomainEvent(this._idPaciente.id, razon));
+    this.agregarEvento(
+      new PacienteBloqueadoDomainEvent(this._idPaciente.id, razon),
+    );
   }
 
- 
   activarSuscripcion(): void {
     this._estadoSuscripcion = EstadoSuscripcion.ACTIVA;
-    this.agregarEvento(new SuscripcionModificadaDomainEvent(this._idPaciente.id));
+    this.agregarEvento(
+      new SuscripcionModificadaDomainEvent(this._idPaciente.id),
+    );
   }
 
- 
   suspenderSuscripcion(): void {
     this._estadoSuscripcion = EstadoSuscripcion.SUSPENDIDA;
-    this.agregarEvento(new SuscripcionSuspendidaDomainEvent(this._idPaciente.id));
+    this.agregarEvento(
+      new SuscripcionSuspendidaDomainEvent(this._idPaciente.id),
+    );
   }
-
-
 }

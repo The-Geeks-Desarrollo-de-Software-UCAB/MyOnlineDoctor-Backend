@@ -1,68 +1,112 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
-import { Cita } from '../Entities/cita.entity';
-import { CitaService } from '../Services/cita.service';
+import { EntityManager, Repository } from 'typeorm';
+import { OrmRepoCita } from '../Repositories/ORMRepoCita.repository';
+import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/Entities/paciente.entity';
+import { CitaEntity } from 'src/modules/cita/domain/entities/cita';
+import { OrmRepoDoctor } from 'src/modules/doctor/infrastructure/TypeORM/Repositories/ormRepoDoctor.repository';
+import { SolicitarCitaService } from 'src/modules/cita/application/Services/solicitarCita.service';
+import { AgendarCitaService } from 'src/modules/cita/application/Services/agendarCita.service';
+import { AceptarFechaCitaService } from 'src/modules/cita/application/Services/aceptarFecha.service';
+import { RechazarFechaCitaService } from 'src/modules/cita/application/Services/rechazarFecha.service';
+import { RechazarCitaService } from 'src/modules/cita/application/Services/rechazarCita.service';
+import { FinalizarCitaService } from 'src/modules/cita/application/Services/finalizarCita.service';
+import { CalificarCitaService } from 'src/modules/cita/application/Services/calificarCita.service';
+import { CancelarCitaDoctorService } from 'src/modules/cita/application/Services/cancelarCitaDoctor.service';
+import { CancelarCitaPacienteService } from 'src/modules/cita/application/Services/cancelarCitaPaciente.service';
+import { EncontrarCitaPorDoctorYEstadoService } from 'src/modules/cita/application/Services/encontrarCitaPorDoctorYEstado.service';
+import { EncontrarCitaPorPacienteYEstadoService } from 'src/modules/cita/application/Services/encontrarCitaPorPacienteYEstado.service';
+import { EncontrarCitaPorDoctorService } from 'src/modules/cita/application/Services/encontrarCitaPorDoctor.service';
+import { EncontrarCitaPorPacienteService } from 'src/modules/cita/application/Services/encontrarCitaPorPaciente.service';
+import { EncontrarCitasService } from 'src/modules/cita/application/Services/encontrarCitas.service';
 
 @Controller('api/cita')
 export class CitaController {
-  constructor(protected citaService: CitaService) {}
+  private readonly ormRepoCita: OrmRepoCita;
+  private readonly ormRepoDoctor: OrmRepoDoctor;
+  private readonly ormRepoPaciente: Repository<Paciente>; // cambiar por equivalente a OrmRepoCita
 
-  getService(): CitaService {
-    return this.citaService;
+  constructor(private readonly manager: EntityManager) {
+    this.ormRepoCita = this.manager.getCustomRepository(OrmRepoCita);
+    this.ormRepoDoctor = this.manager.getCustomRepository(OrmRepoDoctor);
+    this.ormRepoPaciente = this.manager.getRepository(Paciente);
   }
 
-  @Get('all')
-  async findAll(): Promise<Cita[]> {
-    return await this.getService().findAll();
+  @Get('Todas')
+  async encontrarTodas(): Promise<CitaEntity[]> {
+    const servicio = new EncontrarCitasService(this.ormRepoCita);
+    return await servicio.execute();
   }
 
-  @Get('byDoctor:id_doctor')
-  async findByDoctor(@Param('id_doctor') id_doctor: string): Promise<Cita[]> {
-    return await this.getService().findByDoctor(id_doctor);
+  @Get('PorDoctor:id_doctor')
+  async encontrarCitaPorDoctor(
+    @Param('id_doctor') id_doctor: string,
+  ): Promise<CitaEntity[]> {
+    const servicio = new EncontrarCitaPorDoctorService(this.ormRepoCita);
+    return await servicio.execute(id_doctor);
   }
 
-  @Get('byPaciente:id_paciente')
-  async findByPaciente(
+  @Get('PorPaciente:id_paciente')
+  async encontrarCitaPorPaciente(
     @Param('id_paciente') id_paciente: string,
-  ): Promise<Cita[]> {
-    return await this.getService().findByPaciente(id_paciente);
-  }
-
-  @Get('byEstado:estado')
-  async findByEstado(@Param('estado') estado: string): Promise<Cita[]> {
-    return await this.getService().findByEstado(estado);
+  ): Promise<CitaEntity[]> {
+    const servicio = new EncontrarCitaPorPacienteService(this.ormRepoCita);
+    return await servicio.execute(id_paciente);
   }
 
   @Get('SolicitadasDoctor:id_doctor')
   async encontrarSolicitadasDoctor(
     @Param('id_doctor') id_doctor: string,
-  ): Promise<Cita[]> {
-    return await this.getService().encontrarSolicitadasDoctor(id_doctor);
+  ): Promise<CitaEntity[]> {
+    const servicio = new EncontrarCitaPorDoctorYEstadoService(this.ormRepoCita);
+    return await servicio.execute(id_doctor, 'SOLICITADA');
   }
 
   @Get('AceptadasDoctor:id_doctor')
   async encontrarAceptadasDoctor(
     @Param('id_doctor') id_doctor: string,
-  ): Promise<Cita[]> {
-    return await this.getService().encontrarAceptadasDoctor(id_doctor);
+  ): Promise<CitaEntity[]> {
+    const servicio = new EncontrarCitaPorDoctorYEstadoService(this.ormRepoCita);
+    return await servicio.execute(id_doctor, 'ACEPTADA');
   }
 
   @Get('SolicitadasPaciente:id_paciente')
   async encontrarSolicitadasPaciente(
     @Param('id_paciente') id_paciente: string,
-  ): Promise<Cita[]> {
-    return await this.getService().encontrarSolicitadasPaciente(id_paciente);
+  ): Promise<CitaEntity[]> {
+    const servicio = new EncontrarCitaPorPacienteYEstadoService(
+      this.ormRepoCita,
+    );
+    return await servicio.execute(id_paciente, 'SOLICITADA');
   }
 
   @Get('AgendadasPaciente:id_paciente')
   async encontrarAgendadasPaciente(
     @Param('id_paciente') id_paciente: string,
-  ): Promise<Cita[]> {
-    return await this.getService().encontrarAgendadasPaciente(id_paciente);
+  ): Promise<CitaEntity[]> {
+    const servicio = new EncontrarCitaPorPacienteYEstadoService(
+      this.ormRepoCita,
+    );
+    return await servicio.execute(id_paciente, 'AGENDADA');
+  }
+
+  @Get('AceptadasPaciente:id_paciente')
+  async encontrarAceptadasPaciente(
+    @Param('id_paciente') id_paciente: string,
+  ): Promise<CitaEntity[]> {
+    const servicio = new EncontrarCitaPorPacienteYEstadoService(
+      this.ormRepoCita,
+    );
+    return await servicio.execute(id_paciente, 'ACEPTADA');
   }
 
   @Post('Solicitar')
-  async solicitarCita(@Body() para): Promise<Cita> {
-    return await this.getService().solicitarCita(
+  async solicitarCita(@Body() para): Promise<CitaEntity> {
+    const servicio = new SolicitarCitaService(
+      this.ormRepoCita,
+      this.ormRepoDoctor,
+      this.ormRepoPaciente,
+    );
+    return await servicio.execute(
       para.id_cita,
       para.duracion,
       para.tipo,
@@ -73,49 +117,93 @@ export class CitaController {
   }
 
   @Put('Agendar')
-  async agendarCita(@Body() para): Promise<Cita> {
-    return await this.getService().agendarCita(
-      para.id_doctor,
-      para.id_cita,
-      para.fecha,
+  async agendarCita(@Body() para): Promise<CitaEntity> {
+    const servicio = new AgendarCitaService(
+      this.ormRepoCita,
+      this.ormRepoDoctor,
     );
+    return await servicio.execute(para.id_doctor, para.id_cita, para.fecha);
   }
 
-  @Put('RechazarPaciente')
-  async rechazarPaciente(@Body() para): Promise<Cita> {
-    return await this.getService().rechazarPaciente(
-      para.id_doctor,
-      para.id_cita,
+  @Put('Rechazar')
+  async rechazarCita(@Body() para): Promise<CitaEntity> {
+    const servicio = new RechazarCitaService(
+      this.ormRepoCita,
+      this.ormRepoDoctor,
     );
+    return await servicio.execute(para.id_doctor, para.id_cita);
   }
 
   @Put('AceptarFecha')
-  async aceptarFechaCita(@Body() para): Promise<Cita> {
-    return await this.getService().aceptarFechaCita(
-      para.id_paciente,
-      para.id_cita,
+  async aceptarFechaCita(@Body() para): Promise<CitaEntity> {
+    const servicio = new AceptarFechaCitaService(
+      this.ormRepoCita,
+      this.ormRepoPaciente,
     );
+    return await servicio.execute(para.id_paciente, para.id_cita);
   }
 
   @Put('RechazarFecha')
-  async rechazarFechaCita(@Body() para): Promise<Cita> {
-    return await this.getService().rechazarFechaCita(
-      para.id_paciente,
-      para.id_cita,
+  async rechazarFechaCita(@Body() para): Promise<CitaEntity> {
+    const servicio = new RechazarFechaCitaService(
+      this.ormRepoCita,
+      this.ormRepoPaciente,
     );
+    return await servicio.execute(para.id_paciente, para.id_cita);
+  }
+
+  @Put('CancelarDoctor')
+  async cancelarCitaDoctor(@Body() para): Promise<CitaEntity> {
+    const servicio = new CancelarCitaDoctorService(
+      this.ormRepoCita,
+      this.ormRepoDoctor,
+    );
+    return await servicio.execute(para.id_doctor, para.id_cita);
+  }
+
+  @Put('CancelarPaciente')
+  async cancelarCitaPaciente(@Body() para): Promise<CitaEntity> {
+    const servicio = new CancelarCitaPacienteService(
+      this.ormRepoCita,
+      this.ormRepoPaciente,
+    );
+    return await servicio.execute(para.id_paciente, para.id_cita);
   }
 
   @Put('Finalizar')
-  async finalizarCita(@Body() para): Promise<Cita> {
-    return await this.getService().finalizarCita(para.id_doctor, para.id_cita);
+  async finalizarCita(@Body() para): Promise<CitaEntity> {
+    const servicio = new FinalizarCitaService(
+      this.ormRepoCita,
+      this.ormRepoDoctor,
+    );
+    return await servicio.execute(para.id_doctor, para.id_cita);
   }
 
   @Put('Calificar')
-  async calificarCita(@Body() para): Promise<Cita> {
-    return await this.getService().calificarCita(
+  async calificarCita(@Body() para): Promise<CitaEntity> {
+    const servicio = new CalificarCitaService(
+      this.ormRepoCita,
+      this.ormRepoPaciente,
+    );
+    return await servicio.execute(
       para.id_paciente,
       para.id_cita,
       para.calificacion,
     );
   }
 }
+
+/*@Get('porEspecialidad:id_especialidad')
+  async encontrarPorEspecialidad(
+    @Param('id_especialidad') id_especialidad: number,
+  ): Promise<DoctorEntity[]> {
+    return await this.getService().encontrarPorEspecialidad(
+      this.ormRepoDoctor,
+      id_especialidad,
+    );
+  }
+
+  @Get('todos')
+  async encontrarTodos(): Promise<DoctorEntity[]> {
+    return await this.getService().encontrarTodos(this.ormRepoDoctor);
+  }*/
