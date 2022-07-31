@@ -34,13 +34,25 @@ export class Paciente {
   correo: string;
 
   @Column()
-  numeroMovil: number;
+  numeroMovil: string;
 
   @Column()
   fechaNacimiento: Date;
 
   @Column()
   estadoSuscripcion: string;
+
+  @Column()
+  alergia: string;
+
+  @Column()
+  operacion: string;
+
+  @Column()
+  peso: number;
+
+  @Column()
+  antecedente: string;
 
   @OneToMany(() => Cita, (cita) => cita.paciente)
   citas: Cita[];
