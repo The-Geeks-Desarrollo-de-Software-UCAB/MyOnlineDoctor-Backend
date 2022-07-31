@@ -3,7 +3,7 @@ import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConne
 const config: PostgresConnectionOptions = {
   type: 'postgres',
   url: process.env.DATABASE_URL,
-  ssl : true,
+  ssl: { rejectUnauthorized: false },
   entities: ['dist/src/**/*.entity.js', 'dist/src/**/*.entity.enum.js'],
   synchronize: true,
 };
