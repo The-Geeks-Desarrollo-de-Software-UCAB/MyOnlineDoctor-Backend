@@ -1,4 +1,4 @@
-import { DoctorEntity } from '../domain/entities/doctor.entity';
+import { DoctorEntity } from '../domain/entities/doctor';
 
 export interface IRepoDoctor {
   encontrarTodos(): Promise<DoctorEntity[]>;

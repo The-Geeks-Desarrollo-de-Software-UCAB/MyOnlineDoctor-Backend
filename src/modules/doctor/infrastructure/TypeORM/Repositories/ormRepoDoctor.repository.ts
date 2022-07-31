@@ -3,7 +3,7 @@ import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/Entities/docto
 import { DoctorOrmMapper } from '../../doctor.orm-mapper';
 import { decoLog } from 'src/modules/decorators/logging-decorator';
 import { IRepoDoctor } from 'src/modules/doctor/application/IRepoDoctor.repository';
-import { DoctorEntity } from 'src/modules/doctor/domain/entities/doctor.entity';
+import { DoctorEntity } from 'src/modules/doctor/domain/entities/doctor';
 import { Especialidad } from 'src/modules/doctor/infrastructure/typeorm/Entities/specialty.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 

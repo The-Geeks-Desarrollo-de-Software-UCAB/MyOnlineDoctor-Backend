@@ -1,5 +1,5 @@
 import { IdPaciente } from 'src/modules/paciente/domain/value-objects/idPaciente.value-object';
-import { PacienteEntity } from '../domain/entities/paciente.entity';
+import { PacienteEntity } from '../domain/entities/paciente';
 
 export interface IRepoPaciente {
   encontrarTodos(): Promise<PacienteEntity[]>;

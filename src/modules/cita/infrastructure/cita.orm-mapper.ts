@@ -1,7 +1,6 @@
-import { InjectRepository } from '@nestjs/typeorm';
 import { IdDoctor } from 'src/modules/doctor/domain/value-objects/idDoctor.value-object';
 import { IdPaciente } from 'src/modules/paciente/domain/value-objects/idPaciente.value-object';
-import { CitaEntity } from '../domain/entities/cita.entity';
+import { CitaEntity } from '../domain/entities/cita';
 import { Calificacion } from '../domain/value-objects/calificacion.value-object';
 import { Duracion } from '../domain/value-objects/duracion.value-object';
 import { EstadoCita } from '../domain/value-objects/estadoCita.value-object';
@@ -12,7 +11,7 @@ import { TipoCita } from '../domain/value-objects/tipoCita.object-value';
 import { Cita } from './typeorm/Entities/cita.entity';
 import { Paciente } from 'src/modules/paciente/infrastructure/Typeorm/Entities/paciente.entity';
 import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/Entities/doctor.entity';
-import { getCustomRepository, getRepository, Repository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 
 export class CitaOrmMapper {
   private readonly ormDoctorRepo: Repository<Doctor>; //cambiar por equivalente a OrmRepoCita

@@ -1,6 +1,6 @@
 import { IRepoCita } from 'src/modules/cita/application/IRepoCita.repository';
 import { IRepoDoctor } from 'src/modules/doctor/application/IRepoDoctor.repository';
-import { CitaEntity } from '../../domain/entities/cita.entity';
+import { CitaEntity } from '../../domain/entities/cita';
 
 export class RechazarCitaService {
   constructor(

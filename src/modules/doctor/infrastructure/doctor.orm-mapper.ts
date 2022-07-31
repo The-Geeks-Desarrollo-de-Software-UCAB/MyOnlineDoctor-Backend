@@ -4,7 +4,7 @@ import { IdDoctor } from 'src/modules/doctor/domain/value-objects/idDoctor.value
 import { Localizacion } from 'src/modules/doctor/domain/value-objects/localizacion.value-object';
 import { Nombre } from 'src/modules/doctor/domain/value-objects/nombre.value-object';
 import { PromedioCalificacion } from 'src/modules/doctor/domain/value-objects/promedio-calificacion.value-object';
-import { DoctorEntity } from '../domain/entities/doctor.entity';
+import { DoctorEntity } from '../domain/entities/doctor';
 import { Especialidad } from './typeorm/Entities/specialty.entity';
 import { Doctor } from './typeorm/Entities/doctor.entity';
 

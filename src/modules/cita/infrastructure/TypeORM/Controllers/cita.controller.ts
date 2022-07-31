@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { EntityManager, Repository } from 'typeorm';
 import { OrmRepoCita } from '../Repositories/ORMRepoCita.repository';
 import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/Entities/paciente.entity';
-import { CitaEntity } from 'src/modules/cita/domain/entities/cita.entity';
+import { CitaEntity } from 'src/modules/cita/domain/entities/cita';
 import { OrmRepoDoctor } from 'src/modules/doctor/infrastructure/TypeORM/Repositories/ormRepoDoctor.repository';
 import { SolicitarCitaService } from 'src/modules/cita/application/Services/solicitarCita.service';
 import { AgendarCitaService } from 'src/modules/cita/application/Services/agendarCita.service';

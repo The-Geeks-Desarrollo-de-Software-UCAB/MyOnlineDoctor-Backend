@@ -1,6 +1,6 @@
 import { IdDoctor } from 'src/modules/doctor/domain/value-objects/idDoctor.value-object';
 import { IdPaciente } from 'src/modules/paciente/domain/value-objects/idPaciente.value-object';
-import { CitaEntity } from '../domain/entities/cita.entity';
+import { CitaEntity } from '../domain/entities/cita';
 
 export interface IRepoCita {
   encontrarTodas(): Promise<CitaEntity[]>;

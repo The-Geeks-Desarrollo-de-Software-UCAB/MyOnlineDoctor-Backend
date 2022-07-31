@@ -5,7 +5,7 @@ import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/Entities/p
 import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/Entities/doctor.entity';
 import { CitaOrmMapper } from '../../cita.orm-mapper';
 import { decoLog } from 'src/modules/decorators/logging-decorator';
-import { CitaEntity } from 'src/modules/cita/domain/entities/cita.entity';
+import { CitaEntity } from 'src/modules/cita/domain/entities/cita';
 
 @EntityRepository(Cita)
 export class OrmRepoCita extends Repository<Cita> implements IRepoCita {

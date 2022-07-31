@@ -1,5 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { PacienteEntity } from '../domain/entities/paciente.entity';
+import { PacienteEntity } from '../domain/entities/paciente';
 import { Nombre } from '../domain/value-objects/nombre.value-object';
 import { Correo } from '../domain/value-objects/correo.value-object';
 import { Apellido } from '../domain/value-objects/apellido.value-object';
@@ -18,27 +18,24 @@ import { Paciente } from './typeorm/Entities/paciente.entity';
 import { getCustomRepository, getRepository, Repository } from 'typeorm';
 
 export class PacienteOrmMapper {
-  
-  constructor() {
-    
-  }
+  constructor() {}
 
   public async toDomain(paciente: Paciente): Promise<PacienteEntity> {
     const pacienteEntity = await new PacienteEntity(
       new IdPaciente(paciente.id_paciente),
-      new Nombre(paciente.primerNombre,paciente.segundoNombre),
       new Correo(paciente.correo),
-      new Apellido(paciente.primerApellido,paciente.segundoApellido),
+      new Nombre(paciente.primerNombre, paciente.segundoNombre),
+      new Apellido(paciente.primerApellido, paciente.segundoApellido),
       new Alergia(paciente.alergia),
       new Altura(paciente.altura),
       new Antecedente(paciente.antecedente),
-      EstadoSuscripcion[paciente.estadoSuscripcion],
       new FechaNacimiento(paciente.fechaNacimiento),
       new Genero(paciente.genero),
       new NumeroMovil(paciente.numeroMovil),
       new Operacion(paciente.operacion),
       new Password(paciente.contrasena),
       new Peso(paciente.peso),
+      EstadoSuscripcion[paciente.estadoSuscripcion],
     );
     pacienteEntity.limpiarEventos();
     return pacienteEntity;
@@ -54,7 +51,6 @@ export class PacienteOrmMapper {
 
   //ARREGLAR
   public async toInfrastructure(paciente: PacienteEntity): Promise<Paciente> {
-    
-  
+    return;
   }
 }

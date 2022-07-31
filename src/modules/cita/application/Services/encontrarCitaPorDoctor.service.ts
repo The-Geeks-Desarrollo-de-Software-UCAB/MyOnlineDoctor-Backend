@@ -1,5 +1,5 @@
 import { IRepoCita } from 'src/modules/cita/application/IRepoCita.repository';
-import { CitaEntity } from '../../domain/entities/cita.entity';
+import { CitaEntity } from '../../domain/entities/cita';
 
 export class EncontrarCitaPorDoctorService {
   constructor(private readonly repoCita: IRepoCita) {}

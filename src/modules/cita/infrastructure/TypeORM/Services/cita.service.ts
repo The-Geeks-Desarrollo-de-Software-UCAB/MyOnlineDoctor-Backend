@@ -8,8 +8,8 @@ import { CitaOrmMapper } from '../../cita.orm-mapper';
 import { decoLog } from 'src/modules/decorators/logging-decorator';
 import { OrmRepoCita } from '../Repositories/ORMRepoCita.repository';
 import { IRepoCita } from 'src/modules/cita/application/IRepoCita.repository';
-import { CitaEntity } from 'src/modules/cita/domain/entities/cita.entity';
-import { DoctorEntity } from 'src/modules/doctor/domain/entities/doctor.entity';
+import { CitaEntity } from 'src/modules/cita/domain/entities/cita';
+import { DoctorEntity } from 'src/modules/doctor/domain/entities/doctor';
 import { DoctorOrmMapper } from 'src/modules/doctor/infrastructure/doctor.orm-mapper';
 import { OrmRepoDoctor } from 'src/modules/doctor/infrastructure/TypeORM/Repositories/ormRepoDoctor.repository';
 

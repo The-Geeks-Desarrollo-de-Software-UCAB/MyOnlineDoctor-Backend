@@ -2,7 +2,7 @@ import { IRepoCita } from 'src/modules/cita/application/IRepoCita.repository';
 import { IRepoDoctor } from 'src/modules/doctor/application/IRepoDoctor.repository';
 import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/Entities/paciente.entity';
 import { Repository } from 'typeorm';
-import { CitaEntity } from '../../domain/entities/cita.entity';
+import { CitaEntity } from '../../domain/entities/cita';
 
 export class SolicitarCitaService {
   constructor(
