@@ -10,25 +10,11 @@ import { Especialidad } from 'src/modules/doctor/infrastructure/typeorm/entities
 import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/entities/paciente.entity';
 import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/entities/doctor.entity';
 import { RegistroModule } from './modules/registro/registro.module';
+import config from 'ormconfig';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'ec2-54-87-179-4.compute-1.amazonaws.com',
-      port: 5432,
-      username: 'nffybrenogqxcl',
-      password: '4e5846bf15c8108830b6ef209c7bbbfc551f9673522226f97d6199acc180bae8',
-      database: 'd6o4rar9o3v525',
-      autoLoadEntities: true,
-      synchronize: true,
-      ssl: true,
-      extra: {
-        ssl: {
-          rejectUnauthorized: false,
-        },
-      },
-    }),
+    TypeOrmModule.forRoot(config),
     DoctorModule,
     SpecialtyModule,
     CitaModule,
