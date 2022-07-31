@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Cita } from 'src/modules/cita/infrastructure/typeorm/Entities/cita.entity';
+import { Cita } from 'src/modules/cita/infrastructure/typeorm/entities/cita.entity';
 import { Paciente } from 'src/modules/paciente/infrastructure/Typeorm/Entities/paciente.entity';
 import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/Entities/doctor.entity';
 import { CitaOrmMapper } from '../../cita.orm-mapper';
 import { decoLog } from 'src/modules/decorators/logging-decorator';
-import { OrmRepoCita } from '../Repositories/ORMRepoCita.repository';
+import { OrmRepoCita } from '../repositories/ORMRepoCita.repository';
 import { IRepoCita } from 'src/modules/cita/application/IRepoCita.repository';
 import { CitaEntity } from 'src/modules/cita/domain/entities/cita';
 import { DoctorEntity } from 'src/modules/doctor/domain/entities/doctor';
 import { DoctorOrmMapper } from 'src/modules/doctor/infrastructure/doctor.orm-mapper';
-import { OrmRepoDoctor } from 'src/modules/doctor/infrastructure/TypeORM/Repositories/ormRepoDoctor.repository';
+import { OrmRepoDoctor } from 'src/modules/doctor/infrastructure/typeorm/repositories/ormRepoDoctor.repository';
 
 @Injectable()
 export class CitaService {

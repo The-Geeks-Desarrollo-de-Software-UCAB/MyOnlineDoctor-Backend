@@ -8,9 +8,9 @@ import { Fecha } from '../domain/value-objects/fecha.value-object';
 import { IdCita } from '../domain/value-objects/idCita.value-object';
 import { Motivo } from '../domain/value-objects/motivo.value-object';
 import { TipoCita } from '../domain/value-objects/tipoCita.object-value';
-import { Cita } from './typeorm/Entities/cita.entity';
-import { Paciente } from 'src/modules/paciente/infrastructure/Typeorm/Entities/paciente.entity';
-import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/Entities/doctor.entity';
+import { Cita } from './typeorm/entities/cita.entity'; //sino devolver a Entity
+import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/entities/paciente.entity';
+import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/entities/doctor.entity';
 import { getRepository, Repository } from 'typeorm';
 
 export class CitaOrmMapper {

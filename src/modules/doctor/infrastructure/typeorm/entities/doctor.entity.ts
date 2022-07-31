@@ -8,7 +8,7 @@ import {
   PrimaryColumn,
 } from 'typeorm';
 import { Especialidad } from './specialty.entity';
-import { Cita } from 'src/modules/cita/infrastructure/typeorm/Entities/cita.entity';
+import { Cita } from 'src/modules/cita/infrastructure/typeorm/entities/cita.entity';
 
 @Entity()
 export class Doctor {

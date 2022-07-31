@@ -1,23 +1,23 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { EntityManager, Repository } from 'typeorm';
-import { OrmRepoCita } from '../Repositories/ORMRepoCita.repository';
-import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/Entities/paciente.entity';
+import { OrmRepoCita } from '../repositories/ORMRepoCita.repository';
+import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/entities/paciente.entity';
 import { CitaEntity } from 'src/modules/cita/domain/entities/cita';
-import { OrmRepoDoctor } from 'src/modules/doctor/infrastructure/TypeORM/Repositories/ormRepoDoctor.repository';
-import { SolicitarCitaService } from 'src/modules/cita/application/Services/solicitarCita.service';
-import { AgendarCitaService } from 'src/modules/cita/application/Services/agendarCita.service';
-import { AceptarFechaCitaService } from 'src/modules/cita/application/Services/aceptarFecha.service';
-import { RechazarFechaCitaService } from 'src/modules/cita/application/Services/rechazarFecha.service';
-import { RechazarCitaService } from 'src/modules/cita/application/Services/rechazarCita.service';
-import { FinalizarCitaService } from 'src/modules/cita/application/Services/finalizarCita.service';
-import { CalificarCitaService } from 'src/modules/cita/application/Services/calificarCita.service';
-import { CancelarCitaDoctorService } from 'src/modules/cita/application/Services/cancelarCitaDoctor.service';
-import { CancelarCitaPacienteService } from 'src/modules/cita/application/Services/cancelarCitaPaciente.service';
-import { EncontrarCitaPorDoctorYEstadoService } from 'src/modules/cita/application/Services/encontrarCitaPorDoctorYEstado.service';
-import { EncontrarCitaPorPacienteYEstadoService } from 'src/modules/cita/application/Services/encontrarCitaPorPacienteYEstado.service';
-import { EncontrarCitaPorDoctorService } from 'src/modules/cita/application/Services/encontrarCitaPorDoctor.service';
-import { EncontrarCitaPorPacienteService } from 'src/modules/cita/application/Services/encontrarCitaPorPaciente.service';
-import { EncontrarCitasService } from 'src/modules/cita/application/Services/encontrarCitas.service';
+import { OrmRepoDoctor } from 'src/modules/doctor/infrastructure/typeorm/repositories/ormRepoDoctor.repository';
+import { SolicitarCitaService } from 'src/modules/cita/application/services/solicitarCita.service';
+import { AgendarCitaService } from 'src/modules/cita/application/services/agendarCita.service';
+import { AceptarFechaCitaService } from 'src/modules/cita/application/services/aceptarFecha.service';
+import { RechazarFechaCitaService } from 'src/modules/cita/application/services/rechazarFecha.service';
+import { RechazarCitaService } from 'src/modules/cita/application/services/rechazarCita.service';
+import { FinalizarCitaService } from 'src/modules/cita/application/services/finalizarCita.service';
+import { CalificarCitaService } from 'src/modules/cita/application/services/calificarCita.service';
+import { CancelarCitaDoctorService } from 'src/modules/cita/application/services/cancelarCitaDoctor.service';
+import { CancelarCitaPacienteService } from 'src/modules/cita/application/services/cancelarCitaPaciente.service';
+import { EncontrarCitaPorDoctorYEstadoService } from 'src/modules/cita/application/services/encontrarCitaPorDoctorYEstado.service';
+import { EncontrarCitaPorPacienteYEstadoService } from 'src/modules/cita/application/services/encontrarCitaPorPacienteYEstado.service';
+import { EncontrarCitaPorDoctorService } from 'src/modules/cita/application/services/encontrarCitaPorDoctor.service';
+import { EncontrarCitaPorPacienteService } from 'src/modules/cita/application/services/encontrarCitaPorPaciente.service';
+import { EncontrarCitasService } from 'src/modules/cita/application/services/encontrarCitas.service';
 
 @Controller('api/cita')
 export class CitaController {

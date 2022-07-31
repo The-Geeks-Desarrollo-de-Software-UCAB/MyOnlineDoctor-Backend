@@ -5,7 +5,7 @@ import { AppService } from 'src/app.service';
 import { CitaModule } from 'src/modules/cita/infrastructure/typeorm/cita.module';
 import { DoctorModule } from 'src/modules/doctor/infrastructure/typeorm/doctor.module';
 import { SpecialtyModule } from 'src/modules/doctor/infrastructure/typeorm/specialty.module';
-import { Cita } from 'src/modules/cita/infrastructure/typeorm/Entities/cita.entity';
+import { Cita } from 'src/modules/cita/infrastructure/typeorm/entities/cita.entity';
 import { Especialidad } from 'src/modules/doctor/infrastructure/typeorm/entities/specialty.entity';
 import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/entities/paciente.entity';
 import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/entities/doctor.entity';

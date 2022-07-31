@@ -1,6 +1,6 @@
 import { IRepoCita } from 'src/modules/cita/application/IRepoCita.repository';
 import { CitaEntity } from '../../domain/entities/cita';
-import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/Entities/paciente.entity';
+import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/entities/paciente.entity';
 import { Repository } from 'typeorm';
 
 export class CalificarCitaService {
