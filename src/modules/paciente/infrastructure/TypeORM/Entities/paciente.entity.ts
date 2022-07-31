@@ -28,16 +28,13 @@ export class Paciente {
   genero: string;
 
   @Column()
-  altura: number;
-
-  @Column()
-  peso: number;
+  altura: string;
 
   @Column()
   correo: string;
 
   @Column()
-  numeroMovil: number;
+  numeroMovil: string;
 
   @Column()
   fechaNacimiento: Date;
@@ -49,10 +46,13 @@ export class Paciente {
   alergia: string;
 
   @Column()
-  antecedente: string;
+  operacion: string;
 
   @Column()
-  operacion: string;
+  peso: number;
+
+  @Column()
+  antecedente: string;
 
   @OneToMany(() => Cita, (cita) => cita.paciente)
   citas: Cita[];

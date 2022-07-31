@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Cita } from 'src/modules/cita/infrastructure/typeorm/Entities/cita.entity';
-import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/Entities/paciente.entity';
+import { Paciente } from 'src/modules/paciente/infrastructure/Typeorm/Entities/paciente.entity';
 import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/Entities/doctor.entity';
 import { CitaOrmMapper } from '../../cita.orm-mapper';
 import { decoLog } from 'src/modules/decorators/logging-decorator';

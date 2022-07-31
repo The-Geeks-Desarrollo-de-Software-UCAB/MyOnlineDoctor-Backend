@@ -10,7 +10,7 @@ import { IdCita } from '../domain/value-objects/idCita.value-object';
 import { Motivo } from '../domain/value-objects/motivo.value-object';
 import { TipoCita } from '../domain/value-objects/tipoCita.object-value';
 import { Cita } from './typeorm/Entities/cita.entity';
-import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/Entities/paciente.entity';
+import { Paciente } from 'src/modules/paciente/infrastructure/Typeorm/Entities/paciente.entity';
 import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/Entities/doctor.entity';
 import { getCustomRepository, getRepository, Repository } from 'typeorm';
 
