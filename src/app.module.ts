@@ -5,6 +5,10 @@ import { AppService } from 'src/app.service';
 import { CitaModule } from 'src/modules/cita/infrastructure/typeorm/cita.module';
 import { DoctorModule } from 'src/modules/doctor/infrastructure/typeorm/doctor.module';
 import { SpecialtyModule } from 'src/modules/doctor/infrastructure/typeorm/specialty.module';
+import { Cita } from 'src/modules/cita/infrastructure/typeorm/Entities/cita.entity';
+import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/Entities/doctor.entity';
+import { Especialidad } from 'src/modules/doctor/infrastructure/typeorm/Entities/specialty.entity';
+import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/Entities/paciente.entity';
 
 @Module({
   imports: [
@@ -15,7 +19,7 @@ import { SpecialtyModule } from 'src/modules/doctor/infrastructure/typeorm/speci
       username: 'root',
       password: 'Tesa15600*', //ingresen aca su clave
       database: 'myonlinedoctor',
-      entities: ['dist/src/**/*.entity.js'],
+      entities: [Cita, Doctor, Especialidad, Paciente],
       autoLoadEntities: true,
     }),
     DoctorModule,

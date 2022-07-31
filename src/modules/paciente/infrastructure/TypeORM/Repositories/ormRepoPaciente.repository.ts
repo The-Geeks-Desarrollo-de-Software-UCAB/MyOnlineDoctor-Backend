@@ -4,7 +4,6 @@ import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/Entities/p
 import { PacienteOrmMapper } from '../../paciente.orm-mapper';
 import { decoLog } from 'src/modules/decorators/logging-decorator';
 import { PacienteEntity } from 'src/modules/paciente/domain/entities/paciente';
-import { IdPaciente } from 'src/modules/paciente/domain/value-objects/idPaciente.value-object';
 
 @EntityRepository(Paciente)
 export class OrmRepoPaciente
@@ -18,9 +17,9 @@ export class OrmRepoPaciente
     return await this.mapper.toDomainMulti(pacientes);
   }
 
-  async encontrarPorID(id_paciente: IdPaciente): Promise<PacienteEntity[]> {
+  async encontrarPorID(id_paciente: string): Promise<PacienteEntity[]> {
     let pacientes = await super.find({
-      where: { id_paciente: id_paciente.id },
+      where: { id_paciente: id_paciente },
     });
     return await this.mapper.toDomainMulti(pacientes);
   }

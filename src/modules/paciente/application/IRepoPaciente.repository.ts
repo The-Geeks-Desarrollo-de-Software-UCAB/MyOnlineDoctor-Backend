@@ -1,10 +1,9 @@
-import { IdPaciente } from 'src/modules/paciente/domain/value-objects/idPaciente.value-object';
 import { PacienteEntity } from '../domain/entities/paciente';
 
 export interface IRepoPaciente {
   encontrarTodos(): Promise<PacienteEntity[]>;
 
-  encontrarPorID(id_paciente: IdPaciente): Promise<PacienteEntity[]>;
+  encontrarPorID(id_paciente: string): Promise<PacienteEntity[]>;
 
   encontrarPorNombre(nombre: string): Promise<PacienteEntity[]>;
 
