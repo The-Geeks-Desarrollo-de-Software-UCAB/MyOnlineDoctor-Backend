@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { EntityManager, Repository } from 'typeorm';
-import { OrmRepoCita } from '../repositories/ORMRepoCita.repository';
+import { OrmRepoCita } from '../repositories/ormRepoCita.repository';
 import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/entities/paciente.entity';
 import { CitaEntity } from 'src/modules/cita/domain/entities/cita';
 import { OrmRepoDoctor } from 'src/modules/doctor/infrastructure/typeorm/repositories/ormRepoDoctor.repository';

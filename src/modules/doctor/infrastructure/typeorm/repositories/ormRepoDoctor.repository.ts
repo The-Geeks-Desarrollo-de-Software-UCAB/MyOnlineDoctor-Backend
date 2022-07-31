@@ -1,10 +1,10 @@
 import { EntityRepository, Repository, getRepository } from 'typeorm';
-import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/Entities/doctor.entity';
+import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/entities/doctor.entity';
 import { DoctorOrmMapper } from '../../doctor.orm-mapper';
 import { decoLog } from 'src/modules/decorators/logging-decorator';
 import { IRepoDoctor } from 'src/modules/doctor/application/IRepoDoctor.repository';
 import { DoctorEntity } from 'src/modules/doctor/domain/entities/doctor';
-import { Especialidad } from 'src/modules/doctor/infrastructure/typeorm/Entities/specialty.entity';
+import { Especialidad } from 'src/modules/doctor/infrastructure/typeorm/entities/specialty.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @EntityRepository(Doctor)

@@ -14,7 +14,7 @@ import { Operacion } from '../domain/value-objects/operacion.value-object';
 import { Password } from '../domain/value-objects/password.value-object';
 import { Peso } from '../domain/value-objects/peso.value-object';
 import { IdPaciente } from '../domain/value-objects/idPaciente.value-object';
-import { Paciente } from './typeorm/Entities/paciente.entity';
+import { Paciente } from './typeorm/entities/paciente.entity';
 import { getCustomRepository, getRepository, Repository } from 'typeorm';
 
 export class PacienteOrmMapper {

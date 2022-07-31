@@ -1,6 +1,6 @@
 import { IRepoPaciente } from 'src/modules/paciente/application/IRepoPaciente.repository';
 import { EntityRepository, getRepository, Repository } from 'typeorm';
-import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/Entities/paciente.entity';
+import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/entities/paciente.entity';
 import { PacienteOrmMapper } from '../../paciente.orm-mapper';
 import { decoLog } from 'src/modules/decorators/logging-decorator';
 import { PacienteEntity } from 'src/modules/paciente/domain/entities/paciente';

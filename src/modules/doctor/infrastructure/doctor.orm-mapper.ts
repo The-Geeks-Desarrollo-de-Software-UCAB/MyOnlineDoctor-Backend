@@ -5,8 +5,8 @@ import { Localizacion } from 'src/modules/doctor/domain/value-objects/localizaci
 import { Nombre } from 'src/modules/doctor/domain/value-objects/nombre.value-object';
 import { PromedioCalificacion } from 'src/modules/doctor/domain/value-objects/promedio-calificacion.value-object';
 import { DoctorEntity } from '../domain/entities/doctor';
-import { Especialidad } from './typeorm/Entities/specialty.entity';
-import { Doctor } from './typeorm/Entities/doctor.entity';
+import { Especialidad } from './typeorm/entities/specialty.entity';
+import { Doctor } from './typeorm/entities/doctor.entity';
 
 export class DoctorOrmMapper {
   async toDomain(doctor: Doctor): Promise<DoctorEntity> {

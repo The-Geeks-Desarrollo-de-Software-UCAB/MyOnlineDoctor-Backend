@@ -1,5 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
-import { Especialidad } from 'src/modules/doctor/infrastructure/typeorm/Entities/specialty.entity';
+import { Especialidad } from 'src/modules/doctor/infrastructure/typeorm/entities/specialty.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @EntityRepository(Especialidad)

@@ -1,8 +1,8 @@
 import { IRepoCita } from 'src/modules/cita/application/IRepoCita.repository';
 import { EntityRepository, getRepository, Repository } from 'typeorm';
 import { Cita } from 'src/modules/cita/infrastructure/typeorm/entities/cita.entity';
-import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/Entities/paciente.entity';
-import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/Entities/doctor.entity';
+import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/entities/paciente.entity';
+import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/entities/doctor.entity';
 import { CitaOrmMapper } from '../../cita.orm-mapper';
 import { decoLog } from 'src/modules/decorators/logging-decorator';
 import { CitaEntity } from 'src/modules/cita/domain/entities/cita';
