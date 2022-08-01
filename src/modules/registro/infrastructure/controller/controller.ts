@@ -1,9 +1,9 @@
 import { Controller, Inject, Post, Res, Body, HttpStatus, UsePipes, Get, Param, ParseUUIDPipe, ValidationPipe } from '@nestjs/common';
 
-import { TYPES } from '../interfaces/types';
-import { ICreateRegistroService } from '../interfaces/ICreateRegistro';
-import { RegistroDomain } from '../domain/entities/registro.domain.entity';
-import { IGetRegistroService } from '../interfaces/IGetRegistro';
+import { TYPES } from '../../application/interfaces/types';
+import { ICreateRegistroService } from '../../application/interfaces/ICreateRegistro';
+import { RegistroEntity } from '../../domain/entities/registro';
+import { IGetRegistroService } from '../../application/interfaces/IGetRegistro';
 
 
 @Controller('registro')
@@ -15,8 +15,8 @@ export class RegistroController {
 
     @UsePipes(new ValidationPipe())
     @Post('/create')
-    async create(@Res() res, @Body() RegistroDomain: RegistroDomain) {
-        const stock = await this.createRegistro.create(RegistroDomain);
+    async create(@Res() res, @Body() RegistroEntity: RegistroEntity) {
+        const stock = await this.createRegistro.create(RegistroEntity);
         return res.status(HttpStatus.OK).json(stock);
     }
     @Get(':id')
