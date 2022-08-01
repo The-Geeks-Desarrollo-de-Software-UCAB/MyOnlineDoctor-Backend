@@ -1,12 +1,15 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Registro {
-    @PrimaryGeneratedColumn('uuid')
-    registroId: string;
+    @PrimaryColumn()
+    id_registro: string;
 
     @Column()
-    idHistoria: string;
+    prescripcion: string;
+
+    @Column()
+    historia: string;
 
     @Column()
     diagnostico: string;
@@ -15,10 +18,8 @@ export class Registro {
     plan: string;
 
     @Column()
-    preescripcion: string;
-
-    @Column()
     examen: string;
 
-
+    @Column()
+    fecha: Date;
 }
