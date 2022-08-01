@@ -7,15 +7,16 @@ export class BloquearPacienteService     {
         
       ) {}
     
-    /*  async execute(
-        id_paciente: string,
-        estadoSuscripcion: string,
+      async execute(
+        id_paciente: string
       ): Promise<PacienteEntity> {
         
         
         let paciente = await this.repoPaciente.encontrarPorID(id_paciente);
+
+        const razon  = 'Mal comportamiendo';
            
-        paciente.bloquearSuscripcion( );
+        paciente.bloquearSuscripcion(razon);
         return await this.repoPaciente.guardarPaciente(paciente);
-      }*/
+      }
 }

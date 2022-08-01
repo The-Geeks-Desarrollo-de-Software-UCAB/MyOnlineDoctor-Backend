@@ -2,20 +2,16 @@ import { IRepoPaciente } from 'src/modules/paciente/application/IRepoPaciente.re
 import { PacienteEntity } from '../../domain/entities/paciente';
 
 export class SuspenderPacienteService    {
-    constructor(
-        private readonly repoPaciente: IRepoPaciente,
-        
-      ) {}
+  constructor(
+    private readonly repoPaciente: IRepoPaciente,
     
-      async execute(
-        id_paciente: string,
-        estadoSuscripcion: string,
-      ): Promise<PacienteEntity> {
-        
-        
-        let paciente = await this.repoPaciente.encontrarPorID(id_paciente);
-           
-        paciente.suspender( );
-        return await this.repoPaciente.guardarPaciente(paciente);
-      }
+  ) {}
+
+  async execute(id_paciente: string): Promise<PacienteEntity> {
+    
+    let paciente = await this.repoPaciente.encontrarPorID(id_paciente);
+    
+    paciente.suspenderSuscripcion();
+    return await this.repoPaciente.guardarPaciente(paciente);
+  }
 }

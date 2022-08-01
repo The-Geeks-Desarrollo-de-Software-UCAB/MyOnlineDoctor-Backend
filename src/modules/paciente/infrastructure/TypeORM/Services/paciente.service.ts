@@ -20,7 +20,7 @@ export class PacienteService {
   async encontrarPorID(
     repoPaciente: OrmRepoPaciente,
     id_paciente: string,
-  ): Promise<PacienteEntity[]> {
+  ): Promise<PacienteEntity> {
     
     return await repoPaciente.encontrarPorID(id_paciente);
   }
@@ -44,7 +44,7 @@ export class PacienteService {
   async encontrarPorNumero(
     repoPaciente: OrmRepoPaciente,
     numeroMovil: string,
-  ): Promise<PacienteEntity[]> {
+  ): Promise<PacienteEntity> {
     
     return await repoPaciente.encontrarPorNumero(numeroMovil);
   }

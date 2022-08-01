@@ -17,12 +17,13 @@ export class OrmRepoPaciente
     return await this.mapper.toDomainMulti(pacientes);
   }
 
-  async encontrarPorID(id_paciente: string): Promise<PacienteEntity[]> {
-    let pacientes = await super.find({
+  async encontrarPorID(id_paciente: string): Promise<PacienteEntity> {
+    let paciente = await super.findOne({
       where: { id_paciente: id_paciente },
     });
-    return await this.mapper.toDomainMulti(pacientes);
+    return await this.mapper.toDomain(paciente);
   }
+
 
   async encontrarPorNombre(nombre: string): Promise<PacienteEntity[]> {
     let pacientes = await super.find({
@@ -52,14 +53,14 @@ export class OrmRepoPaciente
     return await this.mapper.toDomainMulti(pacientes);
   }
 
-  async encontrarPorNumero(numero: string): Promise<PacienteEntity[]> {
-    let pacientes = await super.find({
+  async encontrarPorNumero(numero: string): Promise<PacienteEntity> {
+    let paciente = await super.findOne({
       where: { numeroMovil: numero },
     });
-    return await this.mapper.toDomainMulti(pacientes);
+    return await this.mapper.toDomain(paciente);
   }
 
-  //FALTA SUSPENDER PACIENTE
+  
 
   async guardarPaciente(paciente: PacienteEntity): Promise<PacienteEntity> {
     let pacienteOrm = await this.mapper.toInfrastructure(paciente);

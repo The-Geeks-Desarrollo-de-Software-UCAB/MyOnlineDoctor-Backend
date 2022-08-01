@@ -55,6 +55,6 @@ export class Paciente {
   antecedente: string;
 
   @OneToMany(() => Cita, (cita) => cita.paciente)
-  citas: Cita[];
+   citas: Cita[];
 }
 

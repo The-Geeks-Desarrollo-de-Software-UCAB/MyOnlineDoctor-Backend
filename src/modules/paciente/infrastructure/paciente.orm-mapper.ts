@@ -60,10 +60,12 @@ export class PacienteOrmMapper {
 
   //ARREGLAR
   public async toInfrastructure(paciente: PacienteEntity): Promise<Paciente> {
-    
-   /* const cita = await this.ormCitaRepo.findOneOrFail({
-      where: {  },
+
+    const cita = await this.ormCitaRepo.find({
+      where: { paciente: paciente},
     });
+
+    
 
     return {
       id_paciente: paciente.idPaciente,
@@ -85,8 +87,9 @@ export class PacienteOrmMapper {
       usuario: paciente.usuario,
       citas: cita,
       
-    }*/
+      
+    }
 
-    return 
+     
   }
 }

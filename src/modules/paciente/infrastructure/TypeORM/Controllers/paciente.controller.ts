@@ -29,7 +29,7 @@ export class PacienteController {
   @Get('PorID:id_paciente')
   async buscarPacienteID(
     @Param('id_paciente') id_paciente: string,
-  ): Promise<PacienteEntity[]> {
+  ): Promise<PacienteEntity> {
     const servicio = new BuscarPacienteIDService(this.ormRepoPaciente);
     return await servicio.execute(id_paciente);
   }
@@ -69,19 +69,18 @@ export class PacienteController {
   @Get('PorNumero:numeroMovil')
   async buscarPacienteNumero(
     @Param('numeroMovil') numeroMovil: string,
-  ): Promise<PacienteEntity[]> {
+  ): Promise<PacienteEntity> {
     const servicio = new BuscarPacienteNumeroService(this.ormRepoPaciente);
     return await servicio.execute(numeroMovil);
   }
 
- /* @Put('Suspender')
+  @Put('Suspender')
   async suspenderPaciente(@Body() para): Promise<PacienteEntity> {
     const servicio = new SuspenderPacienteService(
       this.ormRepoPaciente,
     );
     return await servicio.execute(
       para.id_paciente,
-      para.estadoSuscripcion,
     );
   }
 
@@ -92,8 +91,8 @@ export class PacienteController {
     );
     return await servicio.execute(
       para.id_paciente,
-      para.estadoSuscripcion,
+      
     );
-  }*/
+  }
 }
 

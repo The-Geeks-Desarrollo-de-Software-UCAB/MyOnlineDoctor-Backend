@@ -3,7 +3,7 @@ import { PacienteEntity } from '../domain/entities/paciente';
 export interface IRepoPaciente {
   encontrarTodos(): Promise<PacienteEntity[]>;
 
-  encontrarPorID(id_paciente: string): Promise<PacienteEntity[]>;
+  encontrarPorID(id_paciente: string): Promise<PacienteEntity>;
 
   encontrarPorNombre(nombre: string): Promise<PacienteEntity[]>;
 
@@ -13,7 +13,7 @@ export interface IRepoPaciente {
 
   encontrarPorSegundoApellido(segundoapellido: string): Promise<PacienteEntity[]>;
 
-  encontrarPorNumero(numero: string): Promise<PacienteEntity[]>;
+  encontrarPorNumero(numero: string): Promise<PacienteEntity>;
 
   //no se si esto va
   //suspenderPaciente(id_paciente: IdPaciente): Promise<PacienteEntity[]>;

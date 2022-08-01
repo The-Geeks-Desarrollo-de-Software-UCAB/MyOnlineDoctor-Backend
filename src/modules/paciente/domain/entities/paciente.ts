@@ -21,39 +21,56 @@ import { PacienteCreadoDomainEvent } from '../events/paciente-creado.domain-even
 import { Usuario } from '../value-objects/usuario.value-object';
 
 export class PacienteEntity extends AggregateRoot {
+
+  private _idPaciente: IdPaciente;
+  private _correo: Correo;
+  private _nombre: Nombre;
+  private _apellido: Apellido;
+  private _alergia: Alergia;
+  private _altura: Altura;
+  private _antecedente: Antecedente;
+  private _fechaNacimiento: FechaNacimiento;
+  private _genero: Genero;
+  private _numeroMovil: NumeroMovil;
+  private _operacion: Operacion;
+  private _password: Password;
+  private _peso: Peso;
+  private _estadoSuscripcion: EstadoSuscripcion;
+  private _usuario: Usuario;
+
   constructor(
-    private _idPaciente: IdPaciente,
-    private _correo: Correo,
-    private _nombre: Nombre,
-    private _apellido: Apellido,
-    private _alergia: Alergia,
-    private _altura: Altura,
-    private _antecedente: Antecedente,
-    private _fechaNacimiento: FechaNacimiento,
-    private _genero: Genero,
-    private _numeroMovil: NumeroMovil,
-    private _operacion: Operacion,
-    private _password: Password,
-    private _peso: Peso,
-    private _estadoSuscripcion: EstadoSuscripcion,
-    private _usuario: Usuario,
+    idPaciente: IdPaciente,
+    correo: Correo,
+    nombre: Nombre,
+    apellido: Apellido,
+    alergia: Alergia,
+    altura: Altura,
+    antecedente: Antecedente,
+    fechaNacimiento: FechaNacimiento,
+    genero: Genero,
+    numeroMovil: NumeroMovil,
+    operacion: Operacion,
+    password: Password,
+    peso: Peso,
+    estadoSuscripcion: EstadoSuscripcion.ACTIVA,
+    usuario: Usuario,
   ) {
     super();
-    this._idPaciente = _idPaciente;
-    this._correo = _correo;
-    this._nombre = _nombre;
-    this._apellido = _apellido;
-    this._alergia = _alergia;
-    this._altura = _altura;
-    this._antecedente = _antecedente;
-    this._fechaNacimiento = _fechaNacimiento;
-    this._genero = _genero;
-    this._numeroMovil = _numeroMovil;
-    this._operacion = _operacion;
-    this._password = _password;
-    this._peso = _peso;
-    this._estadoSuscripcion = _estadoSuscripcion;
-    this._usuario = _usuario;
+    this._idPaciente = idPaciente;
+    this._correo = correo;
+    this._nombre = nombre;
+    this._apellido = apellido;
+    this._alergia = alergia;
+    this._altura = altura;
+    this._antecedente = antecedente;
+    this._fechaNacimiento = fechaNacimiento;
+    this._genero = genero;
+    this._numeroMovil = numeroMovil;
+    this._operacion = operacion;
+    this._password = password;
+    this._peso = peso;
+    this._estadoSuscripcion = estadoSuscripcion;
+    this._usuario = usuario;
     this.agregarEvento(new PacienteCreadoDomainEvent(this._idPaciente.id));
   }
 
@@ -208,7 +225,6 @@ export class PacienteEntity extends AggregateRoot {
     );
   }
 
-  
 
   
 }
