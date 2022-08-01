@@ -16,9 +16,17 @@ import { Peso } from '../domain/value-objects/peso.value-object';
 import { IdPaciente } from '../domain/value-objects/idPaciente.value-object';
 import { Paciente } from './typeorm/Entities/paciente.entity';
 import { getCustomRepository, getRepository, Repository } from 'typeorm';
+import { Cita } from 'src/modules/cita/infrastructure/typeorm/Entities/cita.entity';
+import { Usuario } from '../domain/value-objects/usuario.value-object';
 
 export class PacienteOrmMapper {
-  constructor() {}
+
+  private readonly ormCitaRepo: Repository<Cita>; 
+
+  constructor() {
+
+    this.ormCitaRepo = getRepository(Cita);
+  }
 
   public async toDomain(paciente: Paciente): Promise<PacienteEntity> {
     const pacienteEntity = await new PacienteEntity(
@@ -36,6 +44,7 @@ export class PacienteOrmMapper {
       new Password(paciente.contrasena),
       new Peso(paciente.peso),
       EstadoSuscripcion[paciente.estadoSuscripcion],
+      new Usuario(paciente.usuario),
     );
     pacienteEntity.limpiarEventos();
     return pacienteEntity;
@@ -51,6 +60,33 @@ export class PacienteOrmMapper {
 
   //ARREGLAR
   public async toInfrastructure(paciente: PacienteEntity): Promise<Paciente> {
-    return;
+    
+   /* const cita = await this.ormCitaRepo.findOneOrFail({
+      where: {  },
+    });
+
+    return {
+      id_paciente: paciente.idPaciente,
+      antecedente: paciente.antecedente,
+      primerNombre: paciente.nombre,
+      segundoNombre: paciente.segundonombre,
+      primerApellido: paciente.apellido,
+      segundoApellido: paciente.segundoapellido,
+      numeroMovil: paciente.numeroMovil,
+      estadoSuscripcion: paciente.estadoSuscripcion,
+      peso: paciente.peso,
+      alergia: paciente.alergia,
+      altura: paciente.altura,
+      operacion: paciente.operacion,
+      contrasena: paciente.password,
+      genero: paciente.genero,
+      fechaNacimiento: paciente.fechaNacimiento,
+      correo: paciente.correo,
+      usuario: paciente.usuario,
+      citas: cita,
+      
+    }*/
+
+    return 
   }
 }

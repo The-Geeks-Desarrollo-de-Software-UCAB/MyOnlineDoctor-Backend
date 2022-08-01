@@ -57,3 +57,4 @@ export class Paciente {
   @OneToMany(() => Cita, (cita) => cita.paciente)
   citas: Cita[];
 }
+

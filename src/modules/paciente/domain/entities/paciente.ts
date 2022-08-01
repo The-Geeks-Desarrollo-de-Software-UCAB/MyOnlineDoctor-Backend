@@ -18,6 +18,7 @@ import { PacienteBloqueadoDomainEvent } from '../events/paciente-bloqueado.domai
 import { SuscripcionModificadaDomainEvent } from '../events/suscripcion-modificada.domain-event';
 import { SuscripcionSuspendidaDomainEvent } from '../events/suscripcion-suspendida.domain-event';
 import { PacienteCreadoDomainEvent } from '../events/paciente-creado.domain-event';
+import { Usuario } from '../value-objects/usuario.value-object';
 
 export class PacienteEntity extends AggregateRoot {
   constructor(
@@ -35,6 +36,7 @@ export class PacienteEntity extends AggregateRoot {
     private _password: Password,
     private _peso: Peso,
     private _estadoSuscripcion: EstadoSuscripcion,
+    private _usuario: Usuario,
   ) {
     super();
     this._idPaciente = _idPaciente;
@@ -51,90 +53,162 @@ export class PacienteEntity extends AggregateRoot {
     this._password = _password;
     this._peso = _peso;
     this._estadoSuscripcion = _estadoSuscripcion;
+    this._usuario = _usuario;
     this.agregarEvento(new PacienteCreadoDomainEvent(this._idPaciente.id));
   }
 
-  get idPaciente(): IdPaciente {
-    return this._idPaciente;
+  static create(
+    paciente_id: string,
+    correo: string,
+    nombre: string,
+    segnombre: string,
+    apellido: string,
+    segapellido: string,
+    alergia: string,
+    altura: number,
+    antecedente: string,
+    fechaNacimiento: Date,
+    genero: string,
+    numeroMovil: string,
+    operacion: string,
+    password: string,
+    peso: number,
+    estadoSuscripcion: string,
+    usuario: string,
+  
+  ): PacienteEntity {
+    let id_paciente = new IdPaciente(paciente_id);
+    let correoPaciente = new Correo(correo);
+    let nombrePaciente = new Nombre(nombre,segnombre);
+    let apellidoPaciente = new Apellido(apellido,segapellido);
+    let alergiaPaciente = new Alergia(alergia);
+    let alturaPaciente = new Altura(altura);
+    let antecedentePaciente = new Antecedente(antecedente);
+    let fechaPaciente = new FechaNacimiento(fechaNacimiento);
+    let generoPaciente = new Genero(genero);
+    let numeroPaciente = new NumeroMovil(numeroMovil);
+    let operacionPaciente = new Operacion(operacion);
+    let passwordPaciente = new Password(password);
+    let pesoPaciente = new Peso(peso);
+    let estadoPaciente = EstadoSuscripcion[EstadoSuscripcion.ACTIVA];
+    let usuarioPaciente = new Usuario(usuario);
+    return new PacienteEntity(
+      id_paciente,
+      correoPaciente,
+      nombrePaciente,
+      apellidoPaciente,
+      alergiaPaciente,
+      alturaPaciente,
+      antecedentePaciente,
+      fechaPaciente,
+      generoPaciente,
+      numeroPaciente,
+      operacionPaciente,
+      passwordPaciente,
+      pesoPaciente,
+      estadoPaciente,
+      usuarioPaciente
+                 
+    );
   }
 
-  get correo(): Correo {
-    return this._correo;
+  public get idPaciente(): string {
+    return this._idPaciente.id;
   }
 
-  get nombre(): Nombre {
-    return this._nombre;
+  public  get correo(): string {
+    return this._correo.correo;
   }
 
-  get apellido(): Apellido {
-    return this._apellido;
+  public get nombre(): string {
+    return this._nombre.primerNombre;
   }
 
-  get alergia(): Alergia {
-    return this._alergia;
+  public get segundonombre(): string {
+    return this._nombre.segundoNombre;
   }
 
-  get altura(): Altura {
-    return this._altura;
+  public get apellido(): string {
+    return this._apellido.primerApellido;
   }
 
-  get antecedente(): Antecedente {
-    return this._antecedente;
+  public get segundoapellido(): string {
+    return this._apellido.segundoApellido;
   }
 
-  get fechaNacimiento(): FechaNacimiento {
-    return this._fechaNacimiento;
+  public get alergia(): string {
+    return this._alergia.alergia;
   }
 
-  get genero(): Genero {
-    return this._genero;
+  public get altura(): number {
+    return this._altura.altura;
   }
 
-  get numeroMovil(): NumeroMovil {
-    return this._numeroMovil;
+  public  get antecedente(): string {
+    return this._antecedente.antecedente;
   }
 
-  get operacion(): Operacion {
-    return this._operacion;
+  public get fechaNacimiento(): Date {
+    return this._fechaNacimiento.fechaNacimiento;
   }
 
-  get password(): Password {
-    return this._password;
+  public get genero(): string {
+    return this._genero.genero;
   }
 
-  get peso(): Peso {
-    return this._peso;
+  public get numeroMovil(): string {
+    return this._numeroMovil.numeroMovil;
   }
 
-  get estadoSuscripcion(): EstadoSuscripcion {
+  public get operacion(): string {
+    return this._operacion.operacion;
+  }
+
+  public get password(): string {
+    return this._password.password;
+  }
+
+  public get peso(): number {
+    return this._peso.peso;
+  }
+
+  public  get estadoSuscripcion(): EstadoSuscripcion {
     return this._estadoSuscripcion;
   }
 
-  cancelarSuscripcion(): void {
+  public  get usuario(): string {
+    return this._usuario.usuario;
+  }
+
+  public cancelarSuscripcion(): void {
     this._estadoSuscripcion = EstadoSuscripcion.CANCELADA;
     this.agregarEvento(
       new SuscripcionCanceladaDomainEvent(this._idPaciente.id),
     );
   }
 
-  bloquearSuscripcion(razon: string): void {
+  public bloquearSuscripcion(razon: string): void {
     this._estadoSuscripcion = EstadoSuscripcion.BLOQUEADA;
     this.agregarEvento(
       new PacienteBloqueadoDomainEvent(this._idPaciente.id, razon),
     );
   }
 
-  activarSuscripcion(): void {
+  public activarSuscripcion(): void {
     this._estadoSuscripcion = EstadoSuscripcion.ACTIVA;
     this.agregarEvento(
       new SuscripcionModificadaDomainEvent(this._idPaciente.id),
     );
   }
 
-  suspenderSuscripcion(): void {
+  public suspenderSuscripcion(): void {
     this._estadoSuscripcion = EstadoSuscripcion.SUSPENDIDA;
     this.agregarEvento(
       new SuscripcionSuspendidaDomainEvent(this._idPaciente.id),
     );
   }
+
+  
+
+  
 }

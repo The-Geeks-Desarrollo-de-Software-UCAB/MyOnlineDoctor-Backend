@@ -31,6 +31,34 @@ export class OrmRepoPaciente
     return await this.mapper.toDomainMulti(pacientes);
   }
 
+  async encontrarPorSegundoNombre(segundonombre: string): Promise<PacienteEntity[]> {
+    let pacientes = await super.find({
+      where: { segundoNombre: segundonombre },
+    });
+    return await this.mapper.toDomainMulti(pacientes);
+  }
+
+  async encontrarPorApellido(apellido: string): Promise<PacienteEntity[]> {
+    let pacientes = await super.find({
+      where: { primerApellido: apellido },
+    });
+    return await this.mapper.toDomainMulti(pacientes);
+  }
+
+  async encontrarPorSegundoApellido(segundoapellido: string): Promise<PacienteEntity[]> {
+    let pacientes = await super.find({
+      where: { segundoApellido: segundoapellido },
+    });
+    return await this.mapper.toDomainMulti(pacientes);
+  }
+
+  async encontrarPorNumero(numero: string): Promise<PacienteEntity[]> {
+    let pacientes = await super.find({
+      where: { numeroMovil: numero },
+    });
+    return await this.mapper.toDomainMulti(pacientes);
+  }
+
   //FALTA SUSPENDER PACIENTE
 
   async guardarPaciente(paciente: PacienteEntity): Promise<PacienteEntity> {
