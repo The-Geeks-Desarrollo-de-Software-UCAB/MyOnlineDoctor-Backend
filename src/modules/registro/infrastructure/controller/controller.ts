@@ -1,9 +1,9 @@
 import { Controller, Inject, Post, Res, Body, HttpStatus, UsePipes, Get, Param, ParseUUIDPipe, ValidationPipe } from '@nestjs/common';
 
-import { TYPES } from '../interfaces/types';
-import { ICreateRegistroService } from '../interfaces/ICreateRegistro';
-import { RegistroDomain } from '../domain/entities/registro.domain.entity';
-import { IGetRegistroService } from '../interfaces/IGetRegistro';
+import { TYPES } from '../../application/interfaces/types';
+import { ICreateRegistroService } from '../../application/interfaces/ICreateRegistro';
+import { RegistroDomain } from '../../domain/entities/registro';
+import { IGetRegistroService } from '../../application/interfaces/IGetRegistro';
 
 
 @Controller('registro')
