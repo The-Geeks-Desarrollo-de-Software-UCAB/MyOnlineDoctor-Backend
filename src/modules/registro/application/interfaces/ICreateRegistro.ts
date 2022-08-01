@@ -1,5 +1,5 @@
-import { RegistroDomain } from "../../domain/entities/registro";
+import { RegistroEntity } from "../../domain/entities/registro";
 
 export interface ICreateRegistroService {
-    create(registroDomain: RegistroDomain): Promise<RegistroDomain>;
+    create(registroDomain: RegistroEntity): Promise<RegistroEntity>;
 }
