@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { RegistroEntity } from '../../domain/entities/registro';
 import { Registro } from '../../infrastructure/entities/registro.entity';
 
-
+/*
 
 @Injectable()
 export class CreateRegistroService implements ICreateRegistroService {
@@ -17,3 +17,4 @@ export class CreateRegistroService implements ICreateRegistroService {
     }
 }
 
+*/

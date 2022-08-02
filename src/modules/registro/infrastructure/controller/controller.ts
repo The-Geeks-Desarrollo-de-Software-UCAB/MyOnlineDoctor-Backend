@@ -4,7 +4,7 @@ import { TYPES } from '../../application/interfaces/types';
 import { ICreateRegistroService } from '../../application/interfaces/ICreateRegistro';
 import { RegistroEntity } from '../../domain/entities/registro';
 import { IGetRegistroService } from '../../application/interfaces/IGetRegistro';
-
+/*
 
 @Controller('registro')
 export class RegistroController {
@@ -25,3 +25,4 @@ export class RegistroController {
         return registro;
     }
 }
+*/
