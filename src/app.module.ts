@@ -7,6 +7,7 @@ import { DoctorModule } from 'src/modules/doctor/infrastructure/typeorm/doctor.m
 import { SpecialtyModule } from 'src/modules/doctor/infrastructure/typeorm/specialty.module';
 import { RegistroModule } from './modules/registro/infrastructure/registro.module';
 import config from 'ormconfig';
+import { PacienteModule } from './modules/paciente/infrastructure/typeorm/paciente.module';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import config from 'ormconfig';
     DoctorModule,
     SpecialtyModule,
     CitaModule,
-    RegistroModule,
+    PacienteModule
+    //RegistroModule,
   ],
   controllers: [AppController],
   providers: [AppService],

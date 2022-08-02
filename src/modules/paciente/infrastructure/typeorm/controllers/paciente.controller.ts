@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { EntityManager, Repository } from 'typeorm';
-import { OrmRepoPaciente } from '../repositories/ORMRepoPaciente.repository';
+import { OrmRepoPaciente } from '../repositories/ormRepoPaciente.repository';
 import { OrmRepoDoctor } from 'src/modules/doctor/infrastructure/typeorm/repositories/ormRepoDoctor.repository';
 import { PacienteEntity } from 'src/modules/paciente/domain/entities/paciente';
 import { BuscarPacienteNombreService } from 'src/modules/paciente/application/services/buscarPacienteNombre.service';
