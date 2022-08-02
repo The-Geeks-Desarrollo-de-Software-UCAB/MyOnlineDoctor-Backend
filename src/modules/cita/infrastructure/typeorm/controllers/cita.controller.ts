@@ -3,6 +3,7 @@ import { EntityManager, Repository } from 'typeorm';
 import { OrmRepoCita } from '../repositories/ormRepoCita.repository';
 import { CitaEntity } from 'src/modules/cita/domain/entities/cita';
 import { OrmRepoDoctor } from 'src/modules/doctor/infrastructure/typeorm/repositories/ormRepoDoctor.repository';
+import { OrmRepoPaciente } from 'src/modules/paciente/infrastructure/typeorm/repositories/ormRepoPaciente.repository';
 import { SolicitarCitaService } from 'src/modules/cita/application/services/solicitarCita.service';
 import { AgendarCitaService } from 'src/modules/cita/application/services/agendarCita.service';
 import { AceptarFechaCitaService } from 'src/modules/cita/application/services/aceptarFecha.service';
@@ -17,8 +18,7 @@ import { EncontrarCitaPorPacienteYEstadoService } from 'src/modules/cita/applica
 import { EncontrarCitaPorDoctorService } from 'src/modules/cita/application/services/encontrarCitaPorDoctor.service';
 import { EncontrarCitaPorPacienteService } from 'src/modules/cita/application/services/encontrarCitaPorPaciente.service';
 import { EncontrarCitasService } from 'src/modules/cita/application/services/encontrarCitas.service';
-import { OrmRepoPaciente } from 'src/modules/paciente/infrastructure/typeorm/repositories/ormRepoPaciente.repository';
-import { DoctorEntity } from 'src/modules/doctor/domain/entities/doctor';
+import { EncontrarCitaPorIdService } from 'src/modules/cita/application/services/encontrarCitaPorId.service';
 
 @Controller('api/cita')
 export class CitaController {
@@ -36,6 +36,14 @@ export class CitaController {
   async encontrarTodas(): Promise<CitaEntity[]> {
     const servicio = new EncontrarCitasService(this.ormRepoCita);
     return await servicio.execute();
+  }
+
+  @Get('PorId:id_cita')
+  async encontrarCitaPorId(
+    @Param('id_cita') id_cita: string,
+  ): Promise<CitaEntity> {
+    const servicio = new EncontrarCitaPorIdService(this.ormRepoCita);
+    return await servicio.execute(id_cita);
   }
 
   @Get('PorDoctor:id_doctor')

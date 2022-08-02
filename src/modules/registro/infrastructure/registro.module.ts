@@ -1,18 +1,17 @@
-/*import { Module } from '@nestjs/common';
-
+import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RegistroController } from '../infrastructure/controller/controller';
-import { CreateRegistroService } from '../application/services/CreateRegistroServices';
+import { RegistroController } from 'src/modules/registro/infrastructure/typeorm/controllers/registro.controller';
+import { Cita } from 'src/modules/cita/infrastructure/typeorm/entities/cita.entity';
+import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/entities/doctor.entity';
+import { Especialidad } from 'src/modules/doctor/infrastructure/typeorm/entities/specialty.entity';
+import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/entities/paciente.entity';
+import { Registro } from './typeorm/entities/registro.entity';
 
-import { Registro } from '../infrastructure/entities/registro.entity';
-import { TYPES } from '../application/interfaces/types';
-import { GetRegistroService } from '../application/services/GetRegistroServices';
-
-const createRegistro = { provide: TYPES.services.ICreateUserService, useClass: CreateRegistroService };
-const getRegistro = { provide: TYPES.services.IGetUserService, useClass: GetRegistroService };
 @Module({
-    imports: [TypeOrmModule.forFeature([Registro])],
-    controllers: [RegistroController],
-    providers: [createRegistro, getRegistro],
+  imports: [
+    TypeOrmModule.forFeature([Cita, Doctor, Especialidad, Paciente, Registro]),
+  ],
+  providers: [],
+  controllers: [RegistroController],
 })
-export class RegistroModule { }*/
+export class RegistroModule {}
