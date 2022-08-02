@@ -32,11 +32,19 @@ export class DoctorEntity extends AggregateRoot {
   }
 
   get nombre() {
-    return this._nombre;
+    return this._nombre.primerNombre;
+  }
+
+  get segnombre() {
+    return this._nombre.segundoNombre;
   }
 
   get apellido() {
-    return this._apellido;
+    return this._apellido.primerApellido;
+  }
+
+  get segapellido() {
+    return this._apellido.segundoApellido;
   }
 
   get especialidad() {
@@ -47,8 +55,12 @@ export class DoctorEntity extends AggregateRoot {
     return this._promedioCalificacion;
   }
 
-  get localizacion() {
-    return this._localizacion;
+  get latlocalizacion() {
+    return this._localizacion.latitud;
+  }
+
+  get lonlocalizacion() {
+    return this._localizacion.longitud;
   }
 
   get estado() {

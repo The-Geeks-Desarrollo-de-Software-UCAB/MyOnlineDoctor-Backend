@@ -19,4 +19,6 @@ export interface IRepoDoctor {
 
   guardarDoctor(doctor: DoctorEntity): Promise<DoctorEntity>;
 
+  encontrarPorNombreEspecialidad(nombreespecialidad: string): Promise<DoctorEntity[]>;
+
 }

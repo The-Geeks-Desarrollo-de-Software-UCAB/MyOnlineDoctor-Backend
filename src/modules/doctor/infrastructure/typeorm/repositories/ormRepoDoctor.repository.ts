@@ -91,4 +91,22 @@ export class OrmRepoDoctor extends Repository<Doctor> implements IRepoDoctor {
     return await this.mapper.toDomain(salvado);
   }
 
+  //DUDAS
+  async encontrarPorNombreEspecialidad(
+    nombre_especialidad: string,
+  ): Promise<DoctorEntity[]> {
+    const especialidad = await this.especialidadRepo.findOne({
+      where: { nombre_especialidad: nombre_especialidad },
+    });
+    const query = await this.createQueryBuilder('d')
+      .leftJoin('d.especialidades', 's')
+      .select(['d', 's'])
+      .where('s.id_especialidad = :idEspecialidad', {
+        idEspecialidad: especialidad.id_especialidad,
+      })
+      .getMany();
+    return await this.mapper.toDomainMulti(query);
+  }
+
+
 }

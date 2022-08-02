@@ -8,8 +8,15 @@ import { DoctorEntity } from '../domain/entities/doctor';
 import { Especialidad } from './typeorm/entities/specialty.entity';
 import { Estado } from 'src/modules/doctor/domain/value-objects/estado.value-object';
 import { Doctor } from './typeorm/entities/doctor.entity';
+import { getRepository, Repository } from 'typeorm';
 
 export class DoctorOrmMapper {
+
+  private readonly ormDoctorRepo: Repository<Doctor>;
+  constructor() {
+    this.ormDoctorRepo = getRepository(Doctor);
+  }
+
   async toDomain(doctor: Doctor): Promise<DoctorEntity> {
     const especialidades: EspecialidadDomain[] = [];
     let especialidadesOrm: Especialidad[] = [];
@@ -36,4 +43,21 @@ export class DoctorOrmMapper {
     }
     return resultado;
   }
+
+  public async toInfrastructure(doctor: DoctorEntity): Promise<Doctor> {
+    return await this.ormDoctorRepo.create({
+      id_doctor: doctor.id,
+      primerNombre: doctor.nombre,
+      segundoNombre: doctor.segnombre,
+      primerApellido: doctor.apellido,
+      segundoApellido: doctor.segapellido,
+      latitud: doctor.latlocalizacion,
+      longitud: doctor.lonlocalizacion,
+      estado: doctor.estado,
+      Especialidad: doctor.especialidad,
+      promedioCalificacion: doctor.promedioCalificacion,
+
+    });
+  }
+
 }
