@@ -1,5 +1,4 @@
-/*
-import { Module } from '@nestjs/common';
+/*import { Module } from '@nestjs/common';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RegistroController } from '../infrastructure/controller/controller';
@@ -16,5 +15,4 @@ const getRegistro = { provide: TYPES.services.IGetUserService, useClass: GetRegi
     controllers: [RegistroController],
     providers: [createRegistro, getRegistro],
 })
-export class RegistroModule { }
-*/
+export class RegistroModule { }*/
