@@ -1,7 +1,5 @@
 import { IRepoCita } from 'src/modules/cita/application/IRepoCita.repository';
 import { IRepoDoctor } from 'src/modules/doctor/application/IRepoDoctor.repository';
-import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/entities/paciente.entity';
-import { Repository } from 'typeorm';
 import { CitaEntity } from '../../domain/entities/cita';
 import { IRepoPaciente } from 'src/modules/paciente/application/IRepoPaciente.repository';
 
@@ -9,7 +7,7 @@ export class SolicitarCitaService {
   constructor(
     private readonly repoCita: IRepoCita,
     private readonly repoDoctor: IRepoDoctor,
-    private readonly repoPaciente: IRepoPaciente, //esto debe cambiarse por el repositorio final de paciente
+    private readonly repoPaciente: IRepoPaciente,
   ) {}
 
   async execute(

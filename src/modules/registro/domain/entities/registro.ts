@@ -8,6 +8,8 @@ import { Fecha } from '../value-objects/fecha.value-object';
 import { AggregateRoot } from 'src/modules/base/domain/entities/aggregate-root.base';
 import { RegistroCreado } from '../events/registro-creado.domain-event';
 import { RegistroModificado } from '../events/registro-modificado.domain-event';
+import { IdCita } from 'src/modules/cita/domain/value-objects/idCita.value-object';
+import { IdDoctor } from 'src/modules/doctor/domain/value-objects/idDoctor.value-object';
 
 export class RegistroEntity extends AggregateRoot {
   private _identificador: IdRegistro;
@@ -17,6 +19,8 @@ export class RegistroEntity extends AggregateRoot {
   private _plan: Plan;
   private _examen: Examen;
   private _fecha: Fecha;
+  private _identificadorCita: IdCita;
+  private _identificadorDoctor: IdDoctor;
 
   constructor(
     identificador: IdRegistro,
@@ -25,7 +29,9 @@ export class RegistroEntity extends AggregateRoot {
     diagnostico: Diagnostico,
     plan: Plan,
     examen: Examen,
-    fecha: Fecha
+    fecha: Fecha,
+    idCita: IdCita,
+    idDoctor: IdDoctor,
   ) {
     super();
     this._identificador = identificador;
@@ -35,6 +41,8 @@ export class RegistroEntity extends AggregateRoot {
     this._plan = plan;
     this._examen = examen;
     this._fecha = fecha;
+    this._identificadorCita = idCita;
+    this._identificadorDoctor = idDoctor;
     this.agregarEvento(new RegistroCreado(this._identificador.id));
   }
 
@@ -45,7 +53,8 @@ export class RegistroEntity extends AggregateRoot {
     diagnostico: string,
     plan: string,
     examen: string,
-    fecha: Date
+    idCita: string,
+    idDoctor: string,
   ): RegistroEntity {
     const idRegistro = new IdRegistro(identificador);
     const prescripcionValueObject = new Prescripcion(prescripcion);
@@ -53,7 +62,9 @@ export class RegistroEntity extends AggregateRoot {
     const diagnosticoValueObject = new Diagnostico(diagnostico);
     const planValueObject = new Plan(plan);
     const examenValueObject = new Examen(examen);
-    const fechaValueObject = new Fecha(fecha);
+    const fechaValueObject = new Fecha(new Date(Date.now()));
+    const cita_id = new IdCita(idCita);
+    const doctor_id = new IdDoctor(idDoctor);
     return new RegistroEntity(
       idRegistro,
       prescripcionValueObject,
@@ -61,7 +72,9 @@ export class RegistroEntity extends AggregateRoot {
       diagnosticoValueObject,
       planValueObject,
       examenValueObject,
-      fechaValueObject
+      fechaValueObject,
+      cita_id,
+      doctor_id,
     );
   }
 
@@ -91,6 +104,14 @@ export class RegistroEntity extends AggregateRoot {
 
   public get fecha(): Date {
     return this._fecha.fecha;
+  }
+
+  public get identificadorCita(): string {
+    return this._identificadorCita.id;
+  }
+
+  public get identificadorDoctor(): string {
+    return this._identificadorDoctor.id;
   }
 
   public set plan(plan: string) {

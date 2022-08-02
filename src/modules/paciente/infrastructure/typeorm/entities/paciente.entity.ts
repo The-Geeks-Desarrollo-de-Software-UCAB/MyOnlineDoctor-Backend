@@ -1,5 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 import { Cita } from 'src/modules/cita/infrastructure/typeorm/entities/cita.entity';
+import { Registro } from 'src/modules/registro/infrastructure/typeorm/entities/registro.entity';
 
 @Entity()
 export class Paciente {
@@ -56,4 +57,7 @@ export class Paciente {
 
   @OneToMany(() => Cita, (cita) => cita.paciente)
   citas: Cita[];
+
+  @OneToMany(() => Registro, (registro) => registro.paciente)
+  historiaMedica: Registro[];
 }

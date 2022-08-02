@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { Especialidad } from './specialty.entity';
 import { Cita } from 'src/modules/cita/infrastructure/typeorm/entities/cita.entity';
+import { Registro } from 'src/modules/registro/infrastructure/typeorm/entities/registro.entity';
 
 @Entity()
 export class Doctor {
@@ -50,6 +51,9 @@ export class Doctor {
 
   @OneToMany(() => Cita, (cita) => cita.doctor)
   citas: Cita[];
+
+  @OneToMany(() => Registro, (registro) => registro.doctor)
+  registros: Registro[];
 
   @JoinTable({
     name: 'doctor_especialidad',
