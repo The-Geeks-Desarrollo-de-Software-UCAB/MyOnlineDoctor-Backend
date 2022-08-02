@@ -19,7 +19,7 @@ export class OrmRepoDoctor extends Repository<Doctor> implements IRepoDoctor {
     return await this.mapper.toDomainMulti(doctores);
   }
 
-  async encontrarPorID(id_doctor: string): Promise<DoctorEntity> {
+  async encontrarPorId(id_doctor: string): Promise<DoctorEntity> {
     let doctor = await super.findOne({
       where: { id_doctor: id_doctor },
       relations: ['especialidades'],
@@ -76,14 +76,14 @@ export class OrmRepoDoctor extends Repository<Doctor> implements IRepoDoctor {
   }
 
   async encontrarPorLocalizacion(
-    latitud: number, longitud: number
+    latitud: number,
+    longitud: number,
   ): Promise<DoctorEntity[]> {
     let doctores = await super.find({
       where: { latitud: latitud, longitud: longitud },
     });
     return await this.mapper.toDomainMulti(doctores);
   }
- 
 
   async guardarDoctor(doctor: DoctorEntity): Promise<DoctorEntity> {
     let doctorOrm = await this.mapper.toInfrastructure(doctor);
@@ -107,6 +107,4 @@ export class OrmRepoDoctor extends Repository<Doctor> implements IRepoDoctor {
       .getMany();
     return await this.mapper.toDomainMulti(query);
   }
-
-
 }

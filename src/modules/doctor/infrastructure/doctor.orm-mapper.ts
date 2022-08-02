@@ -11,7 +11,6 @@ import { Doctor } from './typeorm/entities/doctor.entity';
 import { getRepository, Repository } from 'typeorm';
 
 export class DoctorOrmMapper {
-
   private readonly ormDoctorRepo: Repository<Doctor>;
   constructor() {
     this.ormDoctorRepo = getRepository(Doctor);
@@ -45,19 +44,26 @@ export class DoctorOrmMapper {
   }
 
   public async toInfrastructure(doctor: DoctorEntity): Promise<Doctor> {
-    return await this.ormDoctorRepo.create({
-      id_doctor: doctor.id,
+    const backup = await this.ormDoctorRepo.findOne({
+      where: { id_doctor: doctor.id.id },
+    });
+    return {
+      id_doctor: doctor.id.id,
+      usuario: backup.usuario,
+      contrasena: backup.contrasena,
       primerNombre: doctor.nombre,
       segundoNombre: doctor.segnombre,
       primerApellido: doctor.apellido,
       segundoApellido: doctor.segapellido,
+      genero: backup.genero,
       latitud: doctor.latlocalizacion,
       longitud: doctor.lonlocalizacion,
       estado: doctor.estado,
-      Especialidad: doctor.especialidad,
-      promedioCalificacion: doctor.promedioCalificacion,
-
-    });
+      promedioCalificacion: doctor.promedioCalificacion.promedioCalificacion,
+      imagen: backup.imagen,
+      citas: backup.citas,
+      registros: backup.registros,
+      especialidades: backup.especialidades,
+    };
   }
-
 }

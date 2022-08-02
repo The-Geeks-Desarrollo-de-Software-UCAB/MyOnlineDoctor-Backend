@@ -3,7 +3,7 @@ import { DoctorEntity } from '../domain/entities/doctor';
 export interface IRepoDoctor {
   encontrarTodos(): Promise<DoctorEntity[]>;
 
-  encontrarPorID(id_doctor: string): Promise<DoctorEntity>;
+  encontrarPorId(id_doctor: string): Promise<DoctorEntity>;
 
   encontrarPorEspecialidad(id_especialidad: number): Promise<DoctorEntity[]>;
 
@@ -15,10 +15,14 @@ export interface IRepoDoctor {
 
   encontrarPorSegundoApellido(segundoApellido: string): Promise<DoctorEntity[]>;
 
-  encontrarPorLocalizacion(latitud: number, longitud: number): Promise<DoctorEntity[]>;
+  encontrarPorLocalizacion(
+    latitud: number,
+    longitud: number,
+  ): Promise<DoctorEntity[]>;
 
   guardarDoctor(doctor: DoctorEntity): Promise<DoctorEntity>;
 
-  encontrarPorNombreEspecialidad(nombreespecialidad: string): Promise<DoctorEntity[]>;
-
+  encontrarPorNombreEspecialidad(
+    nombreespecialidad: string,
+  ): Promise<DoctorEntity[]>;
 }
