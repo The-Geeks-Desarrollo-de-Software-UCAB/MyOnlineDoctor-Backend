@@ -1,3 +1,4 @@
+/*
 import { Module } from '@nestjs/common';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -16,3 +17,4 @@ const getRegistro = { provide: TYPES.services.IGetUserService, useClass: GetRegi
     providers: [createRegistro, getRegistro],
 })
 export class RegistroModule { }
+*/
