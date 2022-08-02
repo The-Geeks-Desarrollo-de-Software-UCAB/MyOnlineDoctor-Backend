@@ -5,7 +5,6 @@ import { decoLog } from 'src/modules/decorators/logging-decorator';
 import { IRepoDoctor } from 'src/modules/doctor/application/IRepoDoctor.repository';
 import { DoctorEntity } from 'src/modules/doctor/domain/entities/doctor';
 import { Especialidad } from 'src/modules/doctor/infrastructure/typeorm/entities/specialty.entity';
-import { InjectRepository } from '@nestjs/typeorm';
 
 @EntityRepository(Doctor)
 export class OrmRepoDoctor extends Repository<Doctor> implements IRepoDoctor {
@@ -28,17 +27,19 @@ export class OrmRepoDoctor extends Repository<Doctor> implements IRepoDoctor {
     return await this.mapper.toDomain(doctor);
   }
 
-  //no sirve
   async encontrarPorEspecialidad(
     id_especialidad: number,
   ): Promise<DoctorEntity[]> {
-    const especialidad = await this.especialidadRepo.find({
+    const especialidad = await this.especialidadRepo.findOne({
       where: { id_especialidad: id_especialidad },
     });
-    let doctores = await super.find({
-      where: { especialidades: especialidad },
-      relations: ['especialidades'],
-    });
-    return await this.mapper.toDomainMulti(doctores);
+    const query = await this.createQueryBuilder('d')
+      .leftJoin('d.especialidades', 's')
+      .select(['d', 's'])
+      .where('s.nombre = :nombreEspecialidad', {
+        nombreEspecialidad: especialidad.nombre,
+      })
+      .getMany();
+    return await this.mapper.toDomainMulti(query);
   }
 }

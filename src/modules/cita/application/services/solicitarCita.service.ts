@@ -3,12 +3,13 @@ import { IRepoDoctor } from 'src/modules/doctor/application/IRepoDoctor.reposito
 import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/entities/paciente.entity';
 import { Repository } from 'typeorm';
 import { CitaEntity } from '../../domain/entities/cita';
+import { IRepoPaciente } from 'src/modules/paciente/application/IRepoPaciente.repository';
 
 export class SolicitarCitaService {
   constructor(
     private readonly repoCita: IRepoCita,
     private readonly repoDoctor: IRepoDoctor,
-    private readonly repoPaciente: Repository<Paciente>, //esto debe cambiarse por el repositorio final de paciente
+    private readonly repoPaciente: IRepoPaciente, //esto debe cambiarse por el repositorio final de paciente
   ) {}
 
   async execute(
@@ -22,9 +23,7 @@ export class SolicitarCitaService {
     //buscamos al doctor solicitado y si no existe se genera error
     const doctor = await this.repoDoctor.encontrarPorId(doctor_id);
     //buscamos al paciente que solicito la cita y si no existe se genera error
-    const paciente = await this.repoPaciente.findOne({
-      where: { id_paciente: paciente_id },
-    });
+    const paciente = await this.repoPaciente.encontrarPorID(paciente_id);
     //validamos que la suscripcion del paciente este activa
     if (!(paciente.estadoSuscripcion == 'ACTIVA')) {
       throw new Error('La subscripcion de este paciente no esta activa');

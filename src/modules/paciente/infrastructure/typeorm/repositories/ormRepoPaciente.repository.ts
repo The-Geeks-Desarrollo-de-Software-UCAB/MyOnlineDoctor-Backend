@@ -17,11 +17,11 @@ export class OrmRepoPaciente
     return await this.mapper.toDomainMulti(pacientes);
   }
 
-  async encontrarPorID(id_paciente: string): Promise<PacienteEntity[]> {
-    let pacientes = await super.find({
+  async encontrarPorID(id_paciente: string): Promise<PacienteEntity> {
+    let pacientes = await super.findOne({
       where: { id_paciente: id_paciente },
     });
-    return await this.mapper.toDomainMulti(pacientes);
+    return await this.mapper.toDomain(pacientes);
   }
 
   async encontrarPorNombre(nombre: string): Promise<PacienteEntity[]> {
@@ -31,11 +31,41 @@ export class OrmRepoPaciente
     return await this.mapper.toDomainMulti(pacientes);
   }
 
-  //FALTA SUSPENDER PACIENTE
+  async encontrarPorSegundoNombre(
+    segundoNombre: string,
+  ): Promise<PacienteEntity[]> {
+    let pacientes = await super.find({
+      where: { segundoNombre: segundoNombre },
+    });
+    return await this.mapper.toDomainMulti(pacientes);
+  }
+
+  async encontrarPorApellido(apellido: string): Promise<PacienteEntity[]> {
+    let pacientes = await super.find({
+      where: { primerApellido: apellido },
+    });
+    return await this.mapper.toDomainMulti(pacientes);
+  }
+
+  async encontrarPorSegundoApellido(
+    segundoapellido: string,
+  ): Promise<PacienteEntity[]> {
+    let pacientes = await super.find({
+      where: { segundoApellido: segundoapellido },
+    });
+    return await this.mapper.toDomainMulti(pacientes);
+  }
+
+  async encontrarPorNumero(numero: string): Promise<PacienteEntity> {
+    let paciente = await super.findOne({
+      where: { numeroMovil: numero },
+    });
+    return await this.mapper.toDomain(paciente);
+  }
 
   async guardarPaciente(paciente: PacienteEntity): Promise<PacienteEntity> {
     let pacienteOrm = await this.mapper.toInfrastructure(paciente);
-    let salvada = await this.save(pacienteOrm);
-    return await this.mapper.toDomain(salvada);
+    let salvado = await this.save(pacienteOrm);
+    return await this.mapper.toDomain(salvado);
   }
 }

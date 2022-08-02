@@ -1,4 +1,3 @@
-import { InjectRepository } from '@nestjs/typeorm';
 import { PacienteEntity } from '../domain/entities/paciente';
 import { Nombre } from '../domain/value-objects/nombre.value-object';
 import { Correo } from '../domain/value-objects/correo.value-object';
@@ -13,12 +12,16 @@ import { NumeroMovil } from '../domain/value-objects/numeromovil.value-object';
 import { Operacion } from '../domain/value-objects/operacion.value-object';
 import { Password } from '../domain/value-objects/password.value-object';
 import { Peso } from '../domain/value-objects/peso.value-object';
+import { Usuario } from '../domain/value-objects/usuario.value-object';
 import { IdPaciente } from '../domain/value-objects/idPaciente.value-object';
 import { Paciente } from './typeorm/entities/paciente.entity';
-import { getCustomRepository, getRepository, Repository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 
 export class PacienteOrmMapper {
-  constructor() {}
+  private readonly ormPacienteRepo: Repository<Paciente>;
+  constructor() {
+    this.ormPacienteRepo = getRepository(Paciente);
+  }
 
   public async toDomain(paciente: Paciente): Promise<PacienteEntity> {
     const pacienteEntity = await new PacienteEntity(
@@ -33,6 +36,7 @@ export class PacienteOrmMapper {
       new Genero(paciente.genero),
       new NumeroMovil(paciente.numeroMovil),
       new Operacion(paciente.operacion),
+      new Usuario(paciente.usuario),
       new Password(paciente.contrasena),
       new Peso(paciente.peso),
       EstadoSuscripcion[paciente.estadoSuscripcion],
@@ -49,8 +53,25 @@ export class PacienteOrmMapper {
     return resultado;
   }
 
-  //ARREGLAR
   public async toInfrastructure(paciente: PacienteEntity): Promise<Paciente> {
-    return;
+    return await this.ormPacienteRepo.create({
+      id_paciente: paciente.idPaciente.id,
+      usuario: paciente.usuario.usuario,
+      contrasena: paciente.password.password,
+      primerNombre: paciente.nombre.primerNombre,
+      segundoNombre: paciente.nombre.segundoNombre,
+      primerApellido: paciente.apellido.primerApellido,
+      segundoApellido: paciente.apellido.segundoApellido,
+      genero: paciente.genero.genero,
+      altura: paciente.altura.altura,
+      correo: paciente.correo.correo,
+      numeroMovil: paciente.numeroMovil.numeroMovil,
+      fechaNacimiento: paciente.fechaNacimiento.fechaNacimiento,
+      estadoSuscripcion: paciente.estadoSuscripcion,
+      alergia: paciente.alergia.alergia,
+      operacion: paciente.operacion.operacion,
+      peso: paciente.peso.peso,
+      antecedente: paciente.antecedente.antecedente,
+    });
   }
 }

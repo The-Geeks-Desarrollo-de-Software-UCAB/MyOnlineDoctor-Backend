@@ -18,6 +18,7 @@ import { PacienteBloqueadoDomainEvent } from '../events/paciente-bloqueado.domai
 import { SuscripcionModificadaDomainEvent } from '../events/suscripcion-modificada.domain-event';
 import { SuscripcionSuspendidaDomainEvent } from '../events/suscripcion-suspendida.domain-event';
 import { PacienteCreadoDomainEvent } from '../events/paciente-creado.domain-event';
+import { Usuario } from '../value-objects/usuario.value-object';
 
 export class PacienteEntity extends AggregateRoot {
   constructor(
@@ -32,9 +33,10 @@ export class PacienteEntity extends AggregateRoot {
     private _genero: Genero,
     private _numeroMovil: NumeroMovil,
     private _operacion: Operacion,
+    private _usuario: Usuario,
     private _password: Password,
     private _peso: Peso,
-    private _estadoSuscripcion: EstadoSuscripcion,
+    private _estadoSuscripcion: EstadoSuscripcion = EstadoSuscripcion.ACTIVA,
   ) {
     super();
     this._idPaciente = _idPaciente;
@@ -48,10 +50,63 @@ export class PacienteEntity extends AggregateRoot {
     this._genero = _genero;
     this._numeroMovil = _numeroMovil;
     this._operacion = _operacion;
+    this._usuario = _usuario;
     this._password = _password;
     this._peso = _peso;
     this._estadoSuscripcion = _estadoSuscripcion;
     this.agregarEvento(new PacienteCreadoDomainEvent(this._idPaciente.id));
+  }
+
+  static create(
+    paciente_id: string,
+    correo: string,
+    nombre: string,
+    segnombre: string,
+    apellido: string,
+    segapellido: string,
+    alergia: string,
+    altura: number,
+    antecedente: string,
+    fechaNacimiento: Date,
+    genero: string,
+    numeroMovil: string,
+    operacion: string,
+    usuario: string,
+    password: string,
+    peso: number,
+  ): PacienteEntity {
+    let id_paciente = new IdPaciente(paciente_id);
+    let correoPaciente = new Correo(correo);
+    let nombrePaciente = new Nombre(nombre, segnombre);
+    let apellidoPaciente = new Apellido(apellido, segapellido);
+    let alergiaPaciente = new Alergia(alergia);
+    let alturaPaciente = new Altura(altura);
+    let antecedentePaciente = new Antecedente(antecedente);
+    let fechaPaciente = new FechaNacimiento(fechaNacimiento);
+    let generoPaciente = new Genero(genero);
+    let numeroPaciente = new NumeroMovil(numeroMovil);
+    let operacionPaciente = new Operacion(operacion);
+    let passwordPaciente = new Password(password);
+    let pesoPaciente = new Peso(peso);
+    let estadoPaciente = EstadoSuscripcion.ACTIVA;
+    let usuarioPaciente = new Usuario(usuario);
+    return new PacienteEntity(
+      id_paciente,
+      correoPaciente,
+      nombrePaciente,
+      apellidoPaciente,
+      alergiaPaciente,
+      alturaPaciente,
+      antecedentePaciente,
+      fechaPaciente,
+      generoPaciente,
+      numeroPaciente,
+      operacionPaciente,
+      usuarioPaciente,
+      passwordPaciente,
+      pesoPaciente,
+      estadoPaciente,
+    );
   }
 
   get idPaciente(): IdPaciente {
@@ -96,6 +151,10 @@ export class PacienteEntity extends AggregateRoot {
 
   get operacion(): Operacion {
     return this._operacion;
+  }
+
+  public get usuario(): Usuario {
+    return this._usuario;
   }
 
   get password(): Password {

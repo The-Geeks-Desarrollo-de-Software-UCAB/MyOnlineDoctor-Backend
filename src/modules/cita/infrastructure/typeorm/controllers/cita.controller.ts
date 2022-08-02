@@ -1,7 +1,6 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { EntityManager, Repository } from 'typeorm';
 import { OrmRepoCita } from '../repositories/ormRepoCita.repository';
-import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/entities/paciente.entity';
 import { CitaEntity } from 'src/modules/cita/domain/entities/cita';
 import { OrmRepoDoctor } from 'src/modules/doctor/infrastructure/typeorm/repositories/ormRepoDoctor.repository';
 import { SolicitarCitaService } from 'src/modules/cita/application/services/solicitarCita.service';
@@ -18,17 +17,19 @@ import { EncontrarCitaPorPacienteYEstadoService } from 'src/modules/cita/applica
 import { EncontrarCitaPorDoctorService } from 'src/modules/cita/application/services/encontrarCitaPorDoctor.service';
 import { EncontrarCitaPorPacienteService } from 'src/modules/cita/application/services/encontrarCitaPorPaciente.service';
 import { EncontrarCitasService } from 'src/modules/cita/application/services/encontrarCitas.service';
+import { OrmRepoPaciente } from 'src/modules/paciente/infrastructure/typeorm/repositories/ormRepoPaciente.repository';
+import { DoctorEntity } from 'src/modules/doctor/domain/entities/doctor';
 
 @Controller('api/cita')
 export class CitaController {
   private readonly ormRepoCita: OrmRepoCita;
   private readonly ormRepoDoctor: OrmRepoDoctor;
-  private readonly ormRepoPaciente: Repository<Paciente>; // cambiar por equivalente a OrmRepoCita
+  private readonly ormRepoPaciente: OrmRepoPaciente;
 
   constructor(private readonly manager: EntityManager) {
     this.ormRepoCita = this.manager.getCustomRepository(OrmRepoCita);
     this.ormRepoDoctor = this.manager.getCustomRepository(OrmRepoDoctor);
-    this.ormRepoPaciente = this.manager.getRepository(Paciente);
+    this.ormRepoPaciente = this.manager.getCustomRepository(OrmRepoPaciente);
   }
 
   @Get('Todas')
@@ -192,18 +193,14 @@ export class CitaController {
     );
   }
 }
-
-/*@Get('porEspecialidad:id_especialidad')
+/*//Mover al controlador de Doctor, este funciona
+  @Get('porEspecialidad:id_especialidad')
   async encontrarPorEspecialidad(
     @Param('id_especialidad') id_especialidad: number,
   ): Promise<DoctorEntity[]> {
-    return await this.getService().encontrarPorEspecialidad(
-      this.ormRepoDoctor,
-      id_especialidad,
-    );
-  }
-
-  @Get('todos')
+    return await this.ormRepoDoctor.encontrarPorEspecialidad(id_especialidad);
+  }*/
+/*  @Get('todos')
   async encontrarTodos(): Promise<DoctorEntity[]> {
     return await this.getService().encontrarTodos(this.ormRepoDoctor);
   }*/
