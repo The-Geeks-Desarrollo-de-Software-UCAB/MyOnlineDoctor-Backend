@@ -6,6 +6,7 @@ import { Nombre } from 'src/modules/doctor/domain/value-objects/nombre.value-obj
 import { PromedioCalificacion } from 'src/modules/doctor/domain/value-objects/promedio-calificacion.value-object';
 import { DoctorEntity } from '../domain/entities/doctor';
 import { Especialidad } from './typeorm/entities/specialty.entity';
+import { Estado } from 'src/modules/doctor/domain/value-objects/estado.value-object';
 import { Doctor } from './typeorm/entities/doctor.entity';
 
 export class DoctorOrmMapper {
@@ -22,6 +23,7 @@ export class DoctorOrmMapper {
       especialidades,
       new PromedioCalificacion(doctor.promedioCalificacion),
       new Localizacion(doctor.latitud, doctor.longitud),
+      Estado[doctor.estado],
     );
     doctorEntity.limpiarEventos();
     return doctorEntity;

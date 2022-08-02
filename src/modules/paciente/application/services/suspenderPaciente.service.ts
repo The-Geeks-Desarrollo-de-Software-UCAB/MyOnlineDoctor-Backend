@@ -15,7 +15,7 @@ export class SuspenderPacienteService {
     //Buscamos al paciente a suspender
     let paciente = await this.repoPaciente.encontrarPorID(id_paciente);
     //Verificamos que el doctor exista
-    const doctor = await this.repoDoctor.encontrarPorId(id_doctor);
+    const doctor = await this.repoDoctor.encontrarPorID(id_doctor);
     //seria bueno validar que el paciente si sea paciente del doctor
     //se bloquea al paciente
     paciente.suspenderSuscripcion();

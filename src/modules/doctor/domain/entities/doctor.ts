@@ -5,6 +5,7 @@ import { IdDoctor } from '../value-objects/idDoctor.value-object';
 import { Localizacion } from '../value-objects/localizacion.value-object';
 import { Nombre } from '../value-objects/nombre.value-object';
 import { PromedioCalificacion } from '../value-objects/promedio-calificacion.value-object';
+import { Estado } from '../value-objects/estado.value-object';
 
 export class DoctorEntity extends AggregateRoot {
   constructor(
@@ -14,6 +15,7 @@ export class DoctorEntity extends AggregateRoot {
     private _especialidad: EspecialidadDomain[],
     private _promedioCalificacion: PromedioCalificacion,
     private _localizacion: Localizacion,
+    private _estado: Estado = Estado.ACTIVO,
   ) {
     super();
     this._id = _id;
@@ -22,6 +24,7 @@ export class DoctorEntity extends AggregateRoot {
     this._especialidad = _especialidad;
     this._promedioCalificacion = _promedioCalificacion;
     this._localizacion = _localizacion;
+    this._estado = _estado;
   }
 
   get id() {
@@ -46,5 +49,14 @@ export class DoctorEntity extends AggregateRoot {
 
   get localizacion() {
     return this._localizacion;
+  }
+
+  get estado() {
+    return this._estado;
+  }
+
+  bloquear(razon: string): void {
+    this._estado = Estado.BLOQUEADO;
+    
   }
 }

@@ -42,6 +42,9 @@ export class Doctor {
   @Column()
   latitud: number;
 
+  @Column()
+  estado: string;
+
   @Column({ nullable: true })
   promedioCalificacion: number;
 

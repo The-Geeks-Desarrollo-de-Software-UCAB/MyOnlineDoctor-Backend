@@ -19,7 +19,7 @@ export class OrmRepoDoctor extends Repository<Doctor> implements IRepoDoctor {
     return await this.mapper.toDomainMulti(doctores);
   }
 
-  async encontrarPorId(id_doctor: string): Promise<DoctorEntity> {
+  async encontrarPorID(id_doctor: string): Promise<DoctorEntity> {
     let doctor = await super.findOne({
       where: { id_doctor: id_doctor },
       relations: ['especialidades'],
@@ -42,4 +42,53 @@ export class OrmRepoDoctor extends Repository<Doctor> implements IRepoDoctor {
       .getMany();
     return await this.mapper.toDomainMulti(query);
   }
+
+  async encontrarPorNombre(nombre: string): Promise<DoctorEntity[]> {
+    let doctores = await super.find({
+      where: { primerNombre: nombre },
+    });
+    return await this.mapper.toDomainMulti(doctores);
+  }
+
+  async encontrarPorSegundoNombre(
+    segundoNombre: string,
+  ): Promise<DoctorEntity[]> {
+    let doctores = await super.find({
+      where: { segundoNombre: segundoNombre },
+    });
+    return await this.mapper.toDomainMulti(doctores);
+  }
+
+  async encontrarPorApellido(apellido: string): Promise<DoctorEntity[]> {
+    let doctores = await super.find({
+      where: { primerApellido: apellido },
+    });
+    return await this.mapper.toDomainMulti(doctores);
+  }
+
+  async encontrarPorSegundoApellido(
+    segundoapellido: string,
+  ): Promise<DoctorEntity[]> {
+    let doctores = await super.find({
+      where: { segundoApellido: segundoapellido },
+    });
+    return await this.mapper.toDomainMulti(doctores);
+  }
+
+  async encontrarPorLocalizacion(
+    latitud: number, longitud: number
+  ): Promise<DoctorEntity[]> {
+    let doctores = await super.find({
+      where: { latitud: latitud, longitud: longitud },
+    });
+    return await this.mapper.toDomainMulti(doctores);
+  }
+ 
+
+  async guardarDoctor(doctor: DoctorEntity): Promise<DoctorEntity> {
+    let doctorOrm = await this.mapper.toInfrastructure(doctor);
+    let salvado = await this.save(doctorOrm);
+    return await this.mapper.toDomain(salvado);
+  }
+
 }
