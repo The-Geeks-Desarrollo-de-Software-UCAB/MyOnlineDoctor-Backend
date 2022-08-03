@@ -63,6 +63,13 @@ export class OrmRepoPaciente
     return await this.mapper.toDomain(paciente);
   }
 
+  async encontrarPorCorreo(correo: string): Promise<PacienteEntity> {
+    let paciente = await super.findOne({
+      where: { correo: correo },
+    });
+    return await this.mapper.toDomain(paciente);
+  }
+
   async guardarPaciente(paciente: PacienteEntity): Promise<PacienteEntity> {
     let pacienteOrm = await this.mapper.toInfrastructure(paciente);
     let salvado = await this.save(pacienteOrm);

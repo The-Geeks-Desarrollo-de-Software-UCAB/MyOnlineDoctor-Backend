@@ -15,6 +15,7 @@ import { BloquearPacienteService } from 'src/modules/paciente/application/servic
 import { BuscarPacienteSegundoNombreService } from 'src/modules/paciente/application/services/buscarPacienteSegundoNombre.service';
 import { RegistrarPacienteService } from 'src/modules/paciente/application/services/registrarPaciente.service';
 import { EncontrarPacientesPorDoctorService } from 'src/modules/paciente/application/services/buscarPacientesPorDoctor.service';
+import { BuscarPacienteCorreoService } from 'src/modules/paciente/application/services/buscarPacienteCorreo.service';
 
 @Controller('api/paciente')
 export class PacienteController {
@@ -91,6 +92,14 @@ export class PacienteController {
     @Param('id_doctor') id_doctor: string,
   ): Promise<PacienteEntity[]> {
     return await this.ormRepoCita.encontrarPacientesPorDoctor(id_doctor);
+  }
+
+  @Get('PorCorreo:correo')
+  async buscarPacientePorCorreo(
+    @Param('correo') correo: string,
+  ): Promise<PacienteEntity> {
+    const servicio = new BuscarPacienteCorreoService(this.ormRepoPaciente);
+    return await servicio.execute(correo);
   }
 
   @Post('Registrar')
