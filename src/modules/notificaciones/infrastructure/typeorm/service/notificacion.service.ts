@@ -36,4 +36,8 @@ export class NotificacionService {
             
             
         }
+
+        async guardarDispositivo(id_paciente: string, token: string){
+            this.ormRepoDispositivo.guardarDispositivo(id_paciente, token);
+        }
 }
