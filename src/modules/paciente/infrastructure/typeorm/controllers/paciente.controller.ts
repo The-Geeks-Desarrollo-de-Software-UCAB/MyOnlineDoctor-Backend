@@ -1,7 +1,8 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { EntityManager, Repository } from 'typeorm';
-import { OrmRepoPaciente } from '../repositories/ormRepoPaciente.repository';
+import { OrmRepoCita } from 'src/modules/cita/infrastructure/typeorm/repositories/ormRepoCita.repository';
 import { OrmRepoDoctor } from 'src/modules/doctor/infrastructure/typeorm/repositories/ormRepoDoctor.repository';
+import { OrmRepoPaciente } from '../repositories/ormRepoPaciente.repository';
 import { PacienteEntity } from 'src/modules/paciente/domain/entities/paciente';
 import { BuscarPacienteNombreService } from 'src/modules/paciente/application/services/buscarPacienteNombre.service';
 import { BuscarPacienteApellidoService } from 'src/modules/paciente/application/services/buscarPacienteApellido.service';
@@ -13,15 +14,18 @@ import { SuspenderPacienteService } from 'src/modules/paciente/application/servi
 import { BloquearPacienteService } from 'src/modules/paciente/application/services/bloquearPaciente.service';
 import { BuscarPacienteSegundoNombreService } from 'src/modules/paciente/application/services/buscarPacienteSegundoNombre.service';
 import { RegistrarPacienteService } from 'src/modules/paciente/application/services/registrarPaciente.service';
+import { EncontrarPacientesPorDoctorService } from 'src/modules/paciente/application/services/buscarPacientesPorDoctor.service';
 
 @Controller('api/paciente')
 export class PacienteController {
-  private readonly ormRepoPaciente: OrmRepoPaciente;
+  private readonly ormRepoCita: OrmRepoCita;
   private readonly ormRepoDoctor: OrmRepoDoctor;
+  private readonly ormRepoPaciente: OrmRepoPaciente;
 
   constructor(private readonly manager: EntityManager) {
-    this.ormRepoPaciente = this.manager.getCustomRepository(OrmRepoPaciente);
+    this.ormRepoCita = this.manager.getCustomRepository(OrmRepoCita);
     this.ormRepoDoctor = this.manager.getCustomRepository(OrmRepoDoctor);
+    this.ormRepoPaciente = this.manager.getCustomRepository(OrmRepoPaciente);
   }
 
   @Get('Todos')
@@ -80,6 +84,16 @@ export class PacienteController {
   ): Promise<PacienteEntity> {
     const servicio = new BuscarPacienteNumeroService(this.ormRepoPaciente);
     return await servicio.execute(numeroMovil);
+  }
+
+  @Get('PorDoctor:id_doctor')
+  async encontrarPacientesPorDoctor(
+    @Param('id_doctor') id_doctor: string,
+  ): Promise<PacienteEntity[]> {
+    const servicio = new EncontrarPacientesPorDoctorService(
+      this.ormRepoPaciente,
+    );
+    return await servicio.execute(id_doctor);
   }
 
   @Post('Registrar')

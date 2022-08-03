@@ -17,7 +17,7 @@ export class FechaNacimiento {
     }
     if (fechaNacimiento > new Date(Date.now())) {
       throw new ArgumentInvalidException(
-        'fechaNacimiento no puede ser mayor a la fecha actual',
+        'la fecha de nacimiento no puede ser mayor a la fecha actual',
       );
     }
   }

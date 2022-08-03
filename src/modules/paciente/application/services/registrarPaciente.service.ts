@@ -23,7 +23,6 @@ export class RegistrarPacienteService {
     peso: number,
     antecedente: string,
   ): Promise<PacienteEntity> {
-    //throw new Error(new Date(Date.now()).toString());
     if (new Date(fechaNacimiento) > new Date(Date.now())) {
       throw new ArgumentInvalidException(
         'la fecha de nacimiento de un paciente no puede ser mayor a la fecha actual',

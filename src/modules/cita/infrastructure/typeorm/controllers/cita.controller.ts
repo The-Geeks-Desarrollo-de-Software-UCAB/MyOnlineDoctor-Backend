@@ -201,14 +201,3 @@ export class CitaController {
     );
   }
 }
-/*//Mover al controlador de Doctor, este funciona
-  @Get('porEspecialidad:id_especialidad')
-  async encontrarPorEspecialidad(
-    @Param('id_especialidad') id_especialidad: number,
-  ): Promise<DoctorEntity[]> {
-    return await this.ormRepoDoctor.encontrarPorEspecialidad(id_especialidad);
-  }*/
-/*  @Get('todos')
-  async encontrarTodos(): Promise<DoctorEntity[]> {
-    return await this.getService().encontrarTodos(this.ormRepoDoctor);
-  }*/

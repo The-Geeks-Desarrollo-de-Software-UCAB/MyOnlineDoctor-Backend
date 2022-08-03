@@ -18,7 +18,9 @@ export class AgendarCitaService {
     const doctor = await this.repoDoctor.encontrarPorId(id_doctor);
     //validamos que la fecha en la cual se va a agendar la cita sea valida
     if (fecha < new Date(Date.now())) {
-      throw new Error('Fecha invalida para cita');
+      throw new Error(
+        'las fechas para gendar la cita deben ser mayores que la actual',
+      );
     }
     //se busca la cita
     let cita = await this.repoCita.encontrarPorId(id_cita);

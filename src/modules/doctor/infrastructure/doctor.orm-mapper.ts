@@ -46,6 +46,7 @@ export class DoctorOrmMapper {
   public async toInfrastructure(doctor: DoctorEntity): Promise<Doctor> {
     const backup = await this.ormDoctorRepo.findOne({
       where: { id_doctor: doctor.id.id },
+      relations: ['especialidades', 'registros', 'citas'],
     });
     return {
       id_doctor: doctor.id.id,
