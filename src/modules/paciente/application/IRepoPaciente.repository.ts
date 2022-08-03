@@ -17,5 +17,7 @@ export interface IRepoPaciente {
 
   encontrarPorNumero(numero: string): Promise<PacienteEntity>;
 
+  encontrarPorCorreo(correo: string): Promise<PacienteEntity>;
+
   guardarPaciente(paciente: PacienteEntity): Promise<PacienteEntity>;
 }
