@@ -192,6 +192,7 @@ export class CitaController {
   async calificarCita(@Body() para): Promise<CitaEntity> {
     const servicio = new CalificarCitaService(
       this.ormRepoCita,
+      this.ormRepoDoctor,
       this.ormRepoPaciente,
     );
     return await servicio.execute(
