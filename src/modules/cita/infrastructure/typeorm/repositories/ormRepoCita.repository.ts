@@ -6,12 +6,15 @@ import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/entities/docto
 import { CitaOrmMapper } from '../../cita.orm-mapper';
 import { decoLog } from 'src/modules/decorators/logging-decorator';
 import { CitaEntity } from 'src/modules/cita/domain/entities/cita';
+import { PacienteEntity } from 'src/modules/paciente/domain/entities/paciente';
+import { PacienteOrmMapper } from 'src/modules/paciente/infrastructure/paciente.orm-mapper';
 
 @EntityRepository(Cita)
 export class OrmRepoCita extends Repository<Cita> implements IRepoCita {
   doctorRepo = getRepository(Doctor);
   pacienteRepo = getRepository(Paciente);
   mapper = new CitaOrmMapper();
+  mapperPaciente = new PacienteOrmMapper();
 
   async encontrarTodas(): Promise<CitaEntity[]> {
     let citas = await super.find({
@@ -76,6 +79,18 @@ export class OrmRepoCita extends Repository<Cita> implements IRepoCita {
       relations: ['doctor', 'paciente'],
     });
     return await this.mapper.toDomainMulti(citas);
+  }
+
+  async encontrarPacientesPorDoctor(
+    id_doctor: string,
+  ): Promise<PacienteEntity[]> {
+    const query = await this.createQueryBuilder('citas')
+      .select('p.*')
+      .leftJoin('citas.paciente', 'p')
+      .where('citas.doctor = :id_doctor', { id_doctor })
+      .distinctOn(['p.id_paciente'])
+      .getRawMany();
+    return await this.mapperPaciente.toDomainMulti(query);
   }
 
   async guardarCita(cita: CitaEntity): Promise<CitaEntity> {

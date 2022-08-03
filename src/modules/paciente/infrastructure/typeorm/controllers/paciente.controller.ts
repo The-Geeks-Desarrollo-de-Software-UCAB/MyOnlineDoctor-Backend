@@ -90,10 +90,7 @@ export class PacienteController {
   async encontrarPacientesPorDoctor(
     @Param('id_doctor') id_doctor: string,
   ): Promise<PacienteEntity[]> {
-    const servicio = new EncontrarPacientesPorDoctorService(
-      this.ormRepoPaciente,
-    );
-    return await servicio.execute(id_doctor);
+    return await this.ormRepoCita.encontrarPacientesPorDoctor(id_doctor);
   }
 
   @Post('Registrar')

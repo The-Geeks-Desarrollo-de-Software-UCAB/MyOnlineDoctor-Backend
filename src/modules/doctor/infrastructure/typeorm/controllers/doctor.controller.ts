@@ -12,6 +12,7 @@ import { BuscarDoctorSegundoNombreService } from 'src/modules/doctor/application
 import { BuscarDoctorApellidoService } from 'src/modules/doctor/application/services/buscarDoctorApellido.service';
 import { BuscarDoctorSegundoApellidoService } from 'src/modules/doctor/application/services/buscarDoctorSegundoApellido.service';
 import { BloquearDoctorService } from 'src/modules/doctor/application/services/bloquearDoctor.service';
+import { DoctorDto } from '../dto/doctor.dto';
 
 @Controller('api/doctor')
 export class DoctorController {
@@ -27,56 +28,66 @@ export class DoctorController {
   }
 
   @Get('Todos')
-  async encontrarTodos(): Promise<DoctorEntity[]> {
+  async encontrarTodos(): Promise<DoctorDto[]> {
     const servicio = new BuscarDoctoresService(this.ormRepoDoctor);
-    return await servicio.execute();
+    const doctores = await servicio.execute();
+    return await DoctorDto.create(doctores);
   }
 
   @Get('PorId:id_doctor')
   async buscarDoctorPorId(
     @Param('id_doctor') id_doctor: string,
-  ): Promise<DoctorEntity> {
+  ): Promise<DoctorDto[]> {
     const servicio = new BuscarDoctorPorIdService(this.ormRepoDoctor);
-    return await servicio.execute(id_doctor);
+    const doctor: DoctorEntity[] = [];
+    doctor.push(await servicio.execute(id_doctor));
+    return await DoctorDto.create(doctor);
   }
 
   @Get('PorNombre:primerNombre')
   async buscarDoctorNombre(
     @Param('primerNombre') primerNombre: string,
-  ): Promise<DoctorEntity[]> {
+  ): Promise<DoctorDto[]> {
     const servicio = new BuscarDoctorNombreService(this.ormRepoDoctor);
-    return await servicio.execute(primerNombre);
+    const doctores = await servicio.execute(primerNombre);
+    return await DoctorDto.create(doctores);
   }
 
   @Get('PorSegundoNombre:segundoNombre')
   async buscarDoctorSegundoNombre(
     @Param('segundoNombre') segundoNombre: string,
-  ): Promise<DoctorEntity[]> {
+  ): Promise<DoctorDto[]> {
     const servicio = new BuscarDoctorSegundoNombreService(this.ormRepoDoctor);
-    return await servicio.execute(segundoNombre);
+    const doctores = await servicio.execute(segundoNombre);
+    return await DoctorDto.create(doctores);
   }
 
   @Get('PorApellido:primerApellido')
   async buscarDoctorApellido(
     @Param('primerApellido') primerApellido: string,
-  ): Promise<DoctorEntity[]> {
+  ): Promise<DoctorDto[]> {
     const servicio = new BuscarDoctorApellidoService(this.ormRepoDoctor);
-    return await servicio.execute(primerApellido);
+    const doctores = await servicio.execute(primerApellido);
+    return await DoctorDto.create(doctores);
   }
 
   @Get('PorSegundoApellido:segundoApellido')
   async buscarDoctorSegundoApellido(
     @Param('segundoApellido') segundoApellido: string,
-  ): Promise<DoctorEntity[]> {
+  ): Promise<DoctorDto[]> {
     const servicio = new BuscarDoctorSegundoApellidoService(this.ormRepoDoctor);
-    return await servicio.execute(segundoApellido);
+    const doctores = await servicio.execute(segundoApellido);
+    return await DoctorDto.create(doctores);
   }
 
   @Get('PorEspecialidad:id_especialidad')
   async encontrarPorEspecialidad(
     @Param('id_especialidad') id_especialidad: number,
-  ): Promise<DoctorEntity[]> {
-    return await this.ormRepoDoctor.encontrarPorEspecialidad(id_especialidad);
+  ): Promise<DoctorDto[]> {
+    const doctores = await this.ormRepoDoctor.encontrarPorEspecialidad(
+      id_especialidad,
+    );
+    return await DoctorDto.create(doctores);
   }
 
   @Get('Especialidades')
@@ -85,8 +96,10 @@ export class DoctorController {
   }
 
   @Put('Bloquear')
-  async bloquearDoctor(@Body() para): Promise<DoctorEntity> {
+  async bloquearDoctor(@Body() para): Promise<DoctorDto[]> {
     const servicio = new BloquearDoctorService(this.ormRepoDoctor);
-    return await servicio.execute(para.id_doctor, para.razon);
+    const doctor: DoctorEntity[] = [];
+    doctor.push(await servicio.execute(para.id_doctor, para.razon));
+    return await DoctorDto.create(doctor);
   }
 }
