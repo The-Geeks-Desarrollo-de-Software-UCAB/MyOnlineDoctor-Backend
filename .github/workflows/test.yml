@@ -5,9 +5,10 @@ on:
   push:
     branches:
       - main
-    workflow_call:
+  workflow_call:
 
 jobs:
+
   test:
     name: Run tests
     runs-on: ubuntu-lastest
