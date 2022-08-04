@@ -27,4 +27,6 @@ export interface IRepoDoctor {
   ): Promise<DoctorEntity[]>;
 
   encontrarTodosOrdenarPorPromedioCalificacion(): Promise<DoctorEntity[]>;
+
+  encontrarPorUsuario(usuario: string): Promise<DoctorEntity>;
 }

@@ -14,6 +14,7 @@ import { BuscarDoctorSegundoApellidoService } from 'src/modules/doctor/applicati
 import { BloquearDoctorService } from 'src/modules/doctor/application/services/bloquearDoctor.service';
 import { DoctorDto } from '../dto/doctor.dto';
 import { BuscarDoctoresPorPromedioCalificacionService } from 'src/modules/doctor/application/services/buscarDoctoresPorPromedioCalificacion';
+import { BuscarDoctorUsuarioService } from '../../../application/services/buscarDoctorUsuario.service';
 
 @Controller('api/doctor')
 export class DoctorController {
@@ -101,6 +102,16 @@ export class DoctorController {
   @Get('Especialidades')
   async encontrarEspecialidades(): Promise<Especialidad[]> {
     return await this.ormRepoEspecialidad.encontrarTodas();
+  }
+
+  @Get('PorUsuario:usuario')
+  async buscarDoctorPorUsuario(
+    @Param('usuario') usuario: string,
+  ): Promise<DoctorDto[]> {
+    const servicio = new BuscarDoctorUsuarioService(this.ormRepoDoctor);
+    const doctores: DoctorEntity[] = [];
+    doctores.push(await servicio.execute(usuario));
+    return await DoctorDto.create(doctores);
   }
 
   @Put('Bloquear')
