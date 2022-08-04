@@ -64,4 +64,8 @@ export class RepoDoctorMock implements IRepoDoctor {
   async encontrarTodosOrdenarPorPromedioCalificacion(): Promise<DoctorEntity[]> {
     return null;
   }
+
+  async encontrarPorUsuario(usuario: string): Promise<DoctorEntity> {
+    return null;
+  }
 }
