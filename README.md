@@ -101,3 +101,5 @@ npm run start:dev
 ## Módulos Utilizados
 
 1. [@nestjs/typeorm](https://www.npmjs.com/package/@nestjs/typeorm)
+2. [@nestjs/testing](https://www.npmjs.com/package/@nestjs/testing)
+3. [@nestjs/common](https://www.npmjs.com/package/@nestjs/common)
