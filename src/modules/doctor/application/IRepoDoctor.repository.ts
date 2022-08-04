@@ -25,4 +25,6 @@ export interface IRepoDoctor {
   encontrarPorNombreEspecialidad(
     nombreespecialidad: string,
   ): Promise<DoctorEntity[]>;
+
+  encontrarTodosOrdenarPorPromedioCalificacion(): Promise<DoctorEntity[]>;
 }

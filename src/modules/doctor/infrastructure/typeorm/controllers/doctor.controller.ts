@@ -13,6 +13,7 @@ import { BuscarDoctorApellidoService } from 'src/modules/doctor/application/serv
 import { BuscarDoctorSegundoApellidoService } from 'src/modules/doctor/application/services/buscarDoctorSegundoApellido.service';
 import { BloquearDoctorService } from 'src/modules/doctor/application/services/bloquearDoctor.service';
 import { DoctorDto } from '../dto/doctor.dto';
+import { BuscarDoctoresPorPromedioCalificacionService } from 'src/modules/doctor/application/services/buscarDoctoresPorPromedioCalificacion';
 
 @Controller('api/doctor')
 export class DoctorController {
@@ -87,6 +88,13 @@ export class DoctorController {
     const doctores = await this.ormRepoDoctor.encontrarPorEspecialidad(
       id_especialidad,
     );
+    return await DoctorDto.create(doctores);
+  }
+
+  @Get('PorCalificacion')
+  async encontrarTodosPorPromedioCalificacion(): Promise<DoctorDto[]> {
+    const servicio = new BuscarDoctoresPorPromedioCalificacionService(this.ormRepoDoctor);
+    const doctores = await servicio.execute();
     return await DoctorDto.create(doctores);
   }
 
