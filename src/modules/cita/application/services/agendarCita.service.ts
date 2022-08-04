@@ -1,5 +1,6 @@
 import { IRepoCita } from 'src/modules/cita/application/IRepoCita.repository';
 import { IRepoDoctor } from 'src/modules/doctor/application/IRepoDoctor.repository';
+import { NotificacionService } from 'src/modules/notificaciones/infrastructure/typeorm/service/notificacion.service';
 import { CitaEntity } from '../../domain/entities/cita';
 import { Fecha } from '../../domain/value-objects/fecha.value-object';
 
@@ -7,6 +8,7 @@ export class AgendarCitaService {
   constructor(
     private readonly repoCita: IRepoCita,
     private readonly repoDoctor: IRepoDoctor,
+    private readonly notificacionService: NotificacionService,
   ) {}
 
   async execute(
@@ -36,6 +38,7 @@ export class AgendarCitaService {
     }
     //se le asigna la fecha a la cita
     cita.agendar(new Fecha(fecha));
+    this.notificacionService.enviarNotificacionPaciente("CITA AGENDADA", "El Doctor agendó su Cita para el dia "+ cita.fecha, cita.identificadorPaciente)
     return await this.repoCita.guardarCita(cita);
   }
 }

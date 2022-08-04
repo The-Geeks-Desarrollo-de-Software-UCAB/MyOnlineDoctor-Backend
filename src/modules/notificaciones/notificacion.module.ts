@@ -7,12 +7,14 @@ import { Paciente } from '../paciente/infrastructure/typeorm/entities/paciente.e
 import { Registro } from '../registro/infrastructure/typeorm/entities/registro.entity';
 import { NotificacionController } from './infrastructure/typeorm/controller/notificacion.controller';
 import { Dispositivo } from './infrastructure/typeorm/entities/dispositivo.entity';
+import { NotificacionService } from './infrastructure/typeorm/service/notificacion.service';
 
 @Module({
     imports: [
       TypeOrmModule.forFeature([Cita, Doctor, Especialidad, Paciente, Registro, Dispositivo]),
     ],
-    providers: [],
+    providers: [NotificacionService],
     controllers: [NotificacionController],
+    exports: [NotificacionService]
   })
 export class NotificacionModule {}

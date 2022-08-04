@@ -7,12 +7,13 @@ import { Paciente } from '../paciente/infrastructure/typeorm/entities/paciente.e
 import { Registro } from '../registro/infrastructure/typeorm/entities/registro.entity';
 import { VideollamadaController } from './infrastructure/typeorm/controller/videollamada.controller';
 import { Token } from './infrastructure/typeorm/entities/token.entity';
+import { VideollamadaService } from './infrastructure/typeorm/service/videollamada.service';
 
 @Module({
     imports: [
       TypeOrmModule.forFeature([Cita, Doctor, Especialidad, Paciente, Registro, Token]),
     ],
-    providers: [],
+    providers: [VideollamadaService],
     controllers: [VideollamadaController],
   })
 export class VideollamadaModule {

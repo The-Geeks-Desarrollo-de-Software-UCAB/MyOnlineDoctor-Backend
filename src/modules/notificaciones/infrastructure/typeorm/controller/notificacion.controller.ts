@@ -3,7 +3,7 @@ import { DispositivoDto } from 'src/modules/notificaciones/dto/Dispositivo.dto';
 import { PushNotificationDTO } from 'src/modules/notificaciones/dto/PushNotificationDTO';
 import { NotificacionService } from '../service/notificacion.service';
 
-@Controller('notificacion')
+@Controller('api/notificacion')
 export class NotificacionController {
 
     constructor (
@@ -16,6 +16,7 @@ export class NotificacionController {
     }
     @Post('dispositivo')
     async guardarDispositivo(@Body() request: DispositivoDto){
+        
         return await this.pushNotificationService.guardarDispositivo(request.id_paciente, request.token);
     }
 }

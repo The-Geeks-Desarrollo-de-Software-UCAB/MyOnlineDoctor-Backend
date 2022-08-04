@@ -10,6 +10,7 @@ import { EncontrarRegistroPorDoctorService } from 'src/modules/registro/applicat
 import { EncontrarRegistroPorPacienteService } from 'src/modules/registro/application/services/encontrarRegistroPorPaciente.service';
 import { EncontrarRegistroPorCitaService } from 'src/modules/registro/application/services/encontrarRegistroPorCita.service';
 import { CrearRegistroService } from 'src/modules/registro/application/services/crearRegistro.service';
+import { NotificacionService } from 'src/modules/notificaciones/infrastructure/typeorm/service/notificacion.service';
 
 @Controller('api/registro')
 export class RegistroController {
@@ -18,7 +19,8 @@ export class RegistroController {
   private readonly ormRepoPaciente: OrmRepoPaciente;
   private readonly ormRepoRegistro: OrmRepoRegistro;
 
-  constructor(private readonly manager: EntityManager) {
+  constructor(private readonly manager: EntityManager,
+    private readonly notificacionService: NotificacionService) {
     this.ormRepoCita = this.manager.getCustomRepository(OrmRepoCita);
     this.ormRepoDoctor = this.manager.getCustomRepository(OrmRepoDoctor);
     this.ormRepoPaciente = this.manager.getCustomRepository(OrmRepoPaciente);
@@ -65,6 +67,7 @@ export class RegistroController {
       this.ormRepoCita,
       this.ormRepoDoctor,
       this.ormRepoRegistro,
+      this.notificacionService,
     );
     return await servicio.execute(
       para.id_registro,

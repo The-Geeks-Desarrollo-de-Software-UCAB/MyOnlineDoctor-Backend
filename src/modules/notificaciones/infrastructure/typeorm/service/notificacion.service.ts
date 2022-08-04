@@ -11,12 +11,29 @@ export class NotificacionService {
     
     private readonly ormRepoDispositivo: OrmRepoDispositivo;
     constructor(private readonly manager: EntityManager){
-        admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount as ServiceAccount)
-        });
+        if(!admin.apps.length){
+            admin.initializeApp({
+                credential: admin.credential.cert(serviceAccount as ServiceAccount)
+                });
+        }
+        
         this.ormRepoDispositivo = this.manager.getCustomRepository(OrmRepoDispositivo);
         }
     
+        async enviarNotificacionPaciente(title: string, body: string, id_paciente: string){
+            const payload = {
+                notification: {
+                    title,
+                    body,
+                    
+                }
+            };
+            let items = await this.ormRepoDispositivo.encontrarDispositivoPorId(id_paciente);
+
+            for (var item of items){
+                Promise.all([await admin.messaging().sendToDevice(item.token, payload)]);
+            }
+        }
         async send(pushNotificationDTO: PushNotificationDTO){
             const {title, body, token, id_paciente} = pushNotificationDTO;
             console.log(title, body, token);
@@ -38,6 +55,7 @@ export class NotificacionService {
         }
 
         async guardarDispositivo(id_paciente: string, token: string){
+            
             this.ormRepoDispositivo.guardarDispositivo(id_paciente, token);
         }
 }

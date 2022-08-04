@@ -1,5 +1,5 @@
+import { MysqlConnectionOptions } from 'typeorm/driver/mysql/MysqlConnectionOptions';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
-
 const config: PostgresConnectionOptions = {
   type: 'postgres',
   url: process.env.DATABASE_URL,

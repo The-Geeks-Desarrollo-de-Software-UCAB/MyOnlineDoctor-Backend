@@ -19,6 +19,7 @@ import { EncontrarCitaPorDoctorService } from 'src/modules/cita/application/serv
 import { EncontrarCitaPorPacienteService } from 'src/modules/cita/application/services/encontrarCitaPorPaciente.service';
 import { EncontrarCitasService } from 'src/modules/cita/application/services/encontrarCitas.service';
 import { EncontrarCitaPorIdService } from 'src/modules/cita/application/services/encontrarCitaPorId.service';
+import { NotificacionService } from 'src/modules/notificaciones/infrastructure/typeorm/service/notificacion.service';
 
 @Controller('api/cita')
 export class CitaController {
@@ -26,7 +27,8 @@ export class CitaController {
   private readonly ormRepoDoctor: OrmRepoDoctor;
   private readonly ormRepoPaciente: OrmRepoPaciente;
 
-  constructor(private readonly manager: EntityManager) {
+  constructor(private readonly manager: EntityManager,
+    private readonly notificacionService: NotificacionService) {
     this.ormRepoCita = this.manager.getCustomRepository(OrmRepoCita);
     this.ormRepoDoctor = this.manager.getCustomRepository(OrmRepoDoctor);
     this.ormRepoPaciente = this.manager.getCustomRepository(OrmRepoPaciente);
@@ -130,6 +132,7 @@ export class CitaController {
     const servicio = new AgendarCitaService(
       this.ormRepoCita,
       this.ormRepoDoctor,
+      this.notificacionService,
     );
     return await servicio.execute(para.id_doctor, para.id_cita, para.fecha);
   }
@@ -166,6 +169,7 @@ export class CitaController {
     const servicio = new CancelarCitaDoctorService(
       this.ormRepoCita,
       this.ormRepoDoctor,
+      this.notificacionService,
     );
     return await servicio.execute(para.id_doctor, para.id_cita);
   }
@@ -175,6 +179,7 @@ export class CitaController {
     const servicio = new CancelarCitaPacienteService(
       this.ormRepoCita,
       this.ormRepoPaciente,
+      this.notificacionService
     );
     return await servicio.execute(para.id_paciente, para.id_cita);
   }

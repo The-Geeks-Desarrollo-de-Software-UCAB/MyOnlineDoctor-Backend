@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { RtcRole, RtcTokenBuilder } from 'agora-access-token';
 import { OrmRepoCita } from 'src/modules/cita/infrastructure/typeorm/repositories/ormRepoCita.repository';
 import { EntityManager, Repository } from 'typeorm';
+import { Token } from '../entities/token.entity';
 import { OrmRepoToken } from '../repositories/ormRepoToken.repository';
 
 @Injectable()
@@ -10,6 +11,7 @@ export class VideollamadaService {
     private readonly ormRepoToken: OrmRepoToken;
     constructor(private readonly manager: EntityManager){
         this.ormRepoCita = this.manager.getCustomRepository(OrmRepoCita);
+        this.ormRepoToken = this.manager.getCustomRepository(OrmRepoToken);
     }
   private appID = 'b007b19dfa2e4bfaa50fd2cbd5c0a64a';
   private appCertificate = '348b1196000148628f84a76a1d539445';
