@@ -30,12 +30,11 @@ export class VideollamadaService {
        const token =  RtcTokenBuilder.buildTokenWithUid(this.appID, this.appCertificate, this.channelName, this.uid, this.role, this.privilegeExpiredTs);
        const cita = await this.ormRepoCita.encontrarPorId(id_cita);
        this.ormRepoToken.guardarToken(id_cita, token);
-       console.log(token);
        return token;
     }   
     
     async getToken(id_cita: string){
-      let cita = this.ormRepoCita.encontrarPorId(id_cita);
-      return await this.ormRepoToken.findOne({where: {cita: cita}});
+      let cita = await this.ormRepoCita.encontrarPorId(id_cita);
+      return await this.ormRepoToken.findOne({where: {cita: cita }});
     }
 }

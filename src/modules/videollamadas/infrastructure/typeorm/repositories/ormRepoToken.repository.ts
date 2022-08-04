@@ -11,8 +11,6 @@ export class OrmRepoToken extends Repository<Token> implements IRepoToken{
         let citatoken = new Token();
         citatoken.cita = await this.citaRepo.findOne({where: {id_cita: id_cita}});
         citatoken.token = token;
-        console.log((citatoken));
-        
         return await super.save(citatoken);
         
     }
