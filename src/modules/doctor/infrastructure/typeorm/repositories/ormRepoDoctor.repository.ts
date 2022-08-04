@@ -1,4 +1,4 @@
-import { EntityRepository, Repository, getRepository } from 'typeorm';
+import { EntityRepository, Repository, getRepository, IsNull, Not } from 'typeorm';
 import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/entities/doctor.entity';
 import { DoctorOrmMapper } from '../../doctor.orm-mapper';
 import { decoLog } from 'src/modules/decorators/logging-decorator';
@@ -111,5 +111,14 @@ export class OrmRepoDoctor extends Repository<Doctor> implements IRepoDoctor {
       })
       .getMany();
     return await this.mapper.toDomainMulti(query);
+  }
+
+  async encontrarTodosOrdenarPorPromedioCalificacion(): Promise<DoctorEntity[]> {
+    let doctores = await super.find({
+      order: { promedioCalificacion: 'DESC' },
+      where: { promedioCalificacion: Not(IsNull()) },
+      relations: ['especialidades'],
+    });
+    return await this.mapper.toDomainMulti(doctores);
   }
 }
