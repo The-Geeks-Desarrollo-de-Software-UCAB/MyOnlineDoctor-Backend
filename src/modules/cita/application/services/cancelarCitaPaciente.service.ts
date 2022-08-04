@@ -1,13 +1,13 @@
 import { IRepoCita } from 'src/modules/cita/application/IRepoCita.repository';
 import { CitaEntity } from '../../domain/entities/cita';
 import { IRepoPaciente } from 'src/modules/paciente/application/IRepoPaciente.repository';
-import { NotificacionService } from 'src/modules/notificaciones/infrastructure/typeorm/service/notificacion.service';
+import { INotificacionService } from 'src/modules/notificaciones/application/INotification.service';
 
 export class CancelarCitaPacienteService {
   constructor(
     private readonly repoCita: IRepoCita,
     private readonly repoPaciente: IRepoPaciente,
-    private readonly notificacionService: NotificacionService, //esto debe cambiarse por el repositorio final de paciente
+    private readonly notificacionService: INotificacionService,
   ) {}
 
   async execute(id_paciente: string, id_cita: string): Promise<CitaEntity> {
@@ -25,7 +25,11 @@ export class CancelarCitaPacienteService {
     }
     //se cancela la cita
     cita.cancelar();
-    this.notificacionService.enviarNotificacionPaciente("CITA CANCELADA", "La cita fue cancelada", id_paciente);
+    this.notificacionService.enviarNotificacionPaciente(
+      'CITA CANCELADA',
+      'La cita fue cancelada',
+      id_paciente,
+    );
     return await this.repoCita.guardarCita(cita);
   }
 }

@@ -26,12 +26,12 @@ export class CitaController {
   private readonly ormRepoCita: OrmRepoCita;
   private readonly ormRepoDoctor: OrmRepoDoctor;
   private readonly ormRepoPaciente: OrmRepoPaciente;
-
-  constructor(private readonly manager: EntityManager,
-    private readonly notificacionService: NotificacionService) {
+  private readonly notificacionService: NotificacionService;
+  constructor(private readonly manager: EntityManager) {
     this.ormRepoCita = this.manager.getCustomRepository(OrmRepoCita);
     this.ormRepoDoctor = this.manager.getCustomRepository(OrmRepoDoctor);
     this.ormRepoPaciente = this.manager.getCustomRepository(OrmRepoPaciente);
+    this.notificacionService = new NotificacionService(this.manager);
   }
 
   @Get('Todas')
@@ -179,7 +179,7 @@ export class CitaController {
     const servicio = new CancelarCitaPacienteService(
       this.ormRepoCita,
       this.ormRepoPaciente,
-      this.notificacionService
+      this.notificacionService,
     );
     return await servicio.execute(para.id_paciente, para.id_cita);
   }

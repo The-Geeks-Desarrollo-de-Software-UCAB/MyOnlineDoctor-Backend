@@ -18,13 +18,13 @@ export class RegistroController {
   private readonly ormRepoDoctor: OrmRepoDoctor;
   private readonly ormRepoPaciente: OrmRepoPaciente;
   private readonly ormRepoRegistro: OrmRepoRegistro;
-
-  constructor(private readonly manager: EntityManager,
-    private readonly notificacionService: NotificacionService) {
+  private readonly notificacionService: NotificacionService;
+  constructor(private readonly manager: EntityManager) {
     this.ormRepoCita = this.manager.getCustomRepository(OrmRepoCita);
     this.ormRepoDoctor = this.manager.getCustomRepository(OrmRepoDoctor);
     this.ormRepoPaciente = this.manager.getCustomRepository(OrmRepoPaciente);
     this.ormRepoRegistro = this.manager.getCustomRepository(OrmRepoRegistro);
+    this.notificacionService = new NotificacionService(this.manager);
   }
 
   @Get('Todos')
