@@ -121,4 +121,12 @@ export class OrmRepoDoctor extends Repository<Doctor> implements IRepoDoctor {
     });
     return await this.mapper.toDomainMulti(doctores);
   }
+
+  async encontrarPorUsuario(usuario: string): Promise<DoctorEntity> {
+    let doctor = await super.findOne({
+      where: { usuario: usuario },
+      relations: ['especialidades'],
+    });
+    return await this.mapper.toDomain(doctor);
+  }
 }
