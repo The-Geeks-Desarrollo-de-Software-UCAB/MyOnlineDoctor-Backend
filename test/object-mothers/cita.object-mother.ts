@@ -1,3 +1,4 @@
+import { randomUUID } from "crypto";
 import { CitaEntity } from "../../src/modules/cita/domain/entities/cita";
 import { Duracion } from "../../src/modules/cita/domain/value-objects/duracion.value-object";
 import { EstadoCita } from "../../src/modules/cita/domain/value-objects/estadoCita.value-object";
@@ -11,15 +12,31 @@ import { IdPaciente } from "../../src/modules/paciente/domain/value-objects/idPa
 export class CitaObjectMother {
     static crearCitaSolicitada(id_paciente: string, id_doctor: string): CitaEntity {
         return new CitaEntity(
-        new IdCita("00000000-0000-0000-0000-000000000000"),
-        new Fecha(new Date()),
-        EstadoCita.SOLICITADA,
-        TipoCita.VIRTUAL,
-        new Motivo("Motivo de la cita"),
-        new Duracion(2),
-        null,
-        new IdPaciente(id_paciente),
-        new IdDoctor(id_doctor)
+            new IdCita(randomUUID()),
+            null,
+            EstadoCita.SOLICITADA,
+            TipoCita.VIRTUAL,
+            new Motivo("Motivo de la cita"),
+            new Duracion(2),
+            null,
+            new IdPaciente(id_paciente),
+            new IdDoctor(id_doctor)
+        );
+    }
+
+    static crearCitaAgendada(id_paciente: string, id_doctor: string): CitaEntity {
+        let fecha = new Date();
+        fecha.setDate(fecha.getDate() + 1);
+        return new CitaEntity(
+            new IdCita(randomUUID()),
+            new Fecha(fecha),
+            EstadoCita.AGENDADA,
+            TipoCita.VIRTUAL,
+            new Motivo("Motivo de la cita"),
+            new Duracion(2),
+            null,
+            new IdPaciente(id_paciente),
+            new IdDoctor(id_doctor)
         );
     }
 }
