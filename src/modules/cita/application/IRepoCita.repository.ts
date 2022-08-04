@@ -19,5 +19,7 @@ export interface IRepoCita {
     estado: string,
   ): Promise<CitaEntity[]>;
 
+  contarPorDoctor(id_doctor: string): Promise<number>;
+
   guardarCita(cita: CitaEntity): Promise<CitaEntity>;
 }

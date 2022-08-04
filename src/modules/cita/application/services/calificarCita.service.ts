@@ -1,11 +1,14 @@
 import { IRepoCita } from 'src/modules/cita/application/IRepoCita.repository';
-import { CitaEntity } from '../../domain/entities/cita';
+import { IRepoDoctor } from 'src/modules/doctor/application/IRepoDoctor.repository';
 import { IRepoPaciente } from 'src/modules/paciente/application/IRepoPaciente.repository';
+import { CitaEntity } from '../../domain/entities/cita';
+import { ActualizarCalificacionDoctorService } from 'src/modules/doctor/application/services/actualizarCalificacionDoctor.service';
 
 export class CalificarCitaService {
   constructor(
     private readonly repoCita: IRepoCita,
-    private readonly repoPaciente: IRepoPaciente, //esto debe cambiarse por el repositorio final de paciente
+    private readonly repoDoctor: IRepoDoctor,
+    private readonly repoPaciente: IRepoPaciente,
   ) {}
 
   async execute(
@@ -27,6 +30,15 @@ export class CalificarCitaService {
     }
     //se califica la cita
     cita.calificar(calificacion);
+    //se actualiza la calificacion promedio del doctor
+    const actualizarCalificacionPromedio =
+      new ActualizarCalificacionDoctorService(this.repoCita, this.repoDoctor);
+    console.log(
+      await actualizarCalificacionPromedio.execute(
+        cita.identificadorDoctor,
+        calificacion,
+      ),
+    );
     return await this.repoCita.guardarCita(cita);
   }
 }

@@ -1,5 +1,11 @@
 import { IRepoCita } from 'src/modules/cita/application/IRepoCita.repository';
-import { EntityRepository, getRepository, Repository } from 'typeorm';
+import {
+  EntityRepository,
+  getRepository,
+  Repository,
+  Not,
+  IsNull,
+} from 'typeorm';
 import { Cita } from 'src/modules/cita/infrastructure/typeorm/entities/cita.entity';
 import { Paciente } from 'src/modules/paciente/infrastructure/typeorm/entities/paciente.entity';
 import { Doctor } from 'src/modules/doctor/infrastructure/typeorm/entities/doctor.entity';
@@ -91,6 +97,17 @@ export class OrmRepoCita extends Repository<Cita> implements IRepoCita {
       .distinctOn(['p.id_paciente'])
       .getRawMany();
     return await this.mapperPaciente.toDomainMulti(query);
+  }
+
+  async contarPorDoctor(id_doctor: string): Promise<number> {
+    const doctorOrm = await this.doctorRepo.findOneOrFail({
+      where: { id_doctor: id_doctor },
+    });
+    let citas = await super.count({
+      where: { doctor: doctorOrm, calificacion: Not(IsNull()) },
+      relations: ['doctor', 'paciente'],
+    });
+    return await citas;
   }
 
   async guardarCita(cita: CitaEntity): Promise<CitaEntity> {

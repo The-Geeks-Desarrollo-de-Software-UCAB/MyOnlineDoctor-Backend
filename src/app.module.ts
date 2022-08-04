@@ -8,6 +8,10 @@ import { SpecialtyModule } from 'src/modules/doctor/infrastructure/typeorm/speci
 import { RegistroModule } from './modules/registro/infrastructure/registro.module';
 import config from 'ormconfig';
 import { PacienteModule } from './modules/paciente/infrastructure/typeorm/paciente.module';
+import { VideollamadaModule } from './modules/videollamadas/videollamada.module';
+import { NotificacionModule } from './modules/notificaciones/notificacion.module';
+
+
 
 @Module({
   imports: [
@@ -16,7 +20,9 @@ import { PacienteModule } from './modules/paciente/infrastructure/typeorm/pacien
     SpecialtyModule,
     CitaModule,
     PacienteModule,
-    RegistroModule
+    RegistroModule,
+    VideollamadaModule,
+    NotificacionModule
   ],
   controllers: [AppController],
   providers: [AppService],

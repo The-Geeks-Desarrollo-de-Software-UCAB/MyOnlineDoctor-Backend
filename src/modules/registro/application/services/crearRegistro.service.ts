@@ -1,5 +1,6 @@
 import { IRepoCita } from 'src/modules/cita/application/IRepoCita.repository';
 import { IRepoDoctor } from 'src/modules/doctor/application/IRepoDoctor.repository';
+import { NotificacionService } from 'src/modules/notificaciones/infrastructure/typeorm/service/notificacion.service';
 import { IRepoRegistro } from 'src/modules/registro/application/IRepoRegistro.repository';
 import { RegistroEntity } from 'src/modules/registro/domain/entities/registro';
 
@@ -8,6 +9,7 @@ export class CrearRegistroService {
     private readonly repoCita: IRepoCita,
     private readonly repoDoctor: IRepoDoctor,
     private readonly repoRegistro: IRepoRegistro,
+    private readonly notificacionService: NotificacionService
   ) {}
 
   async execute(
@@ -44,6 +46,7 @@ export class CrearRegistroService {
       cita_id,
       doctor_id,
     );
+    this.notificacionService.enviarNotificacionPaciente("REGISTRO MÉDICO CREADO", "EL DOCTOR AGREGÓ SU REGISTRO MÉDICO", cita.identificadorPaciente);
     return await this.repoRegistro.guardarRegistro(registro);
   }
 }

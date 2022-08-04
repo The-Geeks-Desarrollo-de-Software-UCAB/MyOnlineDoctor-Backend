@@ -67,8 +67,11 @@ export class DoctorEntity extends AggregateRoot {
     return this._estado;
   }
 
+  actualizarCalificacion(calificacion: number) {
+    this._promedioCalificacion = new PromedioCalificacion(calificacion);
+  }
+
   bloquear(razon: string): void {
     this._estado = Estado.BLOQUEADO;
-    
   }
 }
