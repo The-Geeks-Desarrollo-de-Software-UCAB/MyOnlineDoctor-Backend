@@ -1,4 +1,4 @@
-# MyOnlineDoctor-Backend
+![Logo](https://i.ibb.co/HBwvY6M/logo-repos.png)
 
 Proyecto semestral: myOnlineDoctor Desarrollo de Software Escuela de Ingeniería Informática - UCAB
 
@@ -15,6 +15,15 @@ Carlos Hernandez - Deploy Heroku, API REGISTRO HISTORIA MEDICA
 ## Tablas de Contribuciones - Entrega Final
 
 ### Tomás Sánchez
+| Descripción  |Links|
+| ------------- |:-------------:|
+| Implementacion de los repositorios de cita y doctor, tanto su puerto como su adaptador, además de cambios para su correcta integracion|[**Repositorios de Cita y Doctor**](https://github.com/The-Geeks-Desarrollo-de-Software-UCAB/MyOnlineDoctor-Backend/commit/535f4ec712684a64de7fd3cfdec5646fa0471922)|
+| Refactorizacion completa de los servicios de cita para cumplir con la arquitectura de puertos y adaptadores
+ |[**Refactorizacion de los servicios de cita**](https://github.com/The-Geeks-Desarrollo-de-Software-UCAB/MyOnlineDoctor-Backend/commit/cadcabbc10a076d92a55a976157b4b49e445096c)|
+|Implementacion del agregado Registro en la capa de aplicacion e infraestructura, lo cual consiste de controlador, repositorio, entidad y mappeador en la capa de infraestructura y de los servicios (Casos de uso) e interfaz para el repositorio en la capa de aplicacion|[**Implementacion del agregado Registro en la capa de aplicacion e infraestructura**](https://github.com/The-Geeks-Desarrollo-de-Software-UCAB/MyOnlineDoctor-Backend/commit/134fafcc0a228fbc2dcebdd21bc7f0b01c4d84a8)|
+|Creacion del controlador y otros servicios de Doctor|[**Creacion del controlador y otros servicios de Doctor**](https://github.com/The-Geeks-Desarrollo-de-Software-UCAB/MyOnlineDoctor-Backend/commit/71d041f6899bb6ea4a7540e3e87578c17e7a8b88)|
+|Implementacion del calculo del promedio de calificaciones recibidas por un doctor en el servicio de Calificar cita|[**Calculo del promedio de calificaciones**](https://github.com/The-Geeks-Desarrollo-de-Software-UCAB/MyOnlineDoctor-Backend/commit/a17a7f4c8bbbed44a1c323c7a4654d1a1df0ece3)|
+|Implementacion de Interfaces para el servicio de notificacion para poder cumplir con la regla de dependencias de la arquitectura hexagonal|[*Implementacion de Interfaces para el servicio de notificacion**](https://github.com/The-Geeks-Desarrollo-de-Software-UCAB/MyOnlineDoctor-Backend/commit/dfafd29d51189c1889b0f615048261e977e2fcbb)|
 
 
 ### Anamaría Chacón
