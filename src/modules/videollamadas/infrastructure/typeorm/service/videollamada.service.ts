@@ -32,5 +32,10 @@ export class VideollamadaService {
        this.ormRepoToken.guardarToken(id_cita, token);
        console.log(token);
        return token;
-    }    
+    }   
+    
+    async getToken(id_cita: string){
+      let cita = this.ormRepoCita.encontrarPorId(id_cita);
+      return await this.ormRepoToken.findOne({where: {cita: cita}});
+    }
 }

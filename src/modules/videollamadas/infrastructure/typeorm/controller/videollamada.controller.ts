@@ -11,4 +11,9 @@ export class VideollamadaController {
     async generarToken(@Param('id_cita') id_cita: string){
         return await this.videollamadaService.generarTokenRTC(id_cita);
     }
+
+    @Get('CitaToken:id_cita')
+    async getToken(@Param('id_cita') id_cita: string){
+        return await this.videollamadaService.getToken(id_cita);
+    }
 }
