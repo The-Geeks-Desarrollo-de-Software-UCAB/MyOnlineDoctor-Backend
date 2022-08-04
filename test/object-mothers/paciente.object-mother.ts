@@ -14,11 +14,12 @@ import { Usuario } from "../../src/modules/paciente/domain/value-objects/usuario
 import { Password } from "../../src/modules/paciente/domain/value-objects/password.value-object";
 import { Peso } from "../../src/modules/paciente/domain/value-objects/peso.value-object";
 import { EstadoSuscripcion } from "../../src/modules/paciente/domain/value-objects/estadosuscripcion.value-object";
+import { randomUUID } from "crypto";
 
 export class PacienteObjectMother {
     static crearPacienteActivo(): PacienteEntity {
         return new PacienteEntity(
-            new IdPaciente("00000000-0000-0000-0000-000000000000"),
+            new IdPaciente(randomUUID()),
             new Correo("juan@test.com"),
             new Nombre("Juan","Antonio"),
             new Apellido("Perez","Perez"),

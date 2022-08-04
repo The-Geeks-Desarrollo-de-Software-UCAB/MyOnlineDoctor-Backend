@@ -1,3 +1,4 @@
+import { randomUUID } from "crypto";
 import { DoctorEntity } from "../../src/modules/doctor/domain/entities/doctor";
 import { Apellido } from "../../src/modules/doctor/domain/value-objects/apellido.value-object";
 import { EspecialidadDomain } from "../../src/modules/doctor/domain/value-objects/especialidad.value-object";
@@ -10,7 +11,7 @@ import { PromedioCalificacion } from "../../src/modules/doctor/domain/value-obje
 export class DoctorObjectMother {
     static crearDoctorActivo(): DoctorEntity {
         return new DoctorEntity(
-            new IdDoctor("00000000-0000-0000-0000-000000000000"),
+            new IdDoctor(randomUUID()),
             new Nombre("Pedro","Fernando"),
             new Apellido("Perez","Perez"),
             [new EspecialidadDomain("Cardiología")],
