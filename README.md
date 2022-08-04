@@ -12,6 +12,25 @@ Natalia Velásquez,
 Alejandro Pestana, 
 Carlos Hernandez - Deploy Heroku, API REGISTRO HISTORIA MEDICA 
 
+## Tablas de Contribuciones - Entrega Final
+
+### Tomás Sánchez
+
+
+### Anamaría Chacón
+| Descripción  |Links|
+| ------------- |:-------------:|
+| Creación de la Interfaz de Repositorio Paciente, Implementación del Repositorio y Mapper de Paciente|[**Adelanto de Repositorio Paciente**](https://github.com/The-Geeks-Desarrollo-de-Software-UCAB/MyOnlineDoctor-Backend/commit/642efa7d099805496a8d8f43f338e4a24a4456cb)|
+| Creación del los Servicios y Controller de Paciente, y algunos arreglos |[**Controller y Services Paciente**](https://github.com/The-Geeks-Desarrollo-de-Software-UCAB/MyOnlineDoctor-Backend/commit/bda4283150ad3ab3ecebeaad5cf4509823e7da0d)|
+| Otros arreglos en Paciente |[**Arreglos en TypeORM Paciente**](https://github.com/The-Geeks-Desarrollo-de-Software-UCAB/MyOnlineDoctor-Backend/commit/fcb1de39c0679ecbf0664be294bd9ec66fb1cdcd#diff-f0629b9084db6c3308797f2fa18e058ee20db6bd36493c2006766749337a8c5a)|
+|Integracion de los Servicios de Paciente|[**Integracion de los Servicios de Paciente**](https://github.com/The-Geeks-Desarrollo-de-Software-UCAB/MyOnlineDoctor-Backend/commit/42a727e78a9b3c5517b0e6572ee3f4c31b3bed8b#diff-f3eb1c9aa923fa3b2852edbc2c46405056cf73443804d0189a9cbd14f9da25bb)|
+|Creación de los Servicios de Doctor|[**Servicios de Doctor**](https://github.com/The-Geeks-Desarrollo-de-Software-UCAB/MyOnlineDoctor-Backend/commit/1499e7b3bcf7eaf3973a55fd0386af057150a0da)|
+|Servicio de búsqueda de Doctores por nombre de la Especialidad|[**Otro servicio Doctor**](https://github.com/The-Geeks-Desarrollo-de-Software-UCAB/MyOnlineDoctor-Backend/commit/bc4ef3a211b007e65a8991e9c18daf1c26d98b24)|
+
+### Alejandro Pestana
+
+
+
 ## Tablas de Contribuciones
 
 ### Tomás Sánchez
@@ -78,3 +97,7 @@ Para poder correr el servicio, la base de datos debe estar activa. Luego ejecuta
 ```
 npm run start:dev
 ```
+
+## Módulos Utilizados
+
+1. [@nestjs/typeorm](https://www.npmjs.com/package/@nestjs/typeorm)
