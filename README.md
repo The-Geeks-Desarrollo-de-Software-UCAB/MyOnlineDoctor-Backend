@@ -103,3 +103,8 @@ npm run start:dev
 1. [@nestjs/typeorm](https://www.npmjs.com/package/@nestjs/typeorm)
 2. [@nestjs/testing](https://www.npmjs.com/package/@nestjs/testing)
 3. [@nestjs/common](https://www.npmjs.com/package/@nestjs/common)
+
+## Referencias Utilizadas
+
+1. https://github.com/Sairyss/domain-driven-hexagon
+2. https://franiglesias.github.io/object-mother/
