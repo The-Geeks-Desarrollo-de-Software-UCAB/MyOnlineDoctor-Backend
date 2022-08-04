@@ -15,12 +15,12 @@ export class VideollamadaService {
     }
   private appID = 'b007b19dfa2e4bfaa50fd2cbd5c0a64a';
   private appCertificate = '348b1196000148628f84a76a1d539445';
-  private channelName = 'Videollamada';
-  private uid = 2882341273;
-  private account = "2882341273";
+  private channelName = 'videochat';
+  private uid = 0;
+
   private role = RtcRole.PUBLISHER;
  
-  private expirationTimeInSeconds = 604800;
+  private expirationTimeInSeconds = 3600;
  
   private currentTimestamp = Math.floor(Date.now() / 1000)
  
